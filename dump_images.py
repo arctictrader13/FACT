@@ -23,8 +23,9 @@ dataset = PATH + 'dataset/'
 
 batch_size = 1
 
-cuda = torch.cuda.is_available()
-device = torch.device("cuda" if cuda else "cpu")
+# cuda = torch.cuda.is_available()
+# device = torch.device("cuda" if cuda else "cpu")
+device = "cpu"
 
 # Dataset loader for sample images
 sample_loader = torch.utils.data.DataLoader(
