@@ -26,16 +26,15 @@ def main():
 						   transforms.Resize((224,224)),
 						   transforms.ToTensor(),
 						   transforms.Normalize(mean = [0.485, 0.456, 0.406],
-											std = [0.229, 0.224, 0.225])
+                                       			std = [0.229, 0.224, 0.225])
 					   ])),
 		batch_size= batch_size, shuffle=False)
-
+	
 	unnormalize = NormalizeInverse(mean = [0.485, 0.456, 0.406],
-							   std = [0.229, 0.224, 0.225])
+							   		std = [0.229, 0.224, 0.225])
+	
 
-
-	# uncomment to use VGG
-	# model = vgg16_bn(pretrained=True)
+	#model = vgg16_bn(pretrained=True)
 	model = resnet18(pretrained=True)
 
 	# Initialize FullGrad objects
@@ -46,7 +45,7 @@ def main():
 
 	for batch_idx, (data, target) in enumerate(sample_loader):
 		data, target = data.to(device).requires_grad_(), target.to(device)
-
+		
 		# Run Input through network
 		initial_output = model.forward(data)
 		
@@ -55,14 +54,17 @@ def main():
 		cam_simple = simple_fullgrad.saliency(data)
 		
 		[column_size, row_size] = data.size()[2:4]
-		for index in torch.topk(cam.view((-1)), k=3, largest=False)[1]:
+		for index in torch.topk(cam.view((-1)), k=5000, largest=True)[1]:
 			row = index / row_size
 			column = index % row_size 
-			data[0, 0, row, column] = 0.0
+			data[0, 0, row, column] = 1.0
 
 		final_output = model.forward(data)
-		print(initial_output.size(), final_output.size())
-		print((initial_output - final_output).abs_().sum())
+		initial_class_probability, predicted_class = initial_output.max(1)
+		final_class_probability = final_output[0, predicted_class]
 
+		print("Absolute fractional output change: ", abs(final_class_probability - initial_class_probability) / initial_class_probability)
+		#print("Actual values: ",  initial_class_probability, final_class_probability)
+		
 if __name__ == "__main__":
 	main()
