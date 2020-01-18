@@ -54,7 +54,7 @@ def main():
 		cam_simple = simple_fullgrad.saliency(data)
 		
 		[column_size, row_size] = data.size()[2:4]
-		for index in torch.topk(cam.view((-1)), k=5000, largest=True)[1]:
+		for index in torch.topk(cam.view((-1)), k=500, largest=False)[1]:
 			row = index / row_size
 			column = index % row_size 
 			data[0, 0, row, column] = 1.0
@@ -64,7 +64,6 @@ def main():
 		final_class_probability = final_output[0, predicted_class]
 
 		print("Absolute fractional output change: ", abs(final_class_probability - initial_class_probability) / initial_class_probability)
-		#print("Actual values: ",  initial_class_probability, final_class_probability)
 		
 if __name__ == "__main__":
 	main()
