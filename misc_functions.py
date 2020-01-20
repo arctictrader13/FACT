@@ -94,3 +94,20 @@ def compute_and_store_saliency_maps(sample_loader, model, device, directory):
 
         torch.save(cam, os.path.join(simple_grad_path, filename))
         torch.save(cam_simple, os.path.join(full_grad_path, filename))
+
+
+def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salient=True, replacement=1.0):
+    # Check that the data and the saliency map have the same batch size and the
+    # same image dimention.
+    assert image_batch.size()[0] == saliency_maps.size()[0], \
+            "Images and saliency maps do not have the same batch size."
+    assert image_batch.size()[2:3] == saliency_maps.size()[2:3], \
+            "Images and saliency maps do not have the same image size."
+
+    [column_size, row_size] = image_batch.size()[2:4]
+    indexes = torch.topk(saliency_maps.view((-1)), k=num_pixels, largest=most_salient)[1]
+    rows = indexes / row_size
+    columns = indexes % row_size
+    image_batch[:, :, rows, columns] = replacement
+    return image_batch
+
