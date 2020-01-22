@@ -6,10 +6,12 @@
 """ Misc helper functions """
 
 import os
+import copy
 import cv2
 import numpy as np
 import subprocess
 import copy
+from matplotlib.pyplot import imshow
 
 import torch
 import torchvision.transforms as transforms
@@ -97,6 +99,10 @@ def compute_and_store_saliency_maps(sample_loader, model, device, directory):
         torch.save(cam, os.path.join(simple_grad_path, filename))
         torch.save(cam_simple, os.path.join(full_grad_path, filename))
 
+        # remove
+        if batch_idx == 3:
+            break
+
 
 def compute_saliency_maps(sample_loader, fullgrad_model, gradcam_model, device):
 
@@ -116,7 +122,7 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
             "Images and saliency maps do not have the same batch size."
     assert image_batch.size()[2:3] == saliency_maps.size()[2:3], \
             "Images and saliency maps do not have the same image size."
-
+    
     [batch_size, channel_size, column_size, row_size] = image_batch.size()
 
     output = copy.deepcopy(image_batch)
