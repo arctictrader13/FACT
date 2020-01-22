@@ -9,9 +9,11 @@ import os
 import cv2
 import numpy as np
 import subprocess
+import copy
 
 import torch
 import torchvision.transforms as transforms
+from torchvision import models
 
 from saliency.fullgrad import FullGrad
 from saliency.simple_fullgrad import SimpleFullGrad
@@ -96,6 +98,17 @@ def compute_and_store_saliency_maps(sample_loader, model, device, directory):
         torch.save(cam_simple, os.path.join(full_grad_path, filename))
 
 
+def compute_saliency_maps(sample_loader, fullgrad_model, gradcam_model, device):
+
+    for batch_idx, (data, target) in enumerate(sample_loader):
+        data, target = data.to(device).requires_grad_(), target.to(device)
+
+        _ = model.forward(data)
+
+        cam = fullgrad.saliency(data)
+        cam_simple = simple_fullgrad.saliency(data)
+
+
 def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salient=True, replacement=1.0):
     # Check that the data and the saliency map have the same batch size and the
     # same image dimention.
@@ -104,10 +117,42 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
     assert image_batch.size()[2:3] == saliency_maps.size()[2:3], \
             "Images and saliency maps do not have the same image size."
 
-    [column_size, row_size] = image_batch.size()[2:4]
-    indexes = torch.topk(saliency_maps.view((-1)), k=num_pixels, largest=most_salient)[1]
-    rows = indexes / row_size
-    columns = indexes % row_size
-    image_batch[:, :, rows, columns] = replacement
-    return image_batch
+    [batch_size, channel_size, column_size, row_size] = image_batch.size()
 
+    output = copy.deepcopy(image_batch)
+
+    for i in range(batch_size):
+        #print("num_pixels:{}".format(num_pixels))
+        indexes = torch.topk(saliency_maps[i].view((-1)), k=num_pixels, largest=most_salient)[1]
+        #print("indexes:{}".format(indexes))
+        rows = indexes / row_size
+        columns = indexes % row_size
+        if len(replacement) == 1:
+            output[i, :, rows, columns] = replacement[0]
+        else:
+            for j in range(len(replacement)):
+                output[i, j, rows, columns] = replacement[i]
+
+    return output
+
+def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement):
+
+    output = copy.deepcopy(image_batch)
+    output.requires_grad =False
+    torch.manual_seed(seed)
+    [batch_size, channel_size, column_size, row_size] = image_batch.size()
+
+    output = copy.deepcopy(image_batch)
+
+   # create binary mask for all batched
+    bin_mask = torch.FloatTensor(batch_size, 3, 224, 224).uniform_() < k_percentage
+
+    for i in range(batch_size):
+        if len(replacement) == 1:
+            # replace True values with replacement value
+            output[i,:,:,:][bin_mask[i, :, :, :]] = replacement[0]
+        else:
+            for j in range(len(replacement)):
+                output[i, j, :, :][bin_mask[i, j, :, :]] = replacement[i]
+
+    return output
