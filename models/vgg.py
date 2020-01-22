@@ -70,11 +70,13 @@ class VGG(nn.Module):
         Returns the explicit biases arising 
         from BatchNorm or convolution layers.
         """
+        cuda = torch.cuda.is_available()
+        device = torch.device("cuda:0" if cuda else "cpu")
 
         self.get_biases = True
         self.biases = [0]
 
-        x = torch.zeros(1,3,224,224) #put in GPU
+        x = torch.zeros(1,3,224,224).to(device) #put in GPU
         _ = self.forward(x)
         self.get_biases = False
         return self.biases
