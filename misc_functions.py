@@ -73,32 +73,19 @@ def save_saliency_map(image, saliency_map, filename):
     cv2.imwrite(filename, np.uint8(255 * img_with_heatmap))
 
 
-def compute_and_store_saliency_maps(sample_loader, model, device, directory):
-    # Initialize FullGrad objects
-    fullgrad = FullGrad(model)
-    simple_fullgrad = SimpleFullGrad(model)
-
-    simple_grad_path = os.path.join(directory, "simple")
-    full_grad_path = os.path.join(directory, "full")
-    
-    create_folder(simple_grad_path)
-    create_folder(full_grad_path)
+def compute_and_store_saliency_maps(sample_loader, model, device, max_batch_num, saliency_method, saliency_path):
+    create_folder(saliency_path)
 
     for batch_idx, (data, target) in enumerate(sample_loader):
         data, target = data.to(device).requires_grad_(), target.to(device)
 
         _ = model.forward(data)
-
-        cam = fullgrad.saliency(data)
-        cam_simple = simple_fullgrad.saliency(data)
-
+        saliency_map = saliency_method.saliency(data)
+    
         filename = "saliency_map_" + str(batch_idx)
-
-        torch.save(cam, os.path.join(simple_grad_path, filename))
-        torch.save(cam_simple, os.path.join(full_grad_path, filename))
-
-        # remove
-        if batch_idx == 3:
+        torch.save(saliency_map, os.path.join(saliency_path, filename))
+        
+        if batch_idx == max_batch_num:
             break
 
 

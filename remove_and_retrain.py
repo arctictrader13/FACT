@@ -17,17 +17,21 @@ import copy
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 data_PATH= PATH + 'dataset/'
 
-batch_size = 3
-k_most_salient = 100
+batch_size = 6
 max_train_steps = 3
-learning_rate = 0.01
+initial_learning_rate = 0.001
+lr_decresing_step = 30
+lr_divisor = 10
 
-device = "cpu"
 
-def train(data_loader, model, max_train_steps, learning_rate, use_saliency=False, saliency_path=""):
+cuda = torch.cuda.is_available()
+device = torch.device("cuda" if cuda else "cpu")
+#device = "cpu"
+
+def train(data_loader, model, max_train_steps, use_saliency=False, saliency_path="", k_most_salient=0):
+    learning_rate = initial_learning_rate
     criterion = torch.nn.CrossEntropyLoss() 
-    optimizer = torch.optim.RMSprop(model.parameters(), \
-                                    lr=learning_rate)
+    optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)
     accuracies = []
     losses = []
     for step, (batch_inputs, batch_targets) in enumerate(data_loader):
@@ -49,7 +53,8 @@ def train(data_loader, model, max_train_steps, learning_rate, use_saliency=False
         # update weights
         optimizer.step()
 
-        if step % 1 == 0:
+        if step % lr_decresing_step == 0:
+            learning_rate /= lr_divisor
             accuracies += [accuracy]
             losses += [loss]
             if (len(losses) > 2 and abs(losses[-1] - losses[-2]) < 0.0001):
@@ -61,21 +66,25 @@ def train(data_loader, model, max_train_steps, learning_rate, use_saliency=False
             ))
 
         if step == max_train_steps:
-            print("break")
             break
 
 
-def remove_and_retrain(data_loader, model):
-    model = resnet18(pretrained=True)
+def remove_and_retrain(data_loader, k_most_salient=0):
+    initial_model = resnet18(pretrained=True)
+    train(data_loader, initial_model, max_train_steps, use_saliency=False)
 
-    train(data_loader, model, max_train_steps, learning_rate, use_saliency=False)
-    saliency_path = os.path.join(data_PATH, "saliency_maps", "cifar_resnet18")
-    if not os.path.isdir(saliency_path):
-        create_folder(saliency_path)
-        compute_and_store_saliency_maps(data_loader, model, device, saliency_path)
-    # save model
-    model = resnet18(pretrained=True)
-    train(data_loader, model, max_train_steps, learning_rate, use_saliency=True, saliency_path=saliency_path)
+    for step, (saliency_method, method_name) in enumerate([(FullGrad(initial_model), "FullGrad"), (SimpleFullGrad(initial_model), "SimpleFullGrad")]):
+        print("Run saliency method: ", method_name)
+        saliency_path = os.path.join(data_PATH, "saliency_maps", "cifar_resnet18")
+        if not os.path.isdir(saliency_path):
+            create_folder(saliency_path)
+            compute_and_store_saliency_maps(saliency_method, saliency_path, \
+                data_loader, initial_model, device, saliency_path, max_train_steps)
+        
+        model = resnet18(pretrained=True)
+        accuracy = train(data_loader, model, max_train_steps, use_saliency=True, \
+              saliency_path=saliency_path, k_most_salient=k_most_salient)
+
 
 
 def main():
@@ -86,20 +95,12 @@ def main():
         transforms.Normalize(mean=[0.485, 0.456, 0.406],
                              std=[0.229, 0.224, 0.225]), ])
     dataset = data_PATH + "/cifar/"
-    data = datasets.CIFAR100(dataset, train=True, transform=transform_standard,target_transform=None,
-                                         download=True)
+    data = datasets.CIFAR100(dataset, train=True, transform=transform_standard, \
+        target_transform=None, download=True)
     # Dataset loader for sample images
     data_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False)
-    
-    # # Dataset loader for sample images
-    # data_loader = torch.utils.data.DataLoader(
-    #     datasets.ImageFolder(dataset, transform=transform_standard),
-    #     batch_size=batch_size, shuffle=False)
 
-    # model = vgg16_bn(pretrained=True)
-    model = resnet18(pretrained=True)
-        
-    remove_and_retrain(data_loader, model)
+    remove_and_retrain(data_loader, k_most_salient=100)
 
 
 if __name__ == "__main__":
