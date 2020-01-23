@@ -18,7 +18,7 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import random
-from torch.nn.functional import softmax
+import torch.nn.functional as F
 
 # PATH variables
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
@@ -81,13 +81,7 @@ def main():
             batch_size=batch_size, shuffle=False)
 
     model_name = ARGS.model + ARGS.model_type
-    fullgrad_model = eval(model_name)()
-    fullgrad_model = fullgrad_model.to(device)
 
-    # Initialize Gradient objects
-    fullgrad = FullGrad(fullgrad_model)
-    # Gradcam
-    gcam_model, gcam = initialize_grad_cam(model_name, device)
     # simple fullgrad
     # simple_fullgrad = SimpleFullGrad(model)
 
@@ -102,19 +96,28 @@ def main():
     model = None
 
     for grad_type in ARGS.grads:
+        if grad_type == 'gradcam':
+            # Gradcam
+            model, grad = initialize_grad_cam(model_name, device)
+
+        else:
+            if ARGS.model == "resnet":
+                model = eval(model_name)(pretrained=True)
+            else:
+                model = eval(model_name)()
+            model = model.to(device)
+            model.eval()
+            # Initialize Gradient objects
+            grad = FullGrad(model)
+
         grad_counter = 0
         means = []
         stds = []
         print("grad_type:{}".format(grad_type))
-        if grad_type == 'fullgrad':
-            grad = fullgrad
-            model = fullgrad_model
-        elif grad_type == 'gradcam':
-            grad = gcam
-            model = gcam_model
-        # print("grad:{}".format(grad))
 
         for i in ARGS.k:
+
+            # print("grad:{}".format(grad))
             grad_counter +=1
             k_most_salient = int(i * total_features)
             # print("k_most_salient:{}".format(k_most_salient))
@@ -128,7 +131,7 @@ def main():
                 # data, target = next(iter(sample_loader))
 
                 # for debugging purposes
-                if counter % 50 == 0:
+                if counter % 100 == 0:
                     print("{} image batches processed".format(counter))
                 if counter == ARGS.n_images:
                     break
@@ -136,15 +139,14 @@ def main():
                 data = data.to(device).requires_grad_()
 
                 # Run Input through network (two different networks if gradcam or fullgrad)
-                if grad_type != "gradcam":
-                    initial_output = fullgrad_model.forward(data)
-                else:
-                    initial_output = gcam_model.forward(data)
+                with torch.no_grad():
+                   initial_output = model.forward(data)
 
                 # compute saliency maps for grad methods not random
                 if grad_type != "random":
                     # print("data size:{}".format(data.size()))
                     cam = compute_saliency_per_grad(grad_type, grad, data)
+                    data = data.detach()
                     #print(cam)
                     #print("cam size:{}".format(cam.size()))
                     if ARGS.save_grad is True and grad_counter == 1 and counter <= ARGS.n_save:
@@ -154,21 +156,19 @@ def main():
                                                  replacement=replacement)
 
                     tmp_results = abs_frac_per_grad(model, data, initial_output, tmp_results)
-                    del data, initial_output, cam
-                    torch.cuda.empty_cache()
+
                 # change pixels based on random removal
                 elif grad_type == "random":
+                    data = data.detach()
                     # run n_random_runs for random pixel removal
                     sample_seeds = np.random.randint(0, 10000, ARGS.n_random_runs)
                     for seed in sample_seeds:
                         tmp_data = remove_random_salient_pixels(data, seed, k_percentage=i, replacement=replacement)
-                        tmp_results = abs_frac_per_grad(fullgrad_model, tmp_data, initial_output, tmp_results)
-                        del tmp_data
-                        torch.cuda.empty_cache()
+                        tmp_results = abs_frac_per_grad(model, tmp_data, initial_output, tmp_results)
 
                 # print("counter:{}".format(counter))
-                torch.cuda.empty_cache()
-
+            print(torch.cuda.memory_summary(device=None, abbreviated=False))
+            print(torch.cuda.memory_allocated(device=None))
             #print("Absolute fractional output changes: ", tmp_results)
             # print("Actual values: ",  initial_class_probability, final_class_probability)
             # save mean and std of
@@ -183,26 +183,32 @@ def main():
 
 def abs_frac_per_grad(model, data, initial_output, tmp_results):
     # output after pixel perturbation
-    final_output = model.forward(data)
-    model.eval()
+    with torch.no_grad():
+        final_output = model.forward(data)
 
+    final_output.to("cpu")
+    initial_output.to("cpu")
+
+    # FOR KL DIVERGENCE AND OWN METRIC
+    initial_probabilities = F.softmax(initial_output, dim=1)
+    final_probabilities = F.softmax(final_output, dim=1)
+
+    kl_div = F.kl_div(final_probabilities,initial_probabilities, reduction='batchmean')
+
+    initial_probabilities.max(1)
+    final_probabilities.max(1)
 
     # initially most confident class
-    initial_class_probability, predicted_class = initial_output.max(1)
-    #print("initial output:{}".format(initial_output.size()))
-    #print("initial predicted_class:{}".format(initial_output.max(1)))
+    initial_class_scores, predicted_class = initial_output.max(1)
 
     # same value after modification
-    final_class_probability = final_output.index_select(1, predicted_class).max(0)[0]
+    final_class_scores= final_output.index_select(1, predicted_class).max(0)[0]
 
-    #print("final output:{}".format(final_output.index_select(1, predicted_class).max(0)))
+    # absolute fractional difference of raw results
+    tmp_result = abs(final_class_scores - initial_class_scores) / initial_class_scores
 
-    # absolute fractional difference
-    tmp_result = abs(final_class_probability - initial_class_probability) / initial_class_probability
     # save per image
     tmp_results.append(np.round(tmp_result.tolist(), 8))
-
-    torch.cuda.empty_cache()
 
     return tmp_results
 
@@ -272,7 +278,7 @@ def save_saliency_map_batch(saliency, data, result_path, grad_type, salient_type
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,
+    parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
                         help='Percentage of k% most salient pixels')
     parser.add_argument('--most_salient', default=True, type=bool,
                         help='most salient = True or False depending on retrain or pixel perturbation')
