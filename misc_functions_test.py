@@ -8,7 +8,7 @@ class MiscFunctionsTestCase(unittest.TestCase):
         image_batch = torch.ones((1, 1, 2, 3))
         saliency_maps = torch.tensor([[[[0, 1, 0], [1, 0, 1]]]])
         output_batch = remove_salient_pixels(image_batch, saliency_maps, 3, \
-                                             most_salient=True, replacement=0.0)
+                                             most_salient=True, replacement=[0.0])
         assert torch.all(torch.eq(output_batch[0][0], \
                          torch.tensor([[1.0, 0.0, 1.0], [0.0, 1.0, 0.0]])))
 
@@ -18,7 +18,7 @@ class MiscFunctionsTestCase(unittest.TestCase):
                                            [[[0, 1, 0], [0, 0, 1]]],
                                            [[[0, 0, 1], [1, 0, 0]]]])
         output_batch = remove_salient_pixels(image_batch, saliency_maps, 2, \
-                                             most_salient=True, replacement=1.0)
+                                             most_salient=True, replacement=[1.0])
         assert torch.all(torch.eq(output_batch, saliency_maps))
 
     def test_remove_salient_pixels_multiple_channels(self):
@@ -27,7 +27,7 @@ class MiscFunctionsTestCase(unittest.TestCase):
             image_batch[:, i, :, :] = torch.ones((2, 3)) * (i + 1)
         saliency_maps = torch.tensor([[[[0, 1, 0], [1, 0, 1]]]])
         output_batch = remove_salient_pixels(image_batch, saliency_maps, 3, \
-                                             most_salient=True, replacement=0.0)
+                                             most_salient=True, replacement=[0.0])
         assert torch.all(torch.eq(output_batch,
                                   torch.tensor([[[[1., 0., 1.], [0., 1., 0.]],
                                                  [[2., 0., 2.], [0., 2., 0.]],

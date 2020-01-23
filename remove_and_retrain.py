@@ -12,15 +12,16 @@ from models.vgg import vgg16_bn
 from models.resnet import resnet18
 from misc_functions import create_folder, compute_and_store_saliency_maps, remove_salient_pixels
 import copy
+import matplotlib.pyplot as plt
 
 # PATH variables
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 data_PATH= PATH + 'dataset/'
 
 batch_size = 6
-max_train_steps = 3
+max_train_steps = 1
 initial_learning_rate = 0.001
-lr_decresing_step = 30
+lr_decresing_step = 3
 lr_divisor = 10
 
 
@@ -28,19 +29,22 @@ cuda = torch.cuda.is_available()
 device = torch.device("cuda" if cuda else "cpu")
 #device = "cpu"
 
-def train(data_loader, model, max_train_steps, use_saliency=False, saliency_path="", k_most_salient=0):
+def train(data_loader, model, max_train_steps, use_saliency=False, \
+          k_most_salient=0, saliency_method=None, saliency_method_name=None, \
+          initial_model=None):
     learning_rate = initial_learning_rate
     criterion = torch.nn.CrossEntropyLoss() 
     optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)
     accuracies = []
     losses = []
     for step, (batch_inputs, batch_targets) in enumerate(data_loader):
+        batch_inputs = batch_inputs.requires_grad_()
         if use_saliency:
-            saliency_map = torch.load(os.path.join(saliency_path, "full", "saliency_map_" + str(step)))
+            _ = initial_model.forward(batch_inputs)
+            saliency_map = saliency_method.saliency(batch_inputs)
             data = remove_salient_pixels(batch_inputs, saliency_map)
-            #import pdb; pdb.set_trace()
         else:
-            data = copy.copy(batch_inputs)
+            data = batch_inputs
 
         output = model.forward(data)
 
@@ -67,24 +71,43 @@ def train(data_loader, model, max_train_steps, use_saliency=False, saliency_path
 
         if step == max_train_steps:
             break
+    # plot
+    plt.plot(range(len(losses)), losses)
+    plt.ylabel('Loss')
+    plt.xlabel('Batches')
+    if use_saliency:
+        figname = saliency_method_name + "_" + str(k_most_salient) + ".jpeg"
+    else:
+        figname = "initial_model.jpeg"
+    plt.savefig(os.path.join("results", "remove_and_retrain", figname))
+    return accuracies[-1]
 
 
-def remove_and_retrain(data_loader, k_most_salient=0):
+def remove_and_retrain(data_loader):
     initial_model = resnet18(pretrained=True)
-    train(data_loader, initial_model, max_train_steps, use_saliency=False)
+    initial_accuracy = train(data_loader, initial_model, max_train_steps, \
+                             use_saliency=False)
+    saliency_methods = [(FullGrad(initial_model), "FullGrad"), 
+                       (SimpleFullGrad(initial_model), "SimpleFullGrad")]
+    percentages = [0.1, 0.2, 0.5, 0.8, 1.0, 2, 5, 10]
+    ks = [int(i * 224 * 224 / 100) for i in percentages] 
+    accuracies = torch.zeros((len(saliency_methods), len(ks)))
+    for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
+        for k_idx, k in enumerate(ks):
+            print("Run saliency method: ", method_name)
 
-    for step, (saliency_method, method_name) in enumerate([(FullGrad(initial_model), "FullGrad"), (SimpleFullGrad(initial_model), "SimpleFullGrad")]):
-        print("Run saliency method: ", method_name)
-        saliency_path = os.path.join(data_PATH, "saliency_maps", "cifar_resnet18")
-        if not os.path.isdir(saliency_path):
-            create_folder(saliency_path)
-            compute_and_store_saliency_maps(saliency_method, saliency_path, \
-                data_loader, initial_model, device, saliency_path, max_train_steps)
-        
-        model = resnet18(pretrained=True)
-        accuracy = train(data_loader, model, max_train_steps, use_saliency=True, \
-              saliency_path=saliency_path, k_most_salient=k_most_salient)
-
+            model = resnet18(pretrained=True)
+            accuracy = train(data_loader, model, max_train_steps, \
+                             use_saliency=True, k_most_salient=k, \
+                             saliency_method=saliency_method, \
+                             saliency_method_name=method_name, \
+                             initial_model=initial_model)
+            accuracies[method_idx, k_idx] = accuracy
+        print(percentages, accuracies[method_idx])
+        plt.plot(percentages, list(accuracies[method_idx]), label="method_name" + str(k))
+    plt.ylabel('Accuracy')
+    plt.xlabel('k %')
+    plt.savefig(os.path.join("results", "remove_and_retrain", "final_result.jpeg"))
 
 
 def main():
@@ -97,10 +120,9 @@ def main():
     dataset = data_PATH + "/cifar/"
     data = datasets.CIFAR100(dataset, train=True, transform=transform_standard, \
         target_transform=None, download=True)
-    # Dataset loader for sample images
     data_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False)
 
-    remove_and_retrain(data_loader, k_most_salient=100)
+    remove_and_retrain(data_loader)
 
 
 if __name__ == "__main__":
