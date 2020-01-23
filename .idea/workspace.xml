@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c3a6114-30d4-4667-be04-609c10d6daa3" name="Default Changelist" comment="" />
+    <list default="true" id="9c3a6114-30d4-4667-be04-609c10d6daa3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/resnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/vgg.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/vgg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pixel_perturbation.py" beforeDir="false" afterPath="$PROJECT_DIR$/pixel_perturbation.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,19 +26,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1870">
-              <caret line="113" column="45" selection-start-line="113" selection-start-column="45" selection-end-line="113" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/saliency/inputgrad.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1292">
-              <caret line="79" column="44" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
+            <state relative-caret-position="1020">
+              <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
               <folding>
-                <element signature="e#91#103#0" expanded="true" />
+                <element signature="e#174#186#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dump_images.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="66" column="25" selection-start-line="66" selection-end-line="67" />
+            <state relative-caret-position="612">
+              <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -51,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/misc_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2125">
-              <caret line="125" column="73" selection-start-line="125" selection-end-line="126" />
+            <state relative-caret-position="-227">
+              <caret line="117" column="4" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="4" />
               <folding>
                 <element signature="e#158#167#0" expanded="true" />
               </folding>
@@ -63,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1003">
-              <caret line="126" column="30" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
+            <state relative-caret-position="328">
+              <caret line="106" column="42" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -75,11 +71,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gradcam/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4590">
-              <caret line="105" column="6" selection-start-line="105" selection-start-column="1" selection-end-line="105" selection-end-column="6" />
-              <folding>
-                <element signature="e#133#170#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="425">
+              <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gradcam/grad_cam.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-12">
+              <caret line="104" column="53" lean-forward="true" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -87,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/vgg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="56" column="9" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
+            <state relative-caret-position="272">
+              <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
               <folding>
                 <element signature="e#441#453#0" expanded="true" />
               </folding>
@@ -99,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/resnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+            <state relative-caret-position="-2924">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="e#536#548#0" expanded="true" />
               </folding>
@@ -133,10 +135,16 @@
       <find>index</find>
       <find>save_gradc</find>
       <find>calcul</find>
-      <find>click</find>
       <find>batch</find>
       <find>counter</find>
-      <find>counter</find>
+      <find>click</find>
+      <find>getBiase</find>
+      <find>dev</find>
+      <find>check</find>
+      <find>device</find>
+      <find>model_urls</find>
+      <find>softma</find>
+      <find>model_zoo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -146,26 +154,29 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/cifar_pixel_pert.py" />
-        <option value="$PROJECT_DIR$/models/vgg.py" />
         <option value="$PROJECT_DIR$/gradcam/main.py" />
         <option value="$PROJECT_DIR$/saliency/inputgrad.py" />
         <option value="$PROJECT_DIR$/lmdb_import.py" />
+        <option value="$PROJECT_DIR$/saliency/fullgrad.py" />
         <option value="$PROJECT_DIR$/misc_functions.py" />
+        <option value="$PROJECT_DIR$/models/resnet.py" />
+        <option value="$PROJECT_DIR$/models/vgg.py" />
         <option value="$PROJECT_DIR$/pixel_perturbation.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1928" />
-    <option name="y" value="604" />
-    <option name="width" value="556" />
-    <option name="height" value="316" />
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="2882" />
+    <option name="height" value="2026" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -197,7 +208,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -205,7 +215,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Deep-Learning" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -275,17 +285,19 @@
       <workItem from="1579276533788" duration="21508000" />
       <workItem from="1579362058458" duration="7536000" />
       <workItem from="1579521881952" duration="29634000" />
-      <workItem from="1579647818915" duration="13471000" />
+      <workItem from="1579647818915" duration="31215000" />
+      <workItem from="1579771721338" duration="15704000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86613000" />
+    <option name="totallyTimeSpent" value="120061000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="604" width="1936" height="1056" extended-state="6" />
+    <frame x="-6" y="-6" width="1441" height="1013" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.108208954" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.109906" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -298,9 +310,9 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4989339" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.1380597" side_tool="true" visible="true" weight="0.3434453" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.8619403" visible="true" weight="0.3434453" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.63539445" weight="0.41386783" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.20462762" side_tool="true" visible="true" weight="0.25028312" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.86034113" weight="0.3434453" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.79537237" visible="true" weight="0.25028312" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -338,16 +350,15 @@
     <entry file="file://$PROJECT_DIR$/cifar_pixel_pert.py" />
     <entry file="file://$PROJECT_DIR$/grad-cam-pytorch-master/grad_cam.py" />
     <entry file="file://$PROJECT_DIR$/grad-cam-pytorch-master/main.py" />
-    <entry file="file://$PROJECT_DIR$/saliency/simple_fullgrad.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1870">
-          <caret line="113" column="45" selection-start-line="113" selection-start-column="45" selection-end-line="113" selection-end-column="45" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lmdb_import.py" />
     <entry file="file://$PROJECT_DIR$/saliency/inputgrad.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1292">
@@ -360,73 +371,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dump_images.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="66" column="25" selection-start-line="66" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/vgg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="56" column="9" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
-          <folding>
-            <element signature="e#441#453#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lmdb_import.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/resnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-          <folding>
-            <element signature="e#536#548#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="612">
+          <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gradcam/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4590">
-          <caret line="105" column="6" selection-start-line="105" selection-start-column="1" selection-end-line="105" selection-end-column="6" />
-          <folding>
-            <element signature="e#133#170#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/saliency/simple_fullgrad.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/misc_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2125">
-          <caret line="125" column="73" selection-start-line="125" selection-end-line="126" />
+        <state relative-caret-position="-227">
+          <caret line="117" column="4" selection-start-line="117" selection-start-column="4" selection-end-line="117" selection-end-column="4" />
           <folding>
             <element signature="e#158#167#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gradcam/grad_cam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="104" column="53" lean-forward="true" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/Lib/site-packages/torch/nn/functional.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-737">
+          <caret line="1872" column="49" lean-forward="true" selection-start-line="1872" selection-start-column="49" selection-end-line="1872" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
+          <folding>
+            <element signature="e#174#186#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/vgg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+          <folding>
+            <element signature="e#441#453#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/resnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2924">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#536#548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1003">
-          <caret line="126" column="30" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
+        <state relative-caret-position="328">
+          <caret line="106" column="42" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>

@@ -15,7 +15,11 @@
 
 import torch
 import torch.nn as nn
-from torch.hub import load_state_dict_from_url
+try:
+    from torch.hub import load_state_dict_from_url
+except ImportError:
+    from torch.utils.model_zoo import load_url as load_state_dict_from_url
+
 
 
 __all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
@@ -302,11 +306,13 @@ class ResNet(nn.Module):
         Returns the explicit biases arising 
         from BatchNorm or convolution layers.
         """
+        cuda = torch.cuda.is_available()
+        device = torch.device("cuda:0" if cuda else "cpu")
 
         self.fullgrad_info['get_biases'] = True
         self.fullgrad_info['biases'] = [0]
 
-        x = torch.zeros(1,3,224,224)
+        x = torch.zeros(1,3,224,224).to(device)
         _ = self.forward(x)
         self.fullgrad_info['get_biases'] = False
         return self.fullgrad_info['biases']

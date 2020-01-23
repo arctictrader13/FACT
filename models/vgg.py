@@ -14,12 +14,7 @@
 
 import torch
 import torch.nn as nn
-try:
-    from torch.hub import load_state_dict_from_url
-except ImportError:
-    from torch.utils.model_zoo import load_url as load_state_dict_from_url
-
-#import torch.utils.model_zoo as model_zoo
+import torch.utils.model_zoo as model_zoo
 
 cfg = { 
     'A': [64, 'M', 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
@@ -70,11 +65,13 @@ class VGG(nn.Module):
         Returns the explicit biases arising 
         from BatchNorm or convolution layers.
         """
+        cuda = torch.cuda.is_available()
+        device = torch.device("cuda:0" if cuda else "cpu")
 
         self.get_biases = True
         self.biases = [0]
 
-        x = torch.zeros(1,3,224,224) #put in GPU
+        x = torch.zeros(1,3,224,224).to(device) #put in GPU
         _ = self.forward(x)
         self.get_biases = False
         return self.biases

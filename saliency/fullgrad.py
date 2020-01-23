@@ -16,10 +16,11 @@ class FullGrad():
     Compute FullGrad saliency map and full gradient decomposition 
     """
 
-    def __init__(self, model, im_size = (3,224,224) ):
+    def __init__(self, model, im_size = (3,224,224)):
         self.model = model
         self.im_size = (1,) + im_size
         self.model.eval()
+        self.device = next(model.parameters()).device
         self.blockwise_biases = self.model.getBiases()
         self.checkCompleteness()
 
@@ -37,7 +38,7 @@ class FullGrad():
         """
 
         #Random input image
-        input = torch.randn(self.im_size)
+        input = torch.randn(self.im_size).to(self.device)
 
         # Get raw outputs
         self.model.eval()
