@@ -14,12 +14,14 @@
 
 import torch
 import torch.nn as nn
+from torch.hub import load_state_dict_from_url
+
 try:
     from torch.hub import load_state_dict_from_url
 except ImportError:
     from torch.utils.model_zoo import load_url as load_state_dict_from_url
 
-#import torch.utils.model_zoo as model_zoo
+import torch.utils.model_zoo as model_zoo
 
 cfg = { 
     'A': [64, 'M', 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],

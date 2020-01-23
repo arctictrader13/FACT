@@ -13,15 +13,18 @@ from gradcam import main
 
 import argparse
 import torchvision
+import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+from torch.nn.functional import softmax
 
 # PATH variables
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 
 # console testing
-# PATH = os.path.abspath(os.getcwd())
+# PATH = os.path.abspath(os.getcwd()) + "/"
 
 data_PATH = PATH + 'dataset/'
 
@@ -78,13 +81,13 @@ def main():
             batch_size=batch_size, shuffle=False)
 
     model_name = ARGS.model + ARGS.model_type
-    fullgrad_model = eval(model_name)(pretrained=ARGS.pretrained)
+    fullgrad_model = eval(model_name)()
     fullgrad_model = fullgrad_model.to(device)
 
     # Initialize Gradient objects
     fullgrad = FullGrad(fullgrad_model)
     # Gradcam
-    gcam_model, gcam = initialize_grad_cam(model_name, device, pretrained=ARGS.pretrained)
+    gcam_model, gcam = initialize_grad_cam(model_name, device)
     # simple fullgrad
     # simple_fullgrad = SimpleFullGrad(model)
 
@@ -130,7 +133,7 @@ def main():
                 if counter == ARGS.n_images:
                     break
 
-                data, target = data.to(device).requires_grad_(), target.to(device)
+                data = data.to(device).requires_grad_()
 
                 # Run Input through network (two different networks if gradcam or fullgrad)
                 if grad_type != "gradcam":
@@ -149,8 +152,10 @@ def main():
 
                     data = remove_salient_pixels(data, cam, num_pixels=k_most_salient, most_salient=ARGS.most_salient,
                                                  replacement=replacement)
-                    tmp_results = abs_frac_per_grad(model, data, initial_output, tmp_results)
 
+                    tmp_results = abs_frac_per_grad(model, data, initial_output, tmp_results)
+                    del data, initial_output, cam
+                    torch.cuda.empty_cache()
                 # change pixels based on random removal
                 elif grad_type == "random":
                     # run n_random_runs for random pixel removal
@@ -158,14 +163,18 @@ def main():
                     for seed in sample_seeds:
                         tmp_data = remove_random_salient_pixels(data, seed, k_percentage=i, replacement=replacement)
                         tmp_results = abs_frac_per_grad(fullgrad_model, tmp_data, initial_output, tmp_results)
+                        del tmp_data
+                        torch.cuda.empty_cache()
 
                 # print("counter:{}".format(counter))
+                torch.cuda.empty_cache()
 
             #print("Absolute fractional output changes: ", tmp_results)
             # print("Actual values: ",  initial_class_probability, final_class_probability)
             # save mean and std of
             means.append(np.mean(tmp_results))
             stds.append(np.std(tmp_results))
+            torch.cuda.empty_cache()
 
         results_dict[grad_type] = [means, stds]
     # plot for all gradient methods stds and means for all k% values
@@ -175,6 +184,8 @@ def main():
 def abs_frac_per_grad(model, data, initial_output, tmp_results):
     # output after pixel perturbation
     final_output = model.forward(data)
+    model.eval()
+
 
     # initially most confident class
     initial_class_probability, predicted_class = initial_output.max(1)
@@ -191,6 +202,8 @@ def abs_frac_per_grad(model, data, initial_output, tmp_results):
     # save per image
     tmp_results.append(np.round(tmp_result.tolist(), 8))
 
+    torch.cuda.empty_cache()
+
     return tmp_results
 
 
@@ -198,7 +211,7 @@ def plot_all_grads(results_dict, filename=None):
     plt.figure()
     axes = plt.gca()
     #axes.set_xlim([0, ARGS.k[-1]*100])
-    axes.set_ylim([0, 1])
+    axes.set_ylim([0, 0.5])
     axes.set_xlabel('% pixels removed')
     axes.set_ylabel('Absolute fractional output change')
 
@@ -273,8 +286,6 @@ if __name__ == "__main__":
                         help='which grad methods to be applied')
     parser.add_argument('--device', default="cuda:0", type=str,
                         help='cpu or gpu')
-    parser.add_argument('--pretrained', default=True, type=bool,
-                        help='Pretrained model?')
     parser.add_argument('--target_layer', default="layer4", type=str,
                         help='Which layer to be visualized in GRADCAM')
     parser.add_argument('--n_random_runs', default=5, type=int,
@@ -292,3 +303,11 @@ if __name__ == "__main__":
 
     ARGS = parser.parse_args()
     main()
+
+
+# TODO 1) change to probs in abs_pergrad
+# TODO 2) add KL divergence as metric
+# TODO 3) run experiment vgg-16
+# TODO 4) new metric add
+# TODO 5) add inputgrad
+# TODO 6) scrape google for doctor and nurse images
