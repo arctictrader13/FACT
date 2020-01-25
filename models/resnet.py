@@ -312,7 +312,8 @@ class ResNet(nn.Module):
         self.fullgrad_info['get_biases'] = True
         self.fullgrad_info['biases'] = [0]
 
-        x = torch.zeros(1,3,224,224).to(device)
+        #x = torch.zeros(1,3,224,224).to(device)
+        x = torch.zeros(1,3,224,224)
         _ = self.forward(x)
         self.fullgrad_info['get_biases'] = False
         return self.fullgrad_info['biases']

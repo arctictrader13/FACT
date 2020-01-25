@@ -6,6 +6,7 @@ from torchvision import datasets, transforms
 from datetime import datetime
 
 # Import saliency methods and models
+import argparse
 from saliency.fullgrad import FullGrad
 from saliency.simple_fullgrad import SimpleFullGrad
 from models.vgg import vgg16_bn
@@ -18,38 +19,25 @@ import matplotlib.pyplot as plt
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 data_PATH= PATH + 'dataset/'
 
-batch_size = 6
-max_train_steps = 1
-initial_learning_rate = 0.001
-lr_decresing_step = 3
-lr_divisor = 10
-
-
-cuda = torch.cuda.is_available()
-device = torch.device("cuda" if cuda else "cpu")
-#device = "cpu"
-
-def train(data_loader, model, max_train_steps, use_saliency=False, \
-          k_most_salient=0, saliency_method=None, saliency_method_name=None, \
-          initial_model=None):
-    learning_rate = initial_learning_rate
+def train(data_loader, model, use_saliency=False, \
+          k_most_salient=0, saliency_method=None, saliency_method_name=None):
+    learning_rate = ARGS.initial_learning_rate
     criterion = torch.nn.CrossEntropyLoss() 
     optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)
     accuracies = []
     losses = []
     for step, (batch_inputs, batch_targets) in enumerate(data_loader):
-        batch_inputs = batch_inputs.requires_grad_()
+        batch_inputs, batch_targets = batch_inputs.to(ARGS.device), batch_targets.to(ARGS.device)
         if use_saliency:
-            _ = initial_model.forward(batch_inputs)
             saliency_map = saliency_method.saliency(batch_inputs)
-            data = remove_salient_pixels(batch_inputs, saliency_map)
+            data = remove_salient_pixels(batch_inputs, saliency_map, num_pixels=k_most_salient, most_salient=ARGS.most_salient)
         else:
             data = batch_inputs
+        data.requires_grad = True
 
         output = model.forward(data)
-
         loss = criterion(output, batch_targets)
-        accuracy = float(sum(batch_targets == torch.argmax(output, 1))) / float(batch_size)
+        accuracy = float(sum(batch_targets == torch.argmax(output, 1))) / float(ARGS.batch_size)
 
         # conpute gradients
         loss.backward()
@@ -57,8 +45,8 @@ def train(data_loader, model, max_train_steps, use_saliency=False, \
         # update weights
         optimizer.step()
 
-        if step % lr_decresing_step == 0:
-            learning_rate /= lr_divisor
+        if step % ARGS.lr_decresing_step == 0:
+            learning_rate /= ARGS.lr_divisor
             accuracies += [accuracy]
             losses += [loss]
             if (len(losses) > 2 and abs(losses[-1] - losses[-2]) < 0.0001):
@@ -66,12 +54,14 @@ def train(data_loader, model, max_train_steps, use_saliency=False, \
             print("[{}] Train Step {:04d}/{:04d}, Batch Size = {}, "
                   "Accuracy = {:.2f}, Loss = {:.3f}".format(
                     datetime.now().strftime("%Y-%m-%d %H:%M"), step,
-                    max_train_steps, batch_size, accuracy, loss
+                    ARGS.max_train_steps, ARGS.batch_size, accuracy, loss
             ))
 
-        if step == max_train_steps:
+        if step == ARGS.max_train_steps:
             break
     # plot
+    plt.figure(1)
+    plt.clf()
     plt.plot(range(len(losses)), losses)
     plt.ylabel('Loss')
     plt.xlabel('Batches')
@@ -83,30 +73,40 @@ def train(data_loader, model, max_train_steps, use_saliency=False, \
     return accuracies[-1]
 
 
+def get_cifar_ready_resnet():
+    model = resnet18(pretrained=True)
+    model.fc = torch.nn.Linear(512, 100)
+    return model
+
+
 def remove_and_retrain(data_loader):
-    initial_model = resnet18(pretrained=True)
-    initial_accuracy = train(data_loader, initial_model, max_train_steps, \
-                             use_saliency=False)
-    saliency_methods = [(FullGrad(initial_model), "FullGrad"), 
-                       (SimpleFullGrad(initial_model), "SimpleFullGrad")]
-    percentages = [0.1, 0.2, 0.5, 0.8, 1.0, 2, 5, 10]
-    ks = [int(i * 224 * 224 / 100) for i in percentages] 
-    accuracies = torch.zeros((len(saliency_methods), len(ks)))
+    initial_model = get_cifar_ready_resnet()
+    initial_accuracy = train(data_loader, initial_model, use_saliency=False)
+    saliency_methods = []
+    for grad_name in ARGS.grads:
+        if grad_name == "fullgrad":
+            saliency_methods += [(FullGrad(initial_model), "FullGrad")]
+        elif grad_name == "simplegrad":
+            saliency_methods += [(SimpleFullGrad(initial_model), "SimpleFullGrad")]
+        # TODO add gradcam
+    
+    total_features = 224 * 224
+    accuracies = torch.zeros((len(saliency_methods), len(ARGS.k)))
     for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
-        for k_idx, k in enumerate(ks):
+        for k_idx, k in enumerate(ARGS.k):
             print("Run saliency method: ", method_name)
 
-            model = resnet18(pretrained=True)
-            accuracy = train(data_loader, model, max_train_steps, \
-                             use_saliency=True, k_most_salient=k, \
+            model = get_cifar_ready_resnet()
+            accuracy = train(data_loader, model, use_saliency=True, \
+                             k_most_salient=int(k * total_features), \
                              saliency_method=saliency_method, \
-                             saliency_method_name=method_name, \
-                             initial_model=initial_model)
+                             saliency_method_name=method_name)
             accuracies[method_idx, k_idx] = accuracy
-        print(percentages, accuracies[method_idx])
-        plt.plot(percentages, list(accuracies[method_idx]), label="method_name" + str(k))
+        plt.figure(0)
+        plt.plot(ARGS.k, list(accuracies[method_idx]), label=method_name + str(k))
     plt.ylabel('Accuracy')
     plt.xlabel('k %')
+    plt.legend()
     plt.savefig(os.path.join("results", "remove_and_retrain", "final_result.jpeg"))
 
 
@@ -120,10 +120,39 @@ def main():
     dataset = data_PATH + "/cifar/"
     data = datasets.CIFAR100(dataset, train=True, transform=transform_standard, \
         target_transform=None, download=True)
-    data_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False)
+    data_loader = torch.utils.data.DataLoader(data, batch_size=ARGS.batch_size, shuffle=False)
 
     remove_and_retrain(data_loader)
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
+                        help='Percentage of k% most salient pixels')
+    parser.add_argument('--most_salient', default=True, type=bool,
+                        help='most salient = True or False depending on retrain or pixel perturbation')
+    parser.add_argument('--grads', default=["fullgrad"], type=str, nargs='+',
+                        help='which grad methods to be applied')
+    parser.add_argument('--device', default="cuda:0", type=str,
+                        help='cpu or gpu')
+    parser.add_argument('--target_layer', default="layer4", type=str,
+                        help='Which layer to be visualized in GRADCAM')
+    parser.add_argument('--n_random_runs', default=5, type=int,
+                        help='Number of runs for random pixels to be removed to decrease std of random run')
+    parser.add_argument('--replacement', default="black", type=str,
+                        help='black = 1.0 or mean = [0.485, 0.456, 0.406]')
+    parser.add_argument('--batch_size', default=1, type=int,
+                        help='Number of images passed through at once')
+    parser.add_argument('--max_train_steps', default=100, type=int,
+                        help='Maximum number of training steps')
+    parser.add_argument('--initial_learning_rate', default=0.01, type=float,
+                        help='Initial learning rate')
+    parser.add_argument('--lr_decresing_step', default=10, type=int,
+                        help='Number of training steps between decreasing the learning rate')
+    parser.add_argument('--lr_divisor', default=10, type=float,
+                        help='Divisor used to decrease the leaarning rate')
+
+    ARGS = parser.parse_args()
     main()
+
+

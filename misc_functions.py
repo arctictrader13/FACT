@@ -112,19 +112,20 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
     
     [batch_size, channel_size, column_size, row_size] = image_batch.size()
 
+    output = copy.deepcopy(image_batch)
+    output.requires_grad = False
+    
     for i in range(batch_size):
-        #print("num_pixels:{}".format(num_pixels))
         indexes = torch.topk(saliency_maps[i].view((-1)), k=num_pixels, largest=most_salient)[1]
-        #print("indexes:{}".format(indexes))
         rows = indexes / row_size
         columns = indexes % row_size
         if len(replacement) == 1:
-            image_batch[i, :, rows, columns] = replacement[0]
+            output[i, :, rows, columns] = replacement[0]
         else:
             for j in range(len(replacement)):
-                image_batch[i, j, rows, columns] = replacement[i]
+                output[i, j, rows, columns] = replacement[i]
     torch.cuda.empty_cache()
-    return image_batch
+    return output
 
 def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement):
 
