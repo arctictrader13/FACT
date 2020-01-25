@@ -90,18 +90,6 @@ def compute_and_store_saliency_maps(sample_loader, model, device, max_batch_num,
         if batch_idx == max_batch_num:
             break
 
-
-def compute_saliency_maps(sample_loader, fullgrad_model, gradcam_model, device):
-
-    for batch_idx, (data, target) in enumerate(sample_loader):
-        data, target = data.to(device).requires_grad_(), target.to(device)
-
-        _ = model.forward(data)
-
-        cam = fullgrad.saliency(data)
-        cam_simple = simple_fullgrad.saliency(data)
-
-
 def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salient=True, replacement=[1.0]):
     # Check that the data and the saliency map have the same batch size and the
     # same image dimention.
@@ -112,6 +100,9 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
     
     [batch_size, channel_size, column_size, row_size] = image_batch.size()
 
+    output = copy.deepcopy(image_batch)
+    output.requires_grad = False
+
     for i in range(batch_size):
         #print("num_pixels:{}".format(num_pixels))
         indexes = torch.topk(saliency_maps[i].view((-1)), k=num_pixels, largest=most_salient)[1]
@@ -119,18 +110,19 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
         rows = indexes / row_size
         columns = indexes % row_size
         if len(replacement) == 1:
-            image_batch[i, :, rows, columns] = replacement[0]
+            output[i, :, rows, columns] = replacement[0]
         else:
             for j in range(len(replacement)):
-                image_batch[i, j, rows, columns] = replacement[i]
-    torch.cuda.empty_cache()
-    return image_batch
+                output[i, j, rows, columns] = replacement[i]
+
+    return output
 
 def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement):
 
     output = copy.deepcopy(image_batch)
     output.requires_grad = False
     torch.manual_seed(seed)
+
     [batch_size, channel_size, column_size, row_size] = image_batch.size()
 
    # create binary mask for all batched
@@ -143,6 +135,5 @@ def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement):
         else:
             for j in range(len(replacement)):
                 output[i, j, :, :][bin_mask[i, j, :, :]] = replacement[i]
-    torch.cuda.empty_cache()
 
     return output

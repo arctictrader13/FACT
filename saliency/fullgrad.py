@@ -97,6 +97,7 @@ class FullGrad():
         return input
 
     def saliency(self, image, target_class=None):
+
         #FullGrad saliency
         
         self.model.eval()
