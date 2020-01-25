@@ -44,11 +44,6 @@ def main():
 
     batch_size = ARGS.batch_size
 
-    if ARGS.replacement == "mean":
-        replacement = [0.485, 0.456, 0.406]
-    else:
-        replacement = [1.0]
-
     if ARGS.most_salient is True:
         salient_type = "most"
     else:
@@ -144,7 +139,7 @@ def main():
                         save_saliency_map_batch(cam, data, result_path, grad_type, salient_type, counter)
 
                     data = remove_salient_pixels(data, cam, num_pixels=k_most_salient, most_salient=ARGS.most_salient,
-                                                 replacement=replacement)
+                                                 replacement=ARGS.replacement)
 
                     tmp_results = abs_frac_per_grad(model, data, initial_output, tmp_results)
 
@@ -153,7 +148,7 @@ def main():
                     # run n_random_runs for random pixel removal
                     sample_seeds = np.random.randint(0, 10000, ARGS.n_random_runs)
                     for seed in sample_seeds:
-                        tmp_data = remove_random_salient_pixels(data, seed, k_percentage=i, replacement=replacement)
+                        tmp_data = remove_random_salient_pixels(data, seed, k_percentage=i, replacement=ARGS.replacement)
                         tmp_results = abs_frac_per_grad(model, tmp_data, initial_output, tmp_results)
 
                 # print("counter:{}".format(counter))
@@ -186,7 +181,7 @@ def main():
     print("KL divergences per k")
     print_dict(all_results[2], div=True)
 
-    print_memory()
+    # print_memory()
 
 
 def print_dict(dictionary, div=False):

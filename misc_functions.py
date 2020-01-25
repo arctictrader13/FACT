@@ -90,7 +90,7 @@ def compute_and_store_saliency_maps(sample_loader, model, device, max_batch_num,
         if batch_idx == max_batch_num:
             break
 
-def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salient=True, replacement=[1.0]):
+def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salient=True, replacement="black"):
     # Check that the data and the saliency map have the same batch size and the
     # same image dimention.
     assert image_batch.size()[0] == saliency_maps.size()[0], \
@@ -103,19 +103,25 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
     output = copy.deepcopy(image_batch)
     output.requires_grad = False
 
+    mean = [0.485, 0.456, 0.406]
+    std = [0.229, 0.224, 0.225]
+
     for i in range(batch_size):
         indexes = torch.topk(saliency_maps[i].view((-1)), k=num_pixels, largest=most_salient)[1]
         rows = indexes / row_size
         columns = indexes % row_size
-        if len(replacement) == 1:
-            output[i, :, rows, columns] = replacement[0]
+
+        if replacement == "black":
+            for j in range(channel_size):
+                output[i, j, rows, columns] =  - mean[j] / std[j]
         else:
-            for j in range(len(replacement)):
-                output[i, j, rows, columns] = replacement[i]
+            for j in range(channel_size):
+                output[i, j, rows, columns] =  mean[j]
 
     return output
 
-def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement):
+
+def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement="black"):
 
     output = copy.deepcopy(image_batch)
     output.requires_grad = False
@@ -123,15 +129,19 @@ def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement):
 
     [batch_size, channel_size, column_size, row_size] = image_batch.size()
 
+    mean = [0.485, 0.456, 0.406]
+    std = [0.229, 0.224, 0.225]
+
    # create binary mask for all batched
     bin_mask = torch.FloatTensor(batch_size, 3, 224, 224).uniform_() < k_percentage
 
     for i in range(batch_size):
-        if len(replacement) == 1:
-            # replace True values with replacement value
-            output[i,:,:,:][bin_mask[i, :, :, :]] = replacement[0]
+
+        if replacement == "black":
+            for j in range(channel_size):
+                output[i,j,:,:][bin_mask[i, j, :, :]] = - mean[j] / std[j]
         else:
-            for j in range(len(replacement)):
-                output[i, j, :, :][bin_mask[i, j, :, :]] = replacement[i]
+            for j in range(channel_size):
+                output[i, j, :, :][bin_mask[i, j, :, :]] = mean[j]
 
     return output
