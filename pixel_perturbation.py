@@ -166,7 +166,6 @@ def main():
             append_mean_std(tmp_results[1], prob_means, prob_stds)
             kl_divs.append(np.mean(tmp_results[2]))
 
-            # torch.cuda.empty_cache()
         all_results[0][grad_type] = [score_means, score_stds]
         all_results[1][grad_type] = [prob_means, prob_stds]
         all_results[2][grad_type] = [kl_divs]
@@ -256,7 +255,6 @@ def append_mean_std(tmp_results, means, stds):
     means.append(np.round(np.mean(tmp_results), 8))
     stds.append(np.round(np.std(tmp_results), 8))
 
-
 def plot_all_grads(results_dict, filename=None, div=False):
     plt.figure()
     axes = plt.gca()
@@ -323,6 +321,8 @@ def print_memory():
     for obj in gc.get_objects():
         try:
             if torch.is_tensor(obj) or (hasattr(obj, 'data') and torch.is_tensor(obj.data)):
+                print(type(obj), obj.size())
+
                 if len(obj.size()) > 0:
                     if obj.type() == 'torch.cuda.FloatTensor':
                         total += reduce(lambda x, y: x * y, obj.size()) * 32
@@ -335,6 +335,7 @@ def print_memory():
         except Exception as e:
             pass
     print("{} GB".format(total / ((1024 ** 3) * 8)))
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

@@ -104,9 +104,7 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
     output.requires_grad = False
 
     for i in range(batch_size):
-        #print("num_pixels:{}".format(num_pixels))
         indexes = torch.topk(saliency_maps[i].view((-1)), k=num_pixels, largest=most_salient)[1]
-        #print("indexes:{}".format(indexes))
         rows = indexes / row_size
         columns = indexes % row_size
         if len(replacement) == 1:
