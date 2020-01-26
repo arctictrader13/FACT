@@ -104,6 +104,7 @@ def remove_and_retrain(data_loader):
             accuracies[method_idx, k_idx] = accuracy
         plt.figure(0)
         plt.plot(ARGS.k, list(accuracies[method_idx]), label=method_name + str(k))
+    plt.figure(0)
     plt.ylabel('Accuracy')
     plt.xlabel('k %')
     plt.legend()
