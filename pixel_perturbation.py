@@ -89,7 +89,7 @@ def main():
 
     # initialize results dictionary: key: gradient method (random, fullgrad,...), values: [[mean, std],..] per k%
     results_dict = {}
-    all_results = [{},{},{}]
+    all_results = [{}, {}, {}, {}, {}, {}, {}]
     total_features = 224 * 224
 
     grad = None
@@ -100,6 +100,8 @@ def main():
 
         grad_counter = 0
         score_means, score_stds, prob_means, prob_stds, kl_divs = [], [], [], [], []
+        other_score_means, other_score_stds, other_prob_means, other_prob_stds = [], [], [], []
+        other_max_score_means, other_max_score_stds, other_max_prob_means, other_max_prob_stds  = [], [], [], []
 
         print("grad_type:{}".format(grad_type))
 
@@ -110,7 +112,7 @@ def main():
             k_most_salient = int(i * total_features)
             # print("k_most_salient:{}".format(k_most_salient))
             counter = 0
-            tmp_results = [[], [], []] # score diffs, prob diffs, kl divs
+            tmp_results = [[], [], [], [], [], [], []] # score diffs, prob diffs, kl divs, score other diffs, prob other diffs, max other diffs
 
             for batch_idx, (data, target) in enumerate(sample_loader):
                 counter += 1
@@ -125,9 +127,11 @@ def main():
                 data = data.to(device).requires_grad_()
 
                 # Run Input through network (two different networks if gradcam or fullgrad)
-                initial_output = model.forward(data)
+                with torch.no_grad():
+                    initial_output = model.forward(data)
+                    initial_out = initial_output.to(torch.device("cpu"))
 
-                # compute saliency maps for grad methods not random
+                    # compute saliency maps for grad methods not random
                 if grad_type != "random":
 
                     # print("data size:{}".format(data.size()))
@@ -140,8 +144,13 @@ def main():
 
                     data = remove_salient_pixels(data, cam, num_pixels=k_most_salient, most_salient=ARGS.most_salient,
                                                  replacement=ARGS.replacement)
+                    data.to("cpu")
+                    # output after pixel perturbation
+                    with torch.no_grad():
+                        final_output = model.forward(data)
+                        final_out = final_output.to("cpu")
 
-                    tmp_results = abs_frac_per_grad(model, data, initial_output, tmp_results)
+                    tmp_results = compute_difference_metrics(model, data, initial_out, final_out, tmp_results)
 
                 # change pixels based on random removal
                 elif grad_type == "random":
@@ -149,21 +158,40 @@ def main():
                     sample_seeds = np.random.randint(0, 10000, ARGS.n_random_runs)
                     for seed in sample_seeds:
                         tmp_data = remove_random_salient_pixels(data, seed, k_percentage=i, replacement=ARGS.replacement)
-                        tmp_results = abs_frac_per_grad(model, tmp_data, initial_output, tmp_results)
+
+                        with torch.no_grad():
+                            final_output = model.forward(tmp_data)
+                            final_out = final_output.to("cpu")
+
+                        tmp_results = compute_difference_metrics(model, tmp_data, initial_out, final_out, tmp_results)
 
                 # print("counter:{}".format(counter))
             # print(torch.cuda.memory_summary(device=None, abbreviated=False))
             # print(torch.cuda.memory_allocated(device=None))
-            #print("Absolute fractional output changes: ", tmp_results)
+            #print("Absolute fractional output changes: ", tmp_results[0])
+            #print("Absolute fractional prob changes: ", tmp_results[1])
+            #print("Absolute fractional other topk output changes: ", tmp_results[3])
+            #print("Absolute fractional other topk prob changes: ", tmp_results[4])
+            #print("Absolute fractional max other output changes: ", tmp_results[5])
+            #print("Absolute fractional max other probchanges: ", tmp_results[6])
+
             # print("Actual values: ",  initial_class_probability, final_class_probability)
             # save mean and std of
             append_mean_std(tmp_results[0], score_means, score_stds)
             append_mean_std(tmp_results[1], prob_means, prob_stds)
             kl_divs.append(np.mean(tmp_results[2]))
+            append_mean_std(tmp_results[3], other_score_means, other_score_stds)
+            append_mean_std(tmp_results[4], other_prob_means, other_prob_stds)
+            append_mean_std(tmp_results[5], other_max_score_means, other_max_score_stds)
+            append_mean_std(tmp_results[6], other_max_prob_means, other_max_prob_stds)
 
         all_results[0][grad_type] = [score_means, score_stds]
         all_results[1][grad_type] = [prob_means, prob_stds]
         all_results[2][grad_type] = [kl_divs]
+        all_results[3][grad_type] = [other_score_means, other_score_stds]
+        all_results[4][grad_type] = [other_prob_means, other_prob_stds]
+        all_results[5][grad_type] = [other_max_score_means, other_max_score_stds]
+        all_results[6][grad_type] = [other_max_prob_means, other_max_prob_stds]
 
     # plot for all gradient methods stds and means for all k% values
     save_experiment_file = result_path + ARGS.dataset + "_" + model_name + "_" + salient_type + "_" + ARGS.replacement + str(ARGS.n_images) + "_"
@@ -172,6 +200,10 @@ def main():
     plot_all_grads(all_results[0], filename=save_experiment_file + "scores")
     plot_all_grads(all_results[1], filename=save_experiment_file + "probs")
     plot_all_grads(all_results[2], filename=save_experiment_file + "kl", div=True)
+    plot_all_grads(all_results[3], filename=save_experiment_file + "topk_other_scores")
+    plot_all_grads(all_results[4], filename=save_experiment_file + "topk_other_probs")
+    plot_all_grads(all_results[5], filename=save_experiment_file + "max_other_scores")
+    plot_all_grads(all_results[6], filename=save_experiment_file + "max_other_probs")
 
     print("For K values: {}".format(ARGS.k))
     print("############ Score absolute fractional differences ############")
@@ -180,9 +212,16 @@ def main():
     print_dict(all_results[1])
     print("KL divergences per k")
     print_dict(all_results[2], div=True)
+    print("############ Top: {} Other Score absolute fractional differences ############".format(ARGS.topk))
+    print_dict(all_results[3])
+    print("############ Top: {} Other Probs absolute fractional differences ############".format(ARGS.topk))
+    print_dict(all_results[4])
+    print("############ Max Other Score absolute fractional differences ############")
+    print_dict(all_results[5])
+    print("############ Max other Probs absolute fractional differences ############")
+    print_dict(all_results[6])
 
     # print_memory()
-
 
 def print_dict(dictionary, div=False):
     for k, v in dictionary.items():
@@ -192,32 +231,39 @@ def print_dict(dictionary, div=False):
         else:
             print("Mean: {}, Std: {}".format(v[0], v[1]))
 
-def abs_frac_per_grad(model, data, initial_output, tmp_results):
-    # output after pixel perturbation
-    with torch.no_grad():
-        final_output = model.forward(data)
+def kl_div(P, Q):
+    kl = (P * (P / Q).log()).sum(1).mean()
+    return kl
 
-    final_output.cpu()
-    initial_output.cpu()
+def compute_difference_metrics(model, data, initial_output, final_output, tmp_results):
 
     # FOR KL DIVERGENCE AND OWN METRIC
     # get probabilities instead of output scores
     initial_probabilities = F.softmax(initial_output, dim=1)
     final_probabilities = F.softmax(final_output, dim=1)
 
-    initial_probabilities.cpu()
-    final_probabilities.cpu()
-
-    kl_div = F.kl_div(final_probabilities,initial_probabilities, reduction='batchmean')
+    kldiv = kl_div(final_probabilities,initial_probabilities)
 
     # score and prob differences
     tmp_score_diffs = get_temp_result(initial_output, final_output)
     tmp_prob_diffs = get_temp_result(initial_probabilities, final_probabilities)
 
+    # changes of mean class score other classes
+    tmp_other_diffs = get_other_class_change(initial_output, final_output, ARGS.topk)
+    tmp_other_probs_diffs = get_other_class_change(initial_probabilities, final_probabilities, ARGS.topk)
+
+    # max change in other classes than most confident one
+    tmp_other_max_diffs = tmp_other_diffs.max(1)[0]
+    tmp_other_max_prob_diffs = tmp_other_probs_diffs.max(1)[0]
+
     # save per image
     tmp_results[0].append(np.round(tmp_score_diffs.tolist(), 8))
     tmp_results[1].append(np.round(tmp_prob_diffs.tolist(), 8))
-    tmp_results[2].append(np.round(kl_div.item(),8))
+    tmp_results[2].append(np.round(kldiv.item(),8))
+    tmp_results[3].append(np.round(tmp_other_diffs.tolist(), 8))
+    tmp_results[4].append(np.round(tmp_other_probs_diffs.tolist(), 8))
+    tmp_results[5].append(np.round(tmp_other_max_diffs.tolist(), 8))
+    tmp_results[6].append(np.round(tmp_other_max_prob_diffs.tolist(), 8))
 
     return tmp_results
 
@@ -234,15 +280,75 @@ def init_grad_and_model(grad_type, model_name, device):
 
     return model, grad
 
-def get_temp_result(initial_output, final_output):
-
+def get_temp_result(initial_out, final_out):
     # initially most confident class
-    initial_class_scores, predicted_class = initial_output.max(1)
+    initial_class_scores, predicted_class = initial_out.max(1)
     # same value after modification
-    final_class_scores = final_output.index_select(1, predicted_class).max(0)[0]
+    final_class_scores = final_out.index_select(1, predicted_class).max(0)[0]
 
     # absolute fractional difference of raw results
     tmp_result = abs(final_class_scores - initial_class_scores) / initial_class_scores
+
+    return tmp_result
+
+def get_other_class_change(initial_out, final_out, topk):
+    # remove gradient
+    other_initial_scores = get_topk_other_scores(initial_out, initial_out, topk)
+    other_final_scores = get_topk_other_scores(initial_out, final_out, topk)
+
+    # absolute fractional difference of raw results
+    tmp_result = abs(other_initial_scores - other_final_scores) / other_initial_scores
+
+    return tmp_result
+
+def get_other_classes_scores(initial_out, final_out):
+    # initially most confident class
+    #print("initial device: {}".format(initial_out.type()))
+    #print("final device: {}".format(final_out.type()))
+
+    _, predicted_class = initial_out.max(1)
+    ind_tensor = torch.LongTensor(initial_out.size()[0] * [list(range(1000))]).to("cpu")
+    new_tensor = torch.LongTensor(initial_out.size()[0] * [[1] * 999]).to("cpu")
+
+    #print("ind_tensor device: {}".format(ind_tensor.type()))
+    #print("new_tensor device: {}".format(new_tensor.type()))
+
+    final_class_scores = torch.zeros(initial_out.size()[0], 999)
+    # remove predicted class
+    for i in range(len(predicted_class)):
+        new_tensor[i] = np.delete(ind_tensor[i], predicted_class[i], None)
+        final_class_scores[i] = final_out[i, new_tensor[i]]
+
+    return final_class_scores
+
+def get_topk_other_scores(initial_out, final_out, topk):
+        other_initial_scores = get_other_classes_scores(initial_out, initial_out)
+        other_final_scores = get_other_classes_scores(initial_out, final_out)
+
+        topk_scores, topk_ind = torch.topk(other_initial_scores, k=topk)
+
+        final_class_scores = torch.zeros(other_initial_scores.size()[0], topk)
+
+        # remove predicted class
+        for i in range(len(topk_ind)):
+            final_class_scores[i] = other_final_scores[i, topk_ind[i]]
+
+        return final_class_scores
+
+def get_max_other_class_change(initial_output, final_output):
+    other_initial_scores = get_other_classes_scores(initial_output, initial_output)
+    other_final_scores = get_other_classes_scores(initial_output, final_output)
+
+    changes = abs(other_initial_scores - other_final_scores) / other_initial_scores
+    tmp_result = changes.max(1)
+
+    # initially most confident class
+    #initial_class_scores, predicted_class = other_initial_scores.max(1)
+    # same value after modification
+    #final_class_scores = other_final_scores.index_select(1, predicted_class).max(0)[0]
+
+    # absolute fractional difference of raw results
+    #tmp_result = abs(final_class_scores - initial_class_scores) / initial_class_scores
 
     return tmp_result
 
@@ -362,9 +468,9 @@ if __name__ == "__main__":
                         help='Save saliency maps for first n_save images')
     parser.add_argument('--batch_size', default=1, type=int,
                         help='Number of images passed through at once')
-
+    parser.add_argument('--topk', default=100, type=int,
+                        help='Number of other classes considered for metric of other class changes')
     ARGS = parser.parse_args()
     main()
 
-# TODO 4) new metric add
 # TODO 5) add inputgrad

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c3a6114-30d4-4667-be04-609c10d6daa3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/full_grad_test_0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/full_grad_test_1.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/misc_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/misc_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pixel_perturbation.py" beforeDir="false" afterPath="$PROJECT_DIR$/pixel_perturbation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.jpg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/misc_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="92" column="107" selection-start-line="92" selection-start-column="107" selection-end-line="92" selection-end-column="107" />
+            <state relative-caret-position="303">
+              <caret line="116" column="13" lean-forward="true" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
               <folding>
                 <element signature="e#158#167#0" expanded="true" />
               </folding>
@@ -53,7 +55,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/find_and_remove_duplicates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
+            <state relative-caret-position="731">
               <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
@@ -65,7 +67,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1581">
+            <state relative-caret-position="16">
               <caret line="99" selection-start-line="99" selection-end-line="99" />
               <folding>
                 <element signature="e#174#186#0" expanded="true" />
@@ -120,8 +122,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-118">
-              <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+            <state relative-caret-position="1767">
+              <caret line="475" column="23" lean-forward="true" selection-start-line="475" selection-start-column="23" selection-end-line="475" selection-end-column="23" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -140,8 +142,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>k</find>
-      <find>numpy</find>
       <find>occlusion</find>
       <find>classta</find>
       <find>target_layer</find>
@@ -166,9 +166,12 @@
       <find>softma</find>
       <find>seed</find>
       <find>get_re</find>
-      <find>inter</find>
       <find>init_grad</find>
       <find>get_filen</find>
+      <find>topk</find>
+      <find>kl_div</find>
+      <find>TODO</find>
+      <find>inter</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -194,9 +197,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-2122" />
-    <option name="y" value="796" />
-    <option name="width" value="1441" />
+    <option name="x" value="-6" />
+    <option name="y" value="-6" />
+    <option name="width" value="1513" />
     <option name="height" value="1013" />
   </component>
   <component name="ProjectView">
@@ -317,18 +320,18 @@
       <workItem from="1579771721338" duration="23989000" />
       <workItem from="1579861029623" duration="13864000" />
       <workItem from="1579878146967" duration="245000" />
-      <workItem from="1579948243827" duration="20406000" />
+      <workItem from="1579948243827" duration="51626000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="162861000" />
+    <option name="totallyTimeSpent" value="194081000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="604" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1864" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08422175" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08758315" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -342,12 +345,12 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4989339" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.2238806" side_tool="true" weight="0.3575298" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.84115136" weight="0.29252437" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.7761194" visible="true" weight="0.3575298" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.84115136" weight="0.27622014" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.7761194" visible="true" weight="0.3364486" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.04904051" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.050997782" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
     <layout-to-restore>
@@ -432,16 +435,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/find_and_remove_duplicates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/vgg.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
@@ -459,16 +452,6 @@
           <caret line="169" selection-start-line="169" selection-end-line="169" />
           <folding>
             <element signature="e#536#548#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="99" selection-start-line="99" selection-end-line="99" />
-          <folding>
-            <element signature="e#174#186#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -492,18 +475,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/misc_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="92" column="107" selection-start-line="92" selection-start-column="107" selection-end-line="92" selection-end-column="107" />
+        <state relative-caret-position="303">
+          <caret line="116" column="13" lean-forward="true" selection-start-line="116" selection-start-column="13" selection-end-line="116" selection-end-column="13" />
           <folding>
             <element signature="e#158#167#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="99" selection-start-line="99" selection-end-line="99" />
+          <folding>
+            <element signature="e#174#186#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/find_and_remove_duplicates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-118">
-          <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+        <state relative-caret-position="1767">
+          <caret line="475" column="23" lean-forward="true" selection-start-line="475" selection-start-column="23" selection-end-line="475" selection-end-column="23" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
