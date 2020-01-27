@@ -19,6 +19,9 @@ import matplotlib.pyplot as plt
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 data_PATH= PATH + 'dataset/'
 
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+
 def train(data_loader, model, use_saliency=False, \
           k_most_salient=0, saliency_method=None, saliency_method_name=None):
     learning_rate = ARGS.initial_learning_rate
@@ -29,12 +32,16 @@ def train(data_loader, model, use_saliency=False, \
     for step, (batch_inputs, batch_targets) in enumerate(data_loader):
         batch_inputs, batch_targets = batch_inputs.to(ARGS.device), batch_targets.to(ARGS.device)
         if use_saliency:
+            batch_inputs = batch_inputs.detach()
             saliency_map = saliency_method.saliency(batch_inputs)
             data = remove_salient_pixels(batch_inputs, saliency_map, num_pixels=k_most_salient, most_salient=ARGS.most_salient)
         else:
             data = batch_inputs
+        
         data.requires_grad = True
-
+        data = data.to(ARGS.device)
+        batch_targets = batch_targets.to(ARGS.device)
+        
         output = model.forward(data)
         loss = criterion(output, batch_targets)
         accuracy = float(sum(batch_targets == torch.argmax(output, 1))) / float(ARGS.batch_size)
@@ -62,7 +69,7 @@ def train(data_loader, model, use_saliency=False, \
     # plot
     plt.figure(1)
     plt.clf()
-    plt.plot(range(len(losses)), losses)
+    plt.plot(range(0, ARGS.batch_size * len(losses), ARGS.batch_size), losses)
     plt.ylabel('Loss')
     plt.xlabel('Batches')
     if use_saliency:
@@ -76,6 +83,7 @@ def train(data_loader, model, use_saliency=False, \
 def get_cifar_ready_resnet():
     model = resnet18(pretrained=True)
     model.fc = torch.nn.Linear(512, 100)
+    model = model.to(ARGS.device)
     return model
 
 
@@ -83,13 +91,13 @@ def remove_and_retrain(data_loader):
     initial_model = get_cifar_ready_resnet()
     initial_accuracy = train(data_loader, initial_model, use_saliency=False)
     saliency_methods = []
+    print(next(initial_model.parameters()).device)
     for grad_name in ARGS.grads:
         if grad_name == "fullgrad":
             saliency_methods += [(FullGrad(initial_model), "FullGrad")]
         elif grad_name == "simplegrad":
             saliency_methods += [(SimpleFullGrad(initial_model), "SimpleFullGrad")]
         # TODO add gradcam
-    
     total_features = 224 * 224
     accuracies = torch.zeros((len(saliency_methods), len(ARGS.k)))
     for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
@@ -103,7 +111,8 @@ def remove_and_retrain(data_loader):
                              saliency_method_name=method_name)
             accuracies[method_idx, k_idx] = accuracy
         plt.figure(0)
-        plt.plot(ARGS.k, list(accuracies[method_idx]), label=method_name + str(k))
+        plt.plot([k * 100 for k in ARGS.k], list(accuracies[method_idx]), label=method_name + str(k))
+    plt.figure(0)
     plt.ylabel('Accuracy')
     plt.xlabel('k %')
     plt.legend()

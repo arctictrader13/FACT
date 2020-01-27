@@ -114,9 +114,12 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
         if replacement == "black":
             for j in range(channel_size):
                 output[i, j, rows, columns] =  - mean[j] / std[j]
-        else:
+        elif replacement == "mean":
             for j in range(channel_size):
                 output[i, j, rows, columns] =  mean[j]
+        else:
+            for j in range(channel_size):
+                output[i, j, rows, columns] =  0.0
 
     return output
 

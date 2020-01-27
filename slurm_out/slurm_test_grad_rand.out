@@ -1,0 +1,75 @@
+/var/spool/slurm-llnl/slurmd/job4410414/slurm_script: line 21: cd: FACT: No such file or directory
+Files already downloaded and verified
+[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.572
+[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 94.963
+[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 75.797
+[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 41.501
+[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 46.993
+[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 22.219
+[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 10.143
+[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3.862
+[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.662
+[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.50, Loss = 3.687
+[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.136
+cuda:0
+Completeness test passed for FullGrad.
+Run saliency method:  FullGrad
+[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.553
+[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 91.539
+[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 83.270
+[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 46.944
+[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 24.115
+[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.291
+[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 15.634
+[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 9.280
+[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.982
+[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.032
+[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.653
+Run saliency method:  FullGrad
+[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.302
+[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 90.086
+[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 80.838
+[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 49.260
+[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 28.966
+[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 12.346
+[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.046
+[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.405
+[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.308
+[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.489
+[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.436
+Run saliency method:  FullGrad
+[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.482
+[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 107.627
+[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 85.705
+[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 81.458
+[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 42.436
+[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.221
+[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.384
+[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.113
+[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.877
+[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.723
+[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.943
+Run saliency method:  FullGrad
+[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.872
+[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 90.212
+[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 75.698
+[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 70.783
+[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 21.652
+[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3.413
+[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.579
+[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.871
+[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.256
+[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3.971
+[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.217
+Run saliency method:  FullGrad
+[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.50, Loss = 4.475
+[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 100.001
+[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 78.169
+[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 54.928
+[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 35.834
+[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3.307
+[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 8.961
+[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.905
+[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.660
+[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.790
+[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.548
