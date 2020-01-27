@@ -306,14 +306,14 @@ class ResNet(nn.Module):
         Returns the explicit biases arising 
         from BatchNorm or convolution layers.
         """
-        cuda = torch.cuda.is_available()
-        device = torch.device("cuda:0" if cuda else "cpu")
+        # cuda = torch.cuda.is_available()
+        # device = torch.device("cuda:0" if cuda else "cpu")
+        device = next(self.parameters()).device
 
         self.fullgrad_info['get_biases'] = True
         self.fullgrad_info['biases'] = [0]
 
-        #x = torch.zeros(1,3,224,224).to(device)
-        x = torch.zeros(1,3,224,224)
+        x = torch.zeros(1,3,224,224).to(device)
         _ = self.forward(x)
         self.fullgrad_info['get_biases'] = False
         return self.fullgrad_info['biases']
