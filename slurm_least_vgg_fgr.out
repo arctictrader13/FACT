@@ -1,0 +1,130 @@
+Completeness test passed for FullGrad.
+grad_type:fullgrad
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+grad_type:gradcam
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+Completeness test passed for FullGrad.
+grad_type:random
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+100 image batches processed
+200 image batches processed
+300 image batches processed
+400 image batches processed
+500 image batches processed
+For K values: [0.001, 0.005, 0.01, 0.05, 0.1]
+############ Score absolute fractional differences ############
+Gradient method: fullgrad
+Mean: [0.07799457, 0.13867537, 0.17790965, 0.33073031, 0.43619053], Std: [0.08427964, 0.11866705, 0.13726157, 0.18456247, 0.19831939]
+Gradient method: gradcam
+Mean: [0.06519104, 0.12180574, 0.16190649, 0.31556282, 0.42337475], Std: [0.0786942, 0.11342259, 0.13193783, 0.17595458, 0.19152515]
+Gradient method: random
+Mean: [0.08880521, 0.20449863, 0.28044551, 0.47457639, 0.57049928], Std: [0.09498971, 0.16410777, 0.19749576, 0.22702501, 0.21694791]
+############ Probs absolute fractional differences ############
+Gradient method: fullgrad
+Mean: [0.1577777, 0.25998285, 0.32256814, 0.55942717, 0.70534414], Std: [0.25864695, 0.3316275, 0.36042249, 0.38892721, 0.35509977]
+Gradient method: gradcam
+Mean: [0.12769875, 0.22298114, 0.29044746, 0.5360808, 0.68761818], Std: [0.2264266, 0.29899166, 0.33873932, 0.38689903, 0.36359628]
+Gradient method: random
+Mean: [0.19425915, 0.3978564, 0.50928967, 0.73997125, 0.83502043], Std: [0.3011397, 0.41606945, 0.42235762, 0.35399754, 0.29231054]
+KL divergences per k
+Gradient method: fullgrad
+KL Div: [0.17460181014028056, 0.5597482244288577, 0.9214413674148296, 3.0869517798998, 5.095754422184369]
+Gradient method: gradcam
+KL Div: [0.11027231322645291, 0.4021742958917836, 0.7108308386973948, 2.7058634883166333, 4.612352656412825]
+Gradient method: random
+KL Div: [0.26753869143486975, 1.5865742720961924, 2.8797278168857714, 6.527078217623246, 8.32581423349499]
+############ Top: 10 Other Score absolute fractional differences ############
+Gradient method: fullgrad
+Mean: [0.07567819, 0.13366465, 0.1693106, 0.30370433, 0.40333115], Std: [0.07993844, 0.12501227, 0.14834025, 0.21389318, 0.2455034]
+Gradient method: gradcam
+Mean: [0.06080675, 0.11016032, 0.1438069, 0.27265234, 0.36923327], Std: [0.0677298, 0.11194136, 0.13743356, 0.20824537, 0.24299346]
+Gradient method: random
+Mean: [0.09964004, 0.21736595, 0.29055172, 0.48150408, 0.57768078], Std: [0.09730038, 0.18381899, 0.22556992, 0.27827072, 0.27541883]
+############ Top: 10 Other Probs absolute fractional differences ############
+Gradient method: fullgrad
+Mean: [25.80288044, 290.55023065, 13293.48584844, 14019165.02638952, 8735642.71413958], Std: [2319.31959484, 9010.90573705, 2640459.86181175, 3654770256.2519617, 745913450.235815]
+Gradient method: gradcam
+Mean: [6.38592175, 197.06636599, 1022.19455035, 54212.99751269, 900320.57623556], Std: [151.20566863, 12061.12460629, 63615.09855667, 6587264.8380228, 80694217.827276]
+Gradient method: random
+Mean: [82.42494906, 37245.89473973, 5319873.96955076, 274534687.21012264, 1361925006.4010198], Std: [22261.39358893, 5150312.88734122, 843898523.2479342, 67669545567.80399, 286226197819.98224]
+############ Max Other Score absolute fractional differences ############
+Gradient method: fullgrad
+Mean: [0.15344897, 0.25827834, 0.31873738, 0.52297196, 0.65096705], Std: [0.1113227, 0.15805995, 0.1783944, 0.21809485, 0.22800366]
+Gradient method: gradcam
+Mean: [0.12355656, 0.21151656, 0.26817573, 0.46749951, 0.59753267], Std: [0.09533457, 0.14511361, 0.16966105, 0.2235175, 0.23660634]
+Gradient method: random
+Mean: [0.20447301, 0.41099415, 0.51543985, 0.73379271, 0.82728661], Std: [0.12745508, 0.21061118, 0.24065228, 0.2494854, 0.22962518]
+############ Max other Probs absolute fractional differences ############
+Gradient method: fullgrad
+Mean: [174.48422892, 1661.99891477, 112403.79753794, 134637517.90495554, 41826436.31704524], Std: [7152.54841671, 24820.28999395, 8332386.40329426, 11551650214.598183, 1853710046.6316369]
+Gradient method: gradcam
+Mean: [27.56405866, 1038.21579436, 6183.79340231, 384397.20497631, 4547512.98352923], Std: [403.76949593, 32210.11153435, 182443.06114839, 20258920.26129864, 210686717.5105436]
+Gradient method: random
+Mean: [546.66373899, 208775.49414495, 26670618.14880794, 1936665298.9693022, 10533522789.519876], Std: [61336.48806435, 13982129.92116853, 2041948527.7881176, 201593791046.5625, 874135401653.1288]

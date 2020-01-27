@@ -44,7 +44,7 @@ def main():
 
     batch_size = ARGS.batch_size
 
-    if ARGS.most_salient is True:
+    if ARGS.most_salient == "True":
         salient_type = "most"
     else:
         salient_type = "least"
@@ -99,7 +99,7 @@ def main():
         model, grad = init_grad_and_model(grad_type, model_name, device)
 
         grad_counter = 0
-        score_means, score_stds, prob_means, prob_stds, kl_divs = [], [], [], [], []
+        score_means, score_stds, prob_means, prob_stds, kl_div_means, kl_div_stds = [], [], [], [], [], []
         other_score_means, other_score_stds, other_prob_means, other_prob_stds = [], [], [], []
         other_max_score_means, other_max_score_stds, other_max_prob_means, other_max_prob_stds  = [], [], [], []
 
@@ -142,15 +142,15 @@ def main():
                     if ARGS.save_grad is True and grad_counter == 1 and counter <= ARGS.n_save:
                         save_saliency_map_batch(cam, data, result_path, grad_type, salient_type, counter)
 
-                    data = remove_salient_pixels(data, cam, num_pixels=k_most_salient, most_salient=ARGS.most_salient,
+                    new_data = remove_salient_pixels(data, cam, num_pixels=k_most_salient, most_salient=ARGS.most_salient,
                                                  replacement=ARGS.replacement)
-                    data.to("cpu")
+                    new_data.to("cpu")
                     # output after pixel perturbation
                     with torch.no_grad():
-                        final_output = model.forward(data)
+                        final_output = model.forward(new_data)
                         final_out = final_output.to("cpu")
 
-                    tmp_results = compute_difference_metrics(model, data, initial_out, final_out, tmp_results)
+                    tmp_results = compute_difference_metrics(initial_out, final_out, tmp_results)
 
                 # change pixels based on random removal
                 elif grad_type == "random":
@@ -163,7 +163,7 @@ def main():
                             final_output = model.forward(tmp_data)
                             final_out = final_output.to("cpu")
 
-                        tmp_results = compute_difference_metrics(model, tmp_data, initial_out, final_out, tmp_results)
+                        tmp_results = compute_difference_metrics(initial_out, final_out, tmp_results)
 
                 # print("counter:{}".format(counter))
             # print(torch.cuda.memory_summary(device=None, abbreviated=False))
@@ -179,7 +179,7 @@ def main():
             # save mean and std of
             append_mean_std(tmp_results[0], score_means, score_stds)
             append_mean_std(tmp_results[1], prob_means, prob_stds)
-            kl_divs.append(np.mean(tmp_results[2]))
+            append_mean_std(tmp_results[2], kl_div_means, kl_div_stds)
             append_mean_std(tmp_results[3], other_score_means, other_score_stds)
             append_mean_std(tmp_results[4], other_prob_means, other_prob_stds)
             append_mean_std(tmp_results[5], other_max_score_means, other_max_score_stds)
@@ -187,23 +187,23 @@ def main():
 
         all_results[0][grad_type] = [score_means, score_stds]
         all_results[1][grad_type] = [prob_means, prob_stds]
-        all_results[2][grad_type] = [kl_divs]
+        all_results[2][grad_type] = [kl_div_means, kl_div_stds]
         all_results[3][grad_type] = [other_score_means, other_score_stds]
         all_results[4][grad_type] = [other_prob_means, other_prob_stds]
         all_results[5][grad_type] = [other_max_score_means, other_max_score_stds]
         all_results[6][grad_type] = [other_max_prob_means, other_max_prob_stds]
 
     # plot for all gradient methods stds and means for all k% values
-    save_experiment_file = result_path + ARGS.dataset + "_" + model_name + "_" + salient_type + "_" + ARGS.replacement + str(ARGS.n_images) + "_"
-
+    file_name = ARGS.dataset + "_" + model_name + "_" + salient_type + "_" + ARGS.replacement + str(ARGS.n_images)
+    save_experiment_file = result_path + file_name
     # plot score differences, prob differences and kl divergence
-    plot_all_grads(all_results[0], filename=save_experiment_file + "scores")
-    plot_all_grads(all_results[1], filename=save_experiment_file + "probs")
-    plot_all_grads(all_results[2], filename=save_experiment_file + "kl", div=True)
-    plot_all_grads(all_results[3], filename=save_experiment_file + "topk_other_scores")
-    plot_all_grads(all_results[4], filename=save_experiment_file + "topk_other_probs")
-    plot_all_grads(all_results[5], filename=save_experiment_file + "max_other_scores")
-    plot_all_grads(all_results[6], filename=save_experiment_file + "max_other_probs")
+    #plot_all_grads(all_results[0], filename=save_experiment_file + "scores")
+    #plot_all_grads(all_results[1], filename=save_experiment_file + "probs")
+    #plot_all_grads(all_results[2], filename=save_experiment_file + "kl", div=True)
+    #plot_all_grads(all_results[3], filename=save_experiment_file + "topk_other_scores")
+    #plot_all_grads(all_results[4], filename=save_experiment_file + "topk_other_probs")
+    #plot_all_grads(all_results[5], filename=save_experiment_file + "max_other_scores")
+    #plot_all_grads(all_results[6], filename=save_experiment_file + "max_other_probs")
 
     print("For K values: {}".format(ARGS.k))
     print("############ Score absolute fractional differences ############")
@@ -211,7 +211,7 @@ def main():
     print("############ Probs absolute fractional differences ############")
     print_dict(all_results[1])
     print("KL divergences per k")
-    print_dict(all_results[2], div=True)
+    print_dict(all_results[2])
     print("############ Top: {} Other Score absolute fractional differences ############".format(ARGS.topk))
     print_dict(all_results[3])
     print("############ Top: {} Other Probs absolute fractional differences ############".format(ARGS.topk))
@@ -220,6 +220,9 @@ def main():
     print_dict(all_results[5])
     print("############ Max other Probs absolute fractional differences ############")
     print_dict(all_results[6])
+
+    # save dictionary
+    save_obj(all_results, save_experiment_file)
 
     # print_memory()
 
@@ -232,10 +235,10 @@ def print_dict(dictionary, div=False):
             print("Mean: {}, Std: {}".format(v[0], v[1]))
 
 def kl_div(P, Q):
-    kl = (P * (P / Q).log()).sum(1).mean()
+    kl = (P * (P / Q).log()).sum(1)
     return kl
 
-def compute_difference_metrics(model, data, initial_output, final_output, tmp_results):
+def compute_difference_metrics(initial_output, final_output, tmp_results):
 
     # FOR KL DIVERGENCE AND OWN METRIC
     # get probabilities instead of output scores
@@ -259,7 +262,7 @@ def compute_difference_metrics(model, data, initial_output, final_output, tmp_re
     # save per image
     tmp_results[0].append(np.round(tmp_score_diffs.tolist(), 8))
     tmp_results[1].append(np.round(tmp_prob_diffs.tolist(), 8))
-    tmp_results[2].append(np.round(kldiv.item(),8))
+    tmp_results[2].append(np.round(kldiv.tolist(),8))
     tmp_results[3].append(np.round(tmp_other_diffs.tolist(), 8))
     tmp_results[4].append(np.round(tmp_other_probs_diffs.tolist(), 8))
     tmp_results[5].append(np.round(tmp_other_max_diffs.tolist(), 8))
@@ -360,7 +363,6 @@ def plot_all_grads(results_dict, filename=None, div=False):
     plt.figure()
     axes = plt.gca()
     #axes.set_xlim([0, ARGS.k[-1]*100])
-    axes.set_ylim([0, 0.5])
     axes.set_xlabel('% pixels removed')
     axes.set_ylabel('Absolute fractional output change')
 
@@ -442,7 +444,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
                         help='Percentage of k% most salient pixels')
-    parser.add_argument('--most_salient', default=False, type=bool,
+    parser.add_argument('--most_salient', default="True", type=str,
                         help='most salient = True or False depending on retrain or pixel perturbation')
     parser.add_argument('--model', default="resnet", type=str,
                         help='which model to use')

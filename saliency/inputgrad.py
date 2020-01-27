@@ -35,14 +35,16 @@ class IntegratedGradients():
         xbar_list = [input_image*step for step in step_list]
         return xbar_list
 
-    def generate_gradients(self, input_image, target_class):
+    def generate_gradients(self, image, target_class):
         # Forward
-        model_output = self.model(input_image)
+        model_output = self.model(image)
         # Zero grads
         self.model.zero_grad()
         # Target for backprop
-        one_hot_output = torch.FloatTensor(1, model_output.size()[-1]).zero_()
-        one_hot_output[0][target_class] = 1
+        one_hot_output = torch.FloatTensor(2, model_output.size()[-1]).zero_()
+
+        for i in range(image.size()[0]):
+            one_hot_output[i, target_class[i]] = 1
         # Backward pass
         model_output.backward(gradient=one_hot_output)
         # Convert Pytorch variable to numpy array
