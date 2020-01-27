@@ -69,7 +69,7 @@ def train(data_loader, model, use_saliency=False, \
     # plot
     plt.figure(1)
     plt.clf()
-    plt.plot(range(len(losses)), losses)
+    plt.plot(range(0, ARGS.batch_size * len(losses), ARGS.batch_size), losses)
     plt.ylabel('Loss')
     plt.xlabel('Batches')
     if use_saliency:
@@ -111,7 +111,7 @@ def remove_and_retrain(data_loader):
                              saliency_method_name=method_name)
             accuracies[method_idx, k_idx] = accuracy
         plt.figure(0)
-        plt.plot(ARGS.k, list(accuracies[method_idx]), label=method_name + str(k))
+        plt.plot([k * 100 for k in ARGS.k], list(accuracies[method_idx]), label=method_name + str(k))
     plt.figure(0)
     plt.ylabel('Accuracy')
     plt.xlabel('k %')
