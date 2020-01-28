@@ -11,6 +11,7 @@ from misc_functions import *
 from gradcam import grad_cam
 from gradcam import main
 from functools import reduce
+from saliency.inputgradient import *
 
 import gc
 
@@ -82,9 +83,6 @@ def main():
 
     model_name = ARGS.model + ARGS.model_type
 
-    # simple fullgrad
-    # simple_fullgrad = SimpleFullGrad(model)
-
     save_path = PATH + 'results/' + ARGS.dataset
 
     # initialize results dictionary: key: gradient method (random, fullgrad,...), values: [[mean, std],..] per k%
@@ -137,8 +135,6 @@ def main():
                     # print("data size:{}".format(data.size()))
                     cam = compute_saliency_per_grad(grad_type, grad, data)
 
-                    #print(cam)
-                    #print("cam size:{}".format(cam.size()))
                     if ARGS.save_grad is True and grad_counter == 1 and counter <= ARGS.n_save:
                         save_saliency_map_batch(cam, data, result_path, grad_type, salient_type, counter)
 
@@ -278,8 +274,11 @@ def init_grad_and_model(grad_type, model_name, device):
         model = eval(model_name)(pretrained=True)
         model = model.to(device)
         model.eval()
-        # Initialize Gradient objects
-        grad = FullGrad(model)
+        if grad_type == "fullgrad":
+            # Initialize Gradient objects
+            grad = FullGrad(model)
+        elif grad_type == "inputgrad":
+            grad = Inputgrad(model)
 
     return model, grad
 
@@ -393,7 +392,7 @@ def compute_saliency_per_grad(grad_type, grad, data):
     saliency = None
 
     # FULLGRAD
-    if grad_type == "fullgrad":
+    if grad_type == "fullgrad" or grad_type == "inputgrad"  :
         # print("calculating saliency")
         saliency = grad.saliency(data)
 
@@ -405,17 +404,21 @@ def compute_saliency_per_grad(grad_type, grad, data):
 
     return saliency
 
-def get_filename(result_path, salient_type, grad_type, index):
-    filename = result_path + ARGS.dataset + "/" + grad_type + "_" + ARGS.model + ARGS.model_type + \
-               "_" + salient_type + "_" + str(index) + ".png"
+#def get_filename(result_path, salient_type, grad_type, index):
+#    filename = result_path + ARGS.dataset + "/" + grad_type + "_" + ARGS.model + ARGS.model_type + \
+#               "_" + salient_type + "_" + str(index) + ".png"
+#    return filename
+
+def get_filename(result_path, grad_type, index):
+    filename = result_path + "/" + grad_type + "_" + "vgg_16bn" + "_" + str(index) + ".png"
     return filename
 
-def save_saliency_map_batch(saliency, data, result_path, grad_type, salient_type, index):
+def save_saliency_map_batch(saliency, data, result_path, grad_type, index):
     for i in range(len(data)):
         im = unnormalize(data[i, :, :, :].cpu())
         im = im.view(1, 3, 224, 224)[-1, :, :, :]
         reg = saliency[i, :, :, :]
-        filename = get_filename(result_path, salient_type, grad_type, index)
+        filename = get_filename(result_path, grad_type, index)
         # print("filename:{}".format(filename))
         save_saliency_map(im, reg, filename)
 

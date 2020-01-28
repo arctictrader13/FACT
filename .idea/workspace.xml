@@ -2,9 +2,111 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c3a6114-30d4-4667-be04-609c10d6daa3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/plot_pp_experiments.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_inputgrad.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/plot_pp_experiments.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/plot_pp_experiments.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pixel_perturbation.py" beforeDir="false" afterPath="$PROJECT_DIR$/pixel_perturbation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_29.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_35.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_36.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_37.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_39.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_41.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_42.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_43.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_44.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_45.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_46.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_47.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_49.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/fullgrad_resnet18_most_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_29.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_35.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_36.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_37.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_39.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_41.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_42.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_43.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_44.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_45.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_46.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_47.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_48.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_49.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet/gradcam_resnet18_most_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saliency/inputgrad.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saliency/inputgradient.py" beforeDir="false" afterPath="$PROJECT_DIR$/saliency/inputgradient.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,29 +122,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dump_images.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
+            <state relative-caret-position="289">
+              <caret line="26" column="40" selection-end-line="83" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/saliency/inputgrad.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test_inputgrad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="48" column="19" selection-start-line="48" selection-end-line="49" />
+            <state relative-caret-position="-1055">
+              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
               <folding>
-                <element signature="e#91#103#0" expanded="true" />
+                <element signature="e#226#238#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/saliency/simple_fullgrad.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="54" column="22" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -50,8 +143,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-799">
-              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+            <state relative-caret-position="1071">
+              <caret line="66" column="17" selection-start-line="66" selection-end-line="67" />
               <folding>
                 <element signature="e#174#186#0" expanded="true" />
               </folding>
@@ -62,8 +155,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/vgg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1258">
-              <caret line="87" selection-start-line="87" selection-end-line="87" />
+            <state relative-caret-position="220">
+              <caret line="185" selection-start-line="185" selection-end-line="185" />
               <folding>
                 <element signature="e#441#453#0" expanded="true" />
               </folding>
@@ -74,11 +167,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saliency/inputgradient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="28" column="19" selection-start-line="28" selection-end-line="29" />
-              <folding>
-                <element signature="e#174#186#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="220">
+              <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -86,8 +176,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="21" selection-start-line="18" selection-end-line="19" />
+            <state relative-caret-position="322">
+              <caret line="422" column="19" selection-start-line="422" selection-start-column="19" selection-end-line="422" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,7 +188,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/resnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2635">
+            <state relative-caret-position="2856">
               <caret line="170" column="29" selection-start-line="170" selection-start-column="29" selection-end-line="170" selection-end-column="29" />
               <caret line="169" selection-start-line="169" selection-end-line="169" />
               <folding>
@@ -105,14 +198,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/plot_pp_experiments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="46" selection-start-line="46" selection-end-line="61" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state>
+              <caret column="28" selection-start-column="28" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -120,8 +210,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/misc_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1887">
-              <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
+            <state relative-caret-position="203">
+              <caret line="44" selection-start-line="44" selection-end-line="75" selection-end-column="59" />
               <folding>
                 <element signature="e#158#167#0" expanded="true" />
               </folding>
@@ -140,7 +230,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>classta</find>
       <find>target_layer</find>
       <find>model</find>
       <find>save_gradcam</find>
@@ -167,8 +256,9 @@
       <find>get_filen</find>
       <find>kl_div</find>
       <find>TODO</find>
-      <find>inter</find>
       <find>topk</find>
+      <find>inter</find>
+      <find>self.im</find>
       <find>index_sele</find>
     </findStrings>
   </component>
@@ -188,11 +278,12 @@
         <option value="$PROJECT_DIR$/duplicate-images-master/find_remove_duplicates.py" />
         <option value="$PROJECT_DIR$/find_and_remove_duplicates.py" />
         <option value="$PROJECT_DIR$/saliency/fullgrad.py" />
-        <option value="$PROJECT_DIR$/saliency/inputgradient.py" />
+        <option value="$PROJECT_DIR$/models/plot_pp_experiments.py" />
         <option value="$PROJECT_DIR$/saliency/inputgrad.py" />
+        <option value="$PROJECT_DIR$/saliency/inputgradient.py" />
         <option value="$PROJECT_DIR$/misc_functions.py" />
         <option value="$PROJECT_DIR$/pixel_perturbation.py" />
-        <option value="$PROJECT_DIR$/models/plot_pp_experiments.py" />
+        <option value="$PROJECT_DIR$/test_inputgrad.py" />
       </list>
     </option>
   </component>
@@ -213,16 +304,6 @@
             <path>
               <item name="FACT" type="b2602c69:ProjectViewProjectNode" />
               <item name="FACT" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FACT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FACT" type="462c0819:PsiDirectoryNode" />
-              <item name="dataset" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FACT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FACT" type="462c0819:PsiDirectoryNode" />
-              <item name="gradcam" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FACT" type="b2602c69:ProjectViewProjectNode" />
@@ -320,18 +401,20 @@
       <workItem from="1579771721338" duration="23989000" />
       <workItem from="1579861029623" duration="13864000" />
       <workItem from="1579878146967" duration="245000" />
-      <workItem from="1579948243827" duration="65658000" />
+      <workItem from="1579948243827" duration="69904000" />
+      <workItem from="1580216212153" duration="919000" />
+      <workItem from="1580218222597" duration="6476000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208113000" />
+    <option name="totallyTimeSpent" value="219754000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1441" height="1013" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11062907" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11352133" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -345,12 +428,12 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4989339" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.2238806" side_tool="true" weight="0.3575298" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.84115136" weight="0.25368065" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.7761194" visible="true" weight="0.38731596" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.84115136" visible="true" weight="0.25368065" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.7761194" weight="0.34994337" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.2516269" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.0889371" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
     <layout-to-restore>
@@ -456,56 +539,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-799">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-          <folding>
-            <element signature="e#174#186#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/vgg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
-          <folding>
-            <element signature="e#441#453#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/saliency/inputgradient.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="28" column="19" selection-start-line="28" selection-end-line="29" />
-          <folding>
-            <element signature="e#174#186#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/saliency/inputgrad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="48" column="19" selection-start-line="48" selection-end-line="49" />
-          <folding>
-            <element signature="e#91#103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/saliency/inputgrad.py" />
     <entry file="file://$PROJECT_DIR$/dump_images.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
+        <state relative-caret-position="289">
+          <caret line="26" column="40" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="66" column="17" selection-start-line="66" selection-end-line="67" />
+          <folding>
+            <element signature="e#174#186#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/resnet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2635">
+        <state relative-caret-position="2856">
           <caret line="170" column="29" selection-start-line="170" selection-start-column="29" selection-end-line="170" selection-end-column="29" />
           <caret line="169" selection-start-line="169" selection-end-line="169" />
           <folding>
@@ -514,29 +568,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/vgg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="185" selection-start-line="185" selection-end-line="185" />
+          <folding>
+            <element signature="e#441#453#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/plot_pp_experiments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saliency/inputgradient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="422" column="19" selection-start-line="422" selection-start-column="19" selection-end-line="422" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/misc_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1887">
-          <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
+        <state relative-caret-position="203">
+          <caret line="44" selection-start-line="44" selection-end-line="75" selection-end-column="59" />
           <folding>
             <element signature="e#158#167#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
+    <entry file="file://$PROJECT_DIR$/test_inputgrad.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="21" selection-start-line="18" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/plot_pp_experiments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="46" selection-start-line="46" selection-end-line="61" />
+        <state relative-caret-position="-1055">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#226#238#0" expanded="true" />
           </folding>
         </state>
       </provider>
