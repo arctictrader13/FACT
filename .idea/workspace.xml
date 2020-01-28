@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c3a6114-30d4-4667-be04-609c10d6daa3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/saliency/inputgradient.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/plot_pp_experiments.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/misc_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/misc_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pixel_perturbation.py" beforeDir="false" afterPath="$PROJECT_DIR$/pixel_perturbation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black1000_kl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black1000_probs.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black1000_scores.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black5000_kl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black5000_probs.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black5000_scores.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saliency/inputgrad.py" beforeDir="false" afterPath="$PROJECT_DIR$/saliency/inputgrad.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,18 +48,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/find_and_remove_duplicates.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-799">
@@ -106,16 +86,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2825">
-              <caret line="264" column="53" selection-start-line="264" selection-start-column="53" selection-end-line="264" selection-end-column="53" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="306">
+              <caret line="18" column="21" selection-start-line="18" selection-end-line="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/resnet.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-2635">
@@ -128,10 +105,22 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/models/plot_pp_experiments.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="46" selection-start-line="46" selection-end-line="61" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/misc_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="1887">
               <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
               <folding>
                 <element signature="e#158#167#0" expanded="true" />
@@ -203,14 +192,15 @@
         <option value="$PROJECT_DIR$/saliency/inputgrad.py" />
         <option value="$PROJECT_DIR$/misc_functions.py" />
         <option value="$PROJECT_DIR$/pixel_perturbation.py" />
+        <option value="$PROJECT_DIR$/models/plot_pp_experiments.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="940" />
-    <option name="height" value="1094" />
+    <option name="x" value="-16" />
+    <option name="y" value="-16" />
+    <option name="width" value="1880" />
+    <option name="height" value="2188" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -330,18 +320,18 @@
       <workItem from="1579771721338" duration="23989000" />
       <workItem from="1579861029623" duration="13864000" />
       <workItem from="1579878146967" duration="245000" />
-      <workItem from="1579948243827" duration="62946000" />
+      <workItem from="1579948243827" duration="65658000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205401000" />
+    <option name="totallyTimeSpent" value="208113000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1864" height="1096" extended-state="6" />
+    <frame x="-6" y="-6" width="1441" height="1013" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17572062" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11062907" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -355,12 +345,12 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4989339" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.2238806" side_tool="true" weight="0.3575298" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.84115136" visible="true" weight="0.23260644" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.7761194" weight="0.5160955" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.84115136" weight="0.25368065" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.7761194" visible="true" weight="0.38731596" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.050997782" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.2516269" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
     <layout-to-restore>
@@ -513,26 +503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2825">
-          <caret line="264" column="53" selection-start-line="264" selection-start-column="53" selection-end-line="264" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/misc_functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
-          <folding>
-            <element signature="e#158#167#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/resnet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2635">
@@ -540,6 +510,33 @@
           <caret line="169" selection-start-line="169" selection-end-line="169" />
           <folding>
             <element signature="e#536#548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/misc_functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1887">
+          <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
+          <folding>
+            <element signature="e#158#167#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="21" selection-start-line="18" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/plot_pp_experiments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="46" selection-start-line="46" selection-end-line="61" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>

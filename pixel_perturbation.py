@@ -376,8 +376,8 @@ def plot_all_grads(results_dict, filename=None, div=False):
     plt.xticks(ARGS.k, x_labels, rotation=45)
     plt.tight_layout()
     plt.legend()
-    plt.savefig(filename + ".png")
-    # plt.show()
+    #plt.savefig(filename + ".png")
+    plt.show()
 
 
 def initialize_grad_cam(model_name, device, pretrained=True):
