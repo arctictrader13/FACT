@@ -9,7 +9,7 @@ from datetime import datetime
 import argparse
 from saliency.fullgrad import FullGrad
 from saliency.simple_fullgrad import SimpleFullGrad
-from models.vgg import vgg16_bn
+from models.vgg import vgg16_bn, vgg9
 from models.resnet import resnet18
 from misc_functions import create_folder, compute_and_store_saliency_maps, remove_salient_pixels
 import copy
@@ -79,16 +79,8 @@ def train(data_loader, model, use_saliency=False, \
     plt.savefig(os.path.join("results", "remove_and_retrain", figname))
     return accuracies[-1]
 
-
-def get_cifar_ready_resnet():
-    model = resnet18(pretrained=True)
-    model.fc = torch.nn.Linear(512, 100)
-    model = model.to(ARGS.device)
-    return model
-
-
 def remove_and_retrain(data_loader):
-    initial_model = get_cifar_ready_resnet()
+    initial_model = vgg9().to(ARGS.device)
     initial_accuracy = train(data_loader, initial_model, use_saliency=False)
     saliency_methods = []
     print(next(initial_model.parameters()).device)
@@ -104,7 +96,7 @@ def remove_and_retrain(data_loader):
         for k_idx, k in enumerate(ARGS.k):
             print("Run saliency method: ", method_name)
 
-            model = get_cifar_ready_resnet()
+            model = vgg9().to(ARGS.device)
             accuracy = train(data_loader, model, use_saliency=True, \
                              k_most_salient=int(k * total_features), \
                              saliency_method=saliency_method, \

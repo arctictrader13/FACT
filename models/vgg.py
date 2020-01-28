@@ -16,7 +16,8 @@ import torch
 import torch.nn as nn
 import torch.utils.model_zoo as model_zoo
 
-cfg = { 
+cfg = {
+    '9': [64, 'M', 128, 'M', 256, 'M', 256, 'M', 512, 512, 'M'], 
     'A': [64, 'M', 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
     'B': [64, 64, 'M', 128, 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
     'D': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512, 'M'],
@@ -169,6 +170,12 @@ class VGG(nn.Module):
                 in_channels = v
         return nn.ModuleList(layers)
 
+
+def vgg9(**kwargs):
+    """VGG 9-layer model
+    """
+    model = VGG('A', **kwargs)
+    return model
 
 
 def vgg11(pretrained=False, **kwargs):
