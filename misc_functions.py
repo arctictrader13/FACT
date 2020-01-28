@@ -11,6 +11,7 @@ import cv2
 import numpy as np
 import subprocess
 import copy
+import pickle
 from matplotlib.pyplot import imshow
 
 import torch
@@ -90,7 +91,7 @@ def compute_and_store_saliency_maps(sample_loader, model, device, max_batch_num,
         if batch_idx == max_batch_num:
             break
 
-def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salient=True, replacement="black"):
+def remove_salient_pixels(image_batch, saliency_maps, most_salient, num_pixels=100, replacement="black"):
     # Check that the data and the saliency map have the same batch size and the
     # same image dimention.
     assert image_batch.size()[0] == saliency_maps.size()[0], \
@@ -107,7 +108,8 @@ def remove_salient_pixels(image_batch, saliency_maps, num_pixels=100, most_salie
     std = [0.229, 0.224, 0.225]
 
     for i in range(batch_size):
-        indexes = torch.topk(saliency_maps[i].view((-1)), k=num_pixels, largest=most_salient)[1]
+        indexes = torch.topk(saliency_maps[i].view((-1)), k=num_pixels, largest=eval(most_salient))[1]
+        # print("indexes:{}".format(indexes))
         rows = indexes / row_size
         columns = indexes % row_size
 
@@ -148,3 +150,11 @@ def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement="b
                 output[i, j, :, :][bin_mask[i, j, :, :]] = mean[j]
 
     return output
+
+def save_obj(obj, name ):
+    with open(name + '.pkl', 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+def load_obj(name ):
+    with open(name + '.pkl', 'rb') as f:
+        return pickle.load(f)

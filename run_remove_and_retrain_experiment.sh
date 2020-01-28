@@ -19,10 +19,7 @@ source activate dl
 
 cp -r $HOME/git_repo/FACT/ $TMPDIR
 cd FACT 
-python3 remove_and_retrain.py --device=cpu --batch_size=20 --max_train_steps=100 --lr_decresing_step=10
-
-#rm  $HOME/git_repo/FACT/results/remove_and_retrain/*
-cp results/remove_and_retrain/*  $HOME/git_repo/FACT/results/remove_and_retrain/
+python3 remove_and_retrain.py --device=cuda --batch_size=2 --max_train_steps=30 --lr_decresing_step=3
 
 source deactivate dl
 
