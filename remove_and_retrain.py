@@ -9,7 +9,7 @@ from datetime import datetime
 import argparse
 from saliency.fullgrad import FullGrad
 from saliency.simple_fullgrad import SimpleFullGrad
-from models.vgg import vgg16_bn, vgg9
+from models.vgg import vgg16_bn, vgg11
 from models.resnet import resnet18
 from misc_functions import create_folder, compute_and_store_saliency_maps, remove_salient_pixels
 import copy
@@ -22,19 +22,22 @@ data_PATH= PATH + 'dataset/'
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
-def train(data_loader, model, use_saliency=False, \
-          k_most_salient=0, saliency_method=None, saliency_method_name=None):
+def train(data_loader, model, k_most_salient=0, saliency_path=""):
     learning_rate = ARGS.initial_learning_rate
     criterion = torch.nn.CrossEntropyLoss() 
     optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)
+    
     accuracies = []
     losses = []
     for step, (batch_inputs, batch_targets) in enumerate(data_loader):
-        batch_inputs, batch_targets = batch_inputs.to(ARGS.device), batch_targets.to(ARGS.device)
-        if use_saliency:
-            batch_inputs = batch_inputs.detach()
-            saliency_map = saliency_method.saliency(batch_inputs)
-            data = remove_salient_pixels(batch_inputs, saliency_map, num_pixels=k_most_salient, most_salient=ARGS.most_salient)
+        batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
+                                      batch_targets.to(ARGS.device)
+        if k_most_salient != 0:
+             if use_saliency:
+                saliency_map = torch.load(os.path.join(train_saliency_path, \
+                    "saliency_map_" + str(step)))
+                data = remove_salient_pixels(batch_inputs, saliency_map, \
+                    num_pixels=k_most_salient, most_salient=ARGS.most_salient)
         else:
             data = batch_inputs
         
@@ -72,16 +75,45 @@ def train(data_loader, model, use_saliency=False, \
     plt.plot(range(0, ARGS.batch_size * len(losses), ARGS.batch_size), losses)
     plt.ylabel('Loss')
     plt.xlabel('Batches')
-    if use_saliency:
+    if k_most_salient != 0:
         figname = saliency_method_name + "_" + str(k_most_salient) + ".jpeg"
     else:
         figname = "initial_model.jpeg"
     plt.savefig(os.path.join("results", "remove_and_retrain", figname))
-    return accuracies[-1]
 
-def remove_and_retrain(data_loader):
-    initial_model = vgg9().to(ARGS.device)
-    initial_accuracy = train(data_loader, initial_model, use_saliency=False)
+
+def test(data_loader, model, k_most_salient=0, saliency_path=""):
+    loss = 0.0
+    accuracy = 0.0
+    criterion = torch.nn.CrossEntropyLoss()
+    for step, (batch_inputs, batch_targets) in enumerate(data_loader):
+        batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
+                                      batch_targets.to(ARGS.device)
+        if k_most_salient != 0:
+             if use_saliency:
+                saliency_map = torch.load(os.path.join(saliency_path, \
+                    "saliency_map_" + str(step)))
+                data = remove_salient_pixels(batch_inputs, saliency_map, \
+                    num_pixels=k_most_salient, most_salient=ARGS.most_salient)
+        else:
+            data = batch_inputs
+        data.requires_grad = True
+        data = data.to(ARGS.device)
+        batch_targets = batch_targets.to(ARGS.device)
+        
+        output = model.forward(data)
+        loss += criterion(output, batch_targets)
+        accuracy += float(sum(batch_targets == torch.argmax(output, 1))) / float(ARGS.batch_size)
+    # TODO check if correct
+    num_batches = len(dataloader.dataset)
+    return loss / num_batches, accuracy / num_batches
+
+
+def remove_and_retrain(train_set_loader, test_set_loader):
+    initial_model = vgg11(pretrained=True).to(ARGS.device)
+    train(train_set_loader, initial_model)
+    accuracy = test(test_set_loader, initial_model)
+    
     saliency_methods = []
     print(next(initial_model.parameters()).device)
     for grad_name in ARGS.grads:
@@ -90,17 +122,28 @@ def remove_and_retrain(data_loader):
         elif grad_name == "simplegrad":
             saliency_methods += [(SimpleFullGrad(initial_model), "SimpleFullGrad")]
         # TODO add gradcam
+
     total_features = 224 * 224
     accuracies = torch.zeros((len(saliency_methods), len(ARGS.k)))
     for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
+        train_saliency_path = os.path.join(data_PATH, "saliency_maps", method_name + "_vgg11")
+        compute_and_store_saliency_maps(train_set_loader, initial_model, \
+            ARGS.device, ARGS.max_train_steps, saliency_method, train_saliency_path)
+
+        test_saliency_path = os.path.join(data_PATH, "saliency_maps", method_name + "_vgg11")
+        compute_and_store_saliency_maps(test_set_loader, initial_model, \
+            ARGS.device, ARGS.max_train_steps, saliency_method, test_saliency_path)
+
         for k_idx, k in enumerate(ARGS.k):
             print("Run saliency method: ", method_name)
 
-            model = vgg9().to(ARGS.device)
-            accuracy = train(data_loader, model, use_saliency=True, \
-                             k_most_salient=int(k * total_features), \
-                             saliency_method=saliency_method, \
-                             saliency_method_name=method_name)
+            model = vgg11(pretrained=True).to(ARGS.device)
+            train(train_set_loader, model, \
+                  k_most_salient=int(k * total_features), \
+                  saliency_path=train_saliency_path)
+            accuracy = test(test_set_loader, model, \
+                            k_most_salient=int(k * total_features), \
+                            saliency_path=test_saliency_path)
             accuracies[method_idx, k_idx] = accuracy
         plt.figure(0)
         plt.plot([k * 100 for k in ARGS.k], list(accuracies[method_idx]), label=method_name + str(k))
@@ -119,11 +162,14 @@ def main():
         transforms.Normalize(mean=[0.485, 0.456, 0.406],
                              std=[0.229, 0.224, 0.225]), ])
     dataset = data_PATH + "/cifar/"
-    data = datasets.CIFAR100(dataset, train=True, transform=transform_standard, \
+    train_set = datasets.CIFAR100(dataset, train=True, transform=transform_standard, \
         target_transform=None, download=True)
-    data_loader = torch.utils.data.DataLoader(data, batch_size=ARGS.batch_size, shuffle=False)
+    test_set = datasets.CIFAR100(dataset, train=False, transform=transform_standard, \
+        target_transform=None, download=True)
+    train_set_loader = torch.utils.data.DataLoader(train_set, batch_size=ARGS.batch_size, shuffle=False)
+    test_set_loader = torch.utils.data.DataLoader(test_set, batch_size=ARGS.batch_size, shuffle=False)
 
-    remove_and_retrain(data_loader)
+    remove_and_retrain(train_set_loader, test_set_loader)
 
 
 if __name__ == "__main__":
