@@ -7,3 +7,4 @@ dataset/cifar/cifar-100-python/train
 dataset/imagenet/
 pp_experiments_
 pp_experiments_most
+results/imagenet

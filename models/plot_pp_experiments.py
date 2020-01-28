@@ -15,6 +15,7 @@ PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 # path to folder of pickle files
 pp_experiments_path = PATH + "/pp_experiments"
 experiment_pickles = os.listdir(pp_experiments_path)
+
 # remove .pkl ending
 for i in range(len(experiment_pickles)):
     #print(path)
