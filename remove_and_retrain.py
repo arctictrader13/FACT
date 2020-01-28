@@ -19,10 +19,11 @@ import matplotlib.pyplot as plt
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 data_PATH= PATH + 'dataset/'
 
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = False
+#torch.backends.cudnn.deterministic = True
+#torch.backends.cudnn.benchmark = False
+#torch.backends.cudnn.enabled = False
 
-def train(data_loader, model, k_most_salient=0, saliency_path=""):
+def train(data_loader, model, k_most_salient=0, saliency_path="", saliency_method_name=""):
     learning_rate = ARGS.initial_learning_rate
     criterion = torch.nn.CrossEntropyLoss() 
     optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)
@@ -33,10 +34,9 @@ def train(data_loader, model, k_most_salient=0, saliency_path=""):
         batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
                                       batch_targets.to(ARGS.device)
         if k_most_salient != 0:
-             if use_saliency:
-                saliency_map = torch.load(os.path.join(train_saliency_path, \
+            saliency_map = torch.load(os.path.join(saliency_path, \
                     "saliency_map_" + str(step)))
-                data = remove_salient_pixels(batch_inputs, saliency_map, \
+            data = remove_salient_pixels(batch_inputs, saliency_map, \
                     num_pixels=k_most_salient, most_salient=ARGS.most_salient)
         else:
             data = batch_inputs
@@ -44,7 +44,7 @@ def train(data_loader, model, k_most_salient=0, saliency_path=""):
         data.requires_grad = True
         data = data.to(ARGS.device)
         batch_targets = batch_targets.to(ARGS.device)
-        
+        print(data.size()) 
         output = model.forward(data)
         loss = criterion(output, batch_targets)
         accuracy = float(sum(batch_targets == torch.argmax(output, 1))) / float(ARGS.batch_size)
@@ -89,11 +89,10 @@ def test(data_loader, model, k_most_salient=0, saliency_path=""):
     for step, (batch_inputs, batch_targets) in enumerate(data_loader):
         batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
                                       batch_targets.to(ARGS.device)
-        if k_most_salient != 0:
-             if use_saliency:
-                saliency_map = torch.load(os.path.join(saliency_path, \
+        if k_most_salient != 0: 
+            saliency_map = torch.load(os.path.join(saliency_path, \
                     "saliency_map_" + str(step)))
-                data = remove_salient_pixels(batch_inputs, saliency_map, \
+            data = remove_salient_pixels(batch_inputs, saliency_map, \
                     num_pixels=k_most_salient, most_salient=ARGS.most_salient)
         else:
             data = batch_inputs
@@ -112,7 +111,7 @@ def test(data_loader, model, k_most_salient=0, saliency_path=""):
 def remove_and_retrain(train_set_loader, test_set_loader):
     initial_model = vgg11(pretrained=True).to(ARGS.device)
     train(train_set_loader, initial_model)
-    accuracy = test(test_set_loader, initial_model)
+    #initial_accuracy = test(test_set_loader, initial_model)
     
     saliency_methods = []
     print(next(initial_model.parameters()).device)
@@ -140,7 +139,7 @@ def remove_and_retrain(train_set_loader, test_set_loader):
             model = vgg11(pretrained=True).to(ARGS.device)
             train(train_set_loader, model, \
                   k_most_salient=int(k * total_features), \
-                  saliency_path=train_saliency_path)
+                  saliency_path=train_saliency_path, saliency_method_name=method_name)
             accuracy = test(test_set_loader, model, \
                             k_most_salient=int(k * total_features), \
                             saliency_path=test_saliency_path)
@@ -176,7 +175,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
                         help='Percentage of k% most salient pixels')
-    parser.add_argument('--most_salient', default=True, type=bool,
+    parser.add_argument('--most_salient', default="True", type=str,
                         help='most salient = True or False depending on retrain or pixel perturbation')
     parser.add_argument('--grads', default=["fullgrad"], type=str, nargs='+',
                         help='which grad methods to be applied')

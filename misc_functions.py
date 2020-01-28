@@ -103,7 +103,6 @@ def remove_salient_pixels(image_batch, saliency_maps, most_salient, num_pixels=1
 
     output = copy.deepcopy(image_batch)
     output.requires_grad = False
-
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
 
@@ -122,7 +121,6 @@ def remove_salient_pixels(image_batch, saliency_maps, most_salient, num_pixels=1
         else:
             for j in range(channel_size):
                 output[i, j, rows, columns] =  0.0
-
     return output
 
 
