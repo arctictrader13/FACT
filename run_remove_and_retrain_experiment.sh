@@ -19,7 +19,7 @@ source activate dl
 
 cp -r $HOME/git_repo/FACT/ $TMPDIR
 cd FACT 
-time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=3
+time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=50 --print_step=1000
 
 source deactivate dl
 
