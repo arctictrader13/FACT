@@ -1,120 +1,26 @@
-/var/spool/slurm-llnl/slurmd/job4415362/slurm_script: line 21: cd: FACT: No such file or directory
+/var/spool/slurm-llnl/slurmd/job4417640/slurm_script: line 21: cd: FACT: No such file or directory
 Files already downloaded and verified
 Files already downloaded and verified
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 10.221
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0002/0030, Batch Size = 2, Accuracy = 0.00, Loss = 14072824832.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0004/0030, Batch Size = 2, Accuracy = 0.00, Loss = 65953460224.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 1479255936.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0008/0030, Batch Size = 2, Accuracy = 0.00, Loss = 2768224768.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0010/0030, Batch Size = 2, Accuracy = 0.00, Loss = 15007771648.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11171361792.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0014/0030, Batch Size = 2, Accuracy = 0.00, Loss = 258912796672.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0016/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3867090176.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 26387299696640.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 14774631923712.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0022/0030, Batch Size = 2, Accuracy = 0.00, Loss = 1909655808.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 217000256.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0026/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4012754176.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0028/0030, Batch Size = 2, Accuracy = 0.00, Loss = 53087993856.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 1565773922304.000
+[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.234
+[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.591
 cuda:0
 Completeness test passed for FullGrad.
 Run saliency method:  FullGrad
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.495
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0002/0030, Batch Size = 2, Accuracy = 0.00, Loss = 121243025408.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0004/0030, Batch Size = 2, Accuracy = 0.00, Loss = 178619875328.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 1528707712.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0008/0030, Batch Size = 2, Accuracy = 0.00, Loss = 52437843968.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0010/0030, Batch Size = 2, Accuracy = 0.00, Loss = 30971646705664.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 95803949056.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0014/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7704686592.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0016/0030, Batch Size = 2, Accuracy = 0.00, Loss = 399847653376.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 14714400768.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 23359934464.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0022/0030, Batch Size = 2, Accuracy = 0.00, Loss = 55693242368.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 19677810688.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0026/0030, Batch Size = 2, Accuracy = 0.00, Loss = 13704723456.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0028/0030, Batch Size = 2, Accuracy = 0.00, Loss = 1826407055360.000
-torch.Size([2, 3, 224, 224])
-torch.Size([2, 3, 224, 224])
-[2020-01-28 21:02] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 163625107456.000
-Traceback (most recent call last):
-  File "remove_and_retrain.py", line 202, in <module>
-    main()
-  File "remove_and_retrain.py", line 171, in main
-    remove_and_retrain(train_set_loader, test_set_loader)
-  File "remove_and_retrain.py", line 145, in remove_and_retrain
-    saliency_path=test_saliency_path)
-  File "remove_and_retrain.py", line 94, in test
-    "saliency_map_" + str(step)))
-  File "/home/lgpu0009/.local/lib/python3.7/site-packages/torch/serialization.py", line 525, in load
-    with _open_file_like(f, 'rb') as opened_file:
-  File "/home/lgpu0009/.local/lib/python3.7/site-packages/torch/serialization.py", line 212, in _open_file_like
-    return _open_file(name_or_buffer, mode)
-  File "/home/lgpu0009/.local/lib/python3.7/site-packages/torch/serialization.py", line 193, in __init__
-    super(_open_file, self).__init__(open(name, mode))
-FileNotFoundError: [Errno 2] No such file or directory: '/home/lgpu0009/git_repo/FACT/dataset/saliency_maps/FullGrad_vgg11/saliency_map_31'
+[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 10.260
+[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.351
+Run saliency method:  FullGrad
+[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 8.610
+[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.719
+Run saliency method:  FullGrad
+[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 9.755
+[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.267
+Run saliency method:  FullGrad
+[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.182
+[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 8.876
+Run saliency method:  FullGrad
+[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.025
+[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.387
 
-real	0m23.273s
-user	0m24.804s
-sys	0m12.392s
+real	0m38.986s
+user	0m48.852s
+sys	0m26.752s
