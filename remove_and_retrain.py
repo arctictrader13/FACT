@@ -9,9 +9,10 @@ from datetime import datetime
 import argparse
 from saliency.fullgrad import FullGrad
 from saliency.simple_fullgrad import SimpleFullGrad
+from saliency.inputgradient import Inputgrad
 from models.vgg import vgg16_bn, vgg11
 from models.resnet import resnet18
-from misc_functions import create_folder, compute_and_store_saliency_maps, remove_salient_pixels
+from misc_functions import create_folder, compute_and_store_saliency_maps, remove_salient_pixels, remove_random_salient_pixels
 import copy
 import matplotlib.pyplot as plt
 from torch.optim import lr_scheduler
@@ -133,7 +134,7 @@ def get_saliency_methods(grad_names, initial_model):
         elif grad_name == "simplegrad":
             saliency_methods += [(SimpleFullGrad(initial_model), "SimpleFullGrad")]
         elif grad_name == "inputgrad":
-            saliency_methods += [(InputGrad(initial_model), "InputGrad")]
+            saliency_methods += [(Inputgrad(initial_model), "InputGrad")]
         elif grad_name == "random":
             saliency_methods += [(None, "RandomGrad")]
     return saliency_methods
@@ -192,8 +193,9 @@ def compute_modified_datasets(train_set_loader, test_set_loader):
     for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
         for dataset, dataloader in [("train", train_set_loader), ("test", test_set_loader)]:
             saliency_path = os.path.join(data_PATH, "saliency_maps", method_name + "_vgg11", dataset)
-            compute_and_store_saliency_maps(dataloader, initial_model, \
-                ARGS.device, ARGS.max_train_steps, saliency_method, saliency_path)
+            if saliency_method != None:
+                compute_and_store_saliency_maps(dataloader, initial_model, \
+                    ARGS.device, ARGS.max_train_steps, saliency_method, saliency_path)
             for k_idx, k in enumerate(ARGS.k):
                 batches = []
                 num_pixels = int(k * total_features)
@@ -202,10 +204,12 @@ def compute_modified_datasets(train_set_loader, test_set_loader):
                 create_folder(dataset_path)
 
                 for step, (batch_inputs, batch_targets) in enumerate(dataloader):
-                    saliency_map = torch.load(os.path.join(saliency_path, \
+                    if method_name == "RandomGrad":
+                        data = remove_random_salient_pixels(batch_inputs, 42, k, im_size=32)
+                    else:
+                        saliency_map = torch.load(os.path.join(saliency_path, \
                             "saliency_map_" + str(step)))
-                    
-                    data = remove_salient_pixels(batch_inputs, saliency_map, \
+                        data = remove_salient_pixels(batch_inputs, saliency_map, \
                             num_pixels=num_pixels, most_salient=ARGS.most_salient)
                     batches += [data]
                     if step == ARGS.max_train_steps:

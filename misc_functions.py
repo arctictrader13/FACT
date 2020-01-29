@@ -125,7 +125,7 @@ def remove_salient_pixels(image_batch, saliency_maps, most_salient, num_pixels=1
     return output
 
 
-def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement="black"):
+def remove_random_salient_pixels(image_batch, seed, k_percentage, im_size=224, replacement="black"):
 
     output = copy.deepcopy(image_batch)
     output.requires_grad = False
@@ -137,7 +137,7 @@ def remove_random_salient_pixels(image_batch, seed, k_percentage, replacement="b
     std = [0.229, 0.224, 0.225]
 
    # create binary mask for all batched
-    bin_mask = torch.FloatTensor(batch_size, 3, 224, 224).uniform_() < k_percentage
+    bin_mask = torch.FloatTensor(batch_size, 3, im_size, im_size).uniform_() < k_percentage
 
     for i in range(batch_size):
 
