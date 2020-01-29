@@ -8,7 +8,7 @@ dataset/cifar/cifar-10-python.tar.gz
 dataset/cifar/cifar-10-batches-py/*
 dataset/modified_cifar_10/*
 dataset/imagenet/
-models/trained_vgg11_cifar10
+models/old_models/trained_vgg11_cifar10
 pp_experiments_
 pp_experiments_most
 results/imagenet
