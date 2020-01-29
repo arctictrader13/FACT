@@ -1,10 +1,9 @@
-/var/spool/slurm-llnl/slurmd/job4419996/slurm_script: line 21: cd: FACT: No such file or directory
+/var/spool/slurm-llnl/slurmd/job4421482/slurm_script: line 21: cd: FACT: No such file or directory
 Files already downloaded and verified
 Files already downloaded and verified
-[2020-01-29 14:26] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Train Loss = 13.570
-[2020-01-29 14:26] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Train Loss = 3.584
+0.009899999999999961
 Completeness test passed for FullGrad.
 
-real	0m26.738s
-user	0m28.340s
-sys	0m17.224s
+real	20m34.021s
+user	31m33.812s
+sys	19m37.132s

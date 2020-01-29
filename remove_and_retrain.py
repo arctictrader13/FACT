@@ -29,44 +29,44 @@ def train(data_loader, model, k_most_salient=0, saliency_path="", \
     optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)
     
     losses = []
-    for step, (batch_inputs, batch_targets) in enumerate(data_loader):
-        batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
-                                      batch_targets.to(ARGS.device)
-        if k_most_salient != 0:
-            saliency_map = torch.load(os.path.join(saliency_path, \
-                    "saliency_map_" + str(step)))
-            data = remove_salient_pixels(batch_inputs, saliency_map, \
-                    num_pixels=k_most_salient, most_salient=ARGS.most_salient)
-        else:
-            data = batch_inputs
-        
-        data.requires_grad = True
-        data = data.to(ARGS.device)
-        batch_targets = batch_targets.to(ARGS.device)
-         
-        output = model.forward(data)
-        loss = criterion(output, batch_targets)
-        accuracy = float(sum(batch_targets == torch.argmax(output, 1))) / float(ARGS.batch_size)
+    accuracy = 0
+    for epoch in range(ARGS.epochs):
+        for step, (batch_inputs, batch_targets) in enumerate(data_loader):
+            batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
+                                          batch_targets.to(ARGS.device)
+            if k_most_salient != 0:
+                saliency_map = torch.load(os.path.join(saliency_path, \
+                        "saliency_map_" + str(step)))
+                data = remove_salient_pixels(batch_inputs, saliency_map, \
+                        num_pixels=k_most_salient, most_salient=ARGS.most_salient)
+            else:
+                data = batch_inputs
+            
+            data.requires_grad = True
+            data = data.to(ARGS.device)
+            batch_targets = batch_targets.to(ARGS.device)
+             
+            output = model.forward(data)
+            loss = criterion(output, batch_targets)
+            accuracy += sum(batch_targets == torch.argmax(output, 1))
 
-        # conpute gradients
-        loss.backward()
+            # conpute gradients
+            loss.backward()
 
-        # update weights
-        optimizer.step()
+            # update weights
+            optimizer.step()
 
-        if step % ARGS.lr_decresing_step == 0:
-            learning_rate /= ARGS.lr_divisor
-            losses += [loss]
-            if (len(losses) > 2 and abs(losses[-1] - losses[-2]) < 0.0001):
-                break
-            print("[{}] Train Step {:04d}/{:04d}, Batch Size = {}, "
-                  "Accuracy = {:.2f}, Train Loss = {:.3f}".format(
-                    datetime.now().strftime("%Y-%m-%d %H:%M"), step,
-                    ARGS.max_train_steps, ARGS.batch_size, accuracy, loss
-            ))
-
-        if step == ARGS.max_train_steps:
-            break
+            if step % ARGS.lr_decresing_step == 0:
+                learning_rate /= ARGS.lr_divisor
+                losses += [loss]
+                accuracy = float(accuracy) / float(ARGS.batch_size * ARGS.lr_decresing_step)
+                if (len(losses) > 2 and abs(losses[-1] - losses[-2]) < 0.0001):
+                    break
+                print("[{}] Train Step {:04d}/{:04d}, Batch Size = {}, "
+                      "Accuracy = {:.2f}, Train Loss = {:.3f}".format(
+                        datetime.now().strftime("%Y-%m-%d %H:%M"), step,
+                        ARGS.max_train_steps, ARGS.batch_size, accuracy, loss
+                ))
     # plot
     plt.figure(1)
     plt.clf()
@@ -98,8 +98,6 @@ def test(data_loader, model, max_steps, k_most_salient=0, saliency_path=""):
         
         output = model.forward(batch_inputs)
         accuracy += float(sum(batch_targets == torch.argmax(output, 1))) / float(ARGS.batch_size)
-        if step == max_steps:
-            break
 
     # TODO check if correct
     num_batches = len(data_loader.dataset)
@@ -116,13 +114,13 @@ def get_saliency_methods(grad_names, initial_model):
     return saliency_methods
 
 def remove_and_retrain(train_set_loader, test_set_loader):
-    initial_model = vgg11(pretrained=True).to(ARGS.device)
+    initial_model = vgg11(pretrained=False, num_classes=10).to(ARGS.device)
     train(train_set_loader, initial_model)
     initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
     
     saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
 
-    total_features = 224 * 224
+    total_features = ARGS.img_size * ARGS.img_size
     accuracies = torch.zeros((len(saliency_methods), len(ARGS.k)))
     for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
         train_saliency_path = os.path.join(data_PATH, "saliency_maps", method_name + "_vgg11", "train")
@@ -136,7 +134,7 @@ def remove_and_retrain(train_set_loader, test_set_loader):
         for k_idx, k in enumerate(ARGS.k):
             print("Run saliency method: ", method_name)
 
-            model = vgg11(pretrained=True).to(ARGS.device)
+            model = vgg11(pretrained=False, num_classes=10).to(ARGS.device)
             train(train_set_loader, k_most_salient=int(k * total_features), \
                   saliency_path=train_saliency_path, \
                   saliency_method_name=method_name)
@@ -155,14 +153,16 @@ def remove_and_retrain(train_set_loader, test_set_loader):
 
 
 def compute_modified_datasets(train_set_loader, test_set_loader):
-    initial_model = vgg11(pretrained=True).to(ARGS.device)
-    torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
-    train(train_set_loader, initial_model)
+    #initial_model = vgg11(pretrained=False, num_classes=10).to(ARGS.device)
+    #torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
+    #train(train_set_loader, initial_model)
+    initial_model = torch.load(os.path.join("models", "trained_vgg11_cifar10"))
+
     initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
-    
+    print(initial_accuracy) 
     saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
 
-    total_features = 224 * 224
+    total_features = ARGS.img_size * ARGS.img_size
     accuracies = torch.zeros((len(saliency_methods), len(ARGS.k)))
     for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
         for dataset, dataloader in [("train", train_set_loader), ("test", test_set_loader)]:
@@ -183,16 +183,17 @@ def compute_modified_datasets(train_set_loader, test_set_loader):
                     data = remove_salient_pixels(batch_inputs, saliency_map, \
                             num_pixels=num_pixels, most_salient=ARGS.most_salient)
                     batches += [data]
-                    if step == ARGS.max_train_steps:
+                    if step == 2:
                         break
                 modified_dataset = torch.utils.data.ConcatDataset(batches)
                 torch.save(modified_dataset, os.path.join(dataset_path, dataset))
+                
 
 
 def main():
     # same transformations for each dataset
     transform_standard = transforms.Compose([
-        transforms.Resize((224, 224)),
+        transforms.Resize((ARGS.img_size, ARGS.img_size)),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406],
                              std=[0.229, 0.224, 0.225]), ])
@@ -209,7 +210,7 @@ def main():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
+    parser.add_argument('--k', default=[0.001, 0.01, 0.05, 0.1], type=float,nargs="+",
                         help='Percentage of k% most salient pixels')
     parser.add_argument('--most_salient', default="True", type=str,
                         help='most salient = True or False depending on retrain or pixel perturbation')
@@ -227,12 +228,17 @@ if __name__ == "__main__":
                         help='Number of images passed through at once')
     parser.add_argument('--max_train_steps', default=100, type=int,
                         help='Maximum number of training steps')
-    parser.add_argument('--initial_learning_rate', default=0.0001, type=float,
+    parser.add_argument('--epochs', default=100, type=int,
+                        help='Maximum number of epochs')
+    parser.add_argument('--initial_learning_rate', default=0.0005, type=float,
                         help='Initial learning rate')
     parser.add_argument('--lr_decresing_step', default=10, type=int,
                         help='Number of training steps between decreasing the learning rate')
-    parser.add_argument('--lr_divisor', default=10, type=float,
+    parser.add_argument('--lr_divisor', default=1.5, type=float,
                         help='Divisor used to decrease the leaarning rate')
+    parser.add_argument('--img_size', default=224, type=int,
+                        help='Row and Column size of the image')
+
 
     ARGS = parser.parse_args()
     main()

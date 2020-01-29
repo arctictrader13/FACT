@@ -87,9 +87,7 @@ def compute_and_store_saliency_maps(sample_loader, model, device, max_batch_num,
     
         filename = "saliency_map_" + str(batch_idx)
         torch.save(saliency_map, os.path.join(saliency_path, filename))
-        
-        if batch_idx == max_batch_num:
-            break
+
 
 def remove_salient_pixels(image_batch, saliency_maps, most_salient, num_pixels=100, replacement="black"):
     # Check that the data and the saliency map have the same batch size and the
