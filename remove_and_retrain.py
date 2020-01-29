@@ -156,7 +156,7 @@ def remove_and_retrain(train_set_loader, test_set_loader):
 
 def compute_modified_datasets(train_set_loader, test_set_loader):
     initial_model = vgg11(pretrained=True).to(ARGS.device)
-    torch.save(initial_model, "trained_vgg11_cifar10")
+    torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
     train(train_set_loader, initial_model)
     initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
     
@@ -170,19 +170,24 @@ def compute_modified_datasets(train_set_loader, test_set_loader):
             compute_and_store_saliency_maps(dataloader, initial_model, \
                 ARGS.device, ARGS.max_train_steps, saliency_method, saliency_path)
             for k_idx, k in enumerate(ARGS.k):
-                bathces = []
+                batches = []
+                num_pixels = int(k * total_features)
+
                 dataset_path = os.path.join(data_PATH, "modified_cifar_10", method_name, str(num_pixels))
                 create_folder(dataset_path)
 
-                for step, (batch_inputs, batch_targets) in enumerate(data_loader):
+                for step, (batch_inputs, batch_targets) in enumerate(dataloader):
                     saliency_map = torch.load(os.path.join(saliency_path, \
                             "saliency_map_" + str(step)))
-                    num_pixels = int(k * total_features)
+                    
                     data = remove_salient_pixels(batch_inputs, saliency_map, \
                             num_pixels=num_pixels, most_salient=ARGS.most_salient)
-                    bathces += [data]
+                    batches += [data]
+                    if step == ARGS.max_train_steps:
+                        break
                 modified_dataset = torch.utils.data.ConcatDataset(batches)
-                torch.save(modified_dataset, os.join.path(dataset_path, datset))
+                torch.save(modified_dataset, os.path.join(dataset_path, dataset))
+
 
 def main():
     # same transformations for each dataset

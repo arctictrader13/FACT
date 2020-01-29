@@ -1,26 +1,10 @@
-/var/spool/slurm-llnl/slurmd/job4417640/slurm_script: line 21: cd: FACT: No such file or directory
+/var/spool/slurm-llnl/slurmd/job4419996/slurm_script: line 21: cd: FACT: No such file or directory
 Files already downloaded and verified
 Files already downloaded and verified
-[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.234
-[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.591
-cuda:0
+[2020-01-29 14:26] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Train Loss = 13.570
+[2020-01-29 14:26] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Train Loss = 3.584
 Completeness test passed for FullGrad.
-Run saliency method:  FullGrad
-[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 10.260
-[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.351
-Run saliency method:  FullGrad
-[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 8.610
-[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.719
-Run saliency method:  FullGrad
-[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 9.755
-[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.267
-Run saliency method:  FullGrad
-[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.182
-[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 8.876
-Run saliency method:  FullGrad
-[2020-01-29 01:34] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.025
-[2020-01-29 01:34] Train Step 0020/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.387
 
-real	0m38.986s
-user	0m48.852s
-sys	0m26.752s
+real	0m26.738s
+user	0m28.340s
+sys	0m17.224s
