@@ -181,12 +181,15 @@ def remove_and_retrain(train_set_loader, test_set_loader):
 
 
 def compute_modified_datasets(train_set_loader, test_set_loader):
+    '''
     initial_model = init_model()
     train(train_set_loader, initial_model)
     initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
     print(initial_accuracy)
     torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
-    
+    '''
+    initial_model = torch.load(os.path.join("models", "trained_vgg11_cifar10")) 
+
     saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
 
     total_features = ARGS.img_size * ARGS.img_size
@@ -219,7 +222,6 @@ def compute_modified_datasets(train_set_loader, test_set_loader):
                 modified_dataset = torch.utils.data.ConcatDataset(batches)
                 torch.save(modified_dataset, os.path.join(dataset_path, dataset))
 
-
 def main():
     # same transformations for each dataset
     transform_standard = transforms.Compose([
@@ -241,7 +243,7 @@ def main():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--k', default=[0.001, 0.01, 0.05, 0.1], type=float,nargs="+",
+    parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
                         help='Percentage of k% most salient pixels')
     parser.add_argument('--most_salient', default="True", type=str,
                         help='most salient = True or False depending on retrain or pixel perturbation')

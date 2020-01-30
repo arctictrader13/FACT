@@ -19,7 +19,11 @@ source activate dl
 
 cp -r $HOME/git_repo/FACT/ $TMPDIR
 cd FACT 
-time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=50 --print_step=1000
+
+time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=5 --print_step=1000 --grads=fullgrad
+time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=5 --print_step=1000 --grads=inputgrad
+time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=5 --print_step=1000 --grads=random
+
 
 source deactivate dl
 
