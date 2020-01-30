@@ -41,188 +41,8 @@ unnormalize = NormalizeInverse(mean=[0.485, 0.456, 0.406],
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
-def main():
-    device = ARGS.device
 
-    batch_size = ARGS.batch_size
-
-    if ARGS.most_salient == "True":
-        salient_type = "most"
-    else:
-        salient_type = "least"
-
-    # same transformations for each dataset
-    transform_standard = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                             std=[0.229, 0.224, 0.225]), ])
-
-    if ARGS.dataset == "cifar":
-        dataset = data_PATH + "/cifar/"
-        data = torchvision.datasets.CIFAR100(dataset, train=True, transform=transform_standard, target_transform=None,
-                                             download=True)
-        # Dataset loader for sample images
-        sample_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False)
-    elif ARGS.dataset == "mnist":
-        dataset = data_PATH + "/mnist/"
-        data = torchvision.datasets.MNIST(dataset, train=True, transform=transform_standard, target_transform=None,
-                                          download=True)
-        # Dataset loader for sample images
-        sample_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False)
-
-    elif ARGS.dataset == "imagenet":
-        dataset = data_PATH
-        sample_loader = torch.utils.data.DataLoader(
-            datasets.ImageFolder(dataset, transform=transforms.Compose([
-                transforms.Resize((224, 224)),
-                transforms.ToTensor(),
-                transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                     std=[0.229, 0.224, 0.225])
-            ])),
-            batch_size=batch_size, shuffle=False)
-
-    model_name = ARGS.model + ARGS.model_type
-
-    save_path = PATH + 'results/' + ARGS.dataset
-
-    # initialize results dictionary: key: gradient method (random, fullgrad,...), values: [[mean, std],..] per k%
-    results_dict = {}
-    all_results = [{}, {}, {}, {}, {}, {}, {}]
-    total_features = 224 * 224
-
-    grad = None
-    model = None
-
-    for grad_type in ARGS.grads:
-        model, grad = init_grad_and_model(grad_type, model_name, device)
-
-        grad_counter = 0
-        score_means, score_stds, prob_means, prob_stds, kl_div_means, kl_div_stds = [], [], [], [], [], []
-        other_score_means, other_score_stds, other_prob_means, other_prob_stds = [], [], [], []
-        other_max_score_means, other_max_score_stds, other_max_prob_means, other_max_prob_stds  = [], [], [], []
-
-        print("grad_type:{}".format(grad_type))
-
-        for i in ARGS.k:
-
-            # print("grad:{}".format(grad))
-            grad_counter +=1
-            k_most_salient = int(i * total_features)
-            # print("k_most_salient:{}".format(k_most_salient))
-            counter = 0
-            tmp_results = [[], [], [], [], [], [], []] # score diffs, prob diffs, kl divs, score other diffs, prob other diffs, max other diffs
-
-            for batch_idx, (data, target) in enumerate(sample_loader):
-                counter += 1
-                # console testing
-                # data, _ = next(iter(sample_loader))
-                # for debugging purposes
-                if counter % 100 == 0:
-                    print("{} image batches processed".format(counter))
-                if counter == ARGS.n_images:
-                    break
-
-                data = data.to(device).requires_grad_()
-
-                # Run Input through network (two different networks if gradcam or fullgrad)
-                with torch.no_grad():
-                    initial_output = model.forward(data)
-                    initial_out = initial_output.to(torch.device("cpu"))
-
-                    # compute saliency maps for grad methods not random
-                if grad_type != "random":
-
-                    # print("data size:{}".format(data.size()))
-                    cam = compute_saliency_per_grad(grad_type, grad, data)
-
-                    if ARGS.save_grad is True and grad_counter == 1 and counter <= ARGS.n_save:
-                        save_saliency_map_batch(cam, data, result_path, grad_type, salient_type, counter)
-
-                    new_data = remove_salient_pixels(data, cam, num_pixels=k_most_salient, most_salient=ARGS.most_salient,
-                                                 replacement=ARGS.replacement)
-                    new_data.to("cpu")
-                    # output after pixel perturbation
-                    with torch.no_grad():
-                        final_output = model.forward(new_data)
-                        final_out = final_output.to("cpu")
-
-                    tmp_results = compute_difference_metrics(initial_out, final_out, tmp_results)
-
-                # change pixels based on random removal
-                elif grad_type == "random":
-                    # run n_random_runs for random pixel removal
-                    sample_seeds = np.random.randint(0, 10000, ARGS.n_random_runs)
-                    for seed in sample_seeds:
-                        tmp_data = remove_random_salient_pixels(data, seed, k_percentage=i, replacement=ARGS.replacement)
-
-                        with torch.no_grad():
-                            final_output = model.forward(tmp_data)
-                            final_out = final_output.to("cpu")
-
-                        tmp_results = compute_difference_metrics(initial_out, final_out, tmp_results)
-
-                # print("counter:{}".format(counter))
-            # print(torch.cuda.memory_summary(device=None, abbreviated=False))
-            # print(torch.cuda.memory_allocated(device=None))
-            #print("Absolute fractional output changes: ", tmp_results[0])
-            #print("Absolute fractional prob changes: ", tmp_results[1])
-            #print("Absolute fractional other topk output changes: ", tmp_results[3])
-            #print("Absolute fractional other topk prob changes: ", tmp_results[4])
-            #print("Absolute fractional max other output changes: ", tmp_results[5])
-            #print("Absolute fractional max other probchanges: ", tmp_results[6])
-
-            # print("Actual values: ",  initial_class_probability, final_class_probability)
-            # save mean and std of
-            append_mean_std(tmp_results[0], score_means, score_stds)
-            append_mean_std(tmp_results[1], prob_means, prob_stds)
-            append_mean_std(tmp_results[2], kl_div_means, kl_div_stds)
-            append_mean_std(tmp_results[3], other_score_means, other_score_stds)
-            append_mean_std(tmp_results[4], other_prob_means, other_prob_stds)
-            append_mean_std(tmp_results[5], other_max_score_means, other_max_score_stds)
-            append_mean_std(tmp_results[6], other_max_prob_means, other_max_prob_stds)
-
-        all_results[0][grad_type] = [score_means, score_stds]
-        all_results[1][grad_type] = [prob_means, prob_stds]
-        all_results[2][grad_type] = [kl_div_means, kl_div_stds]
-        all_results[3][grad_type] = [other_score_means, other_score_stds]
-        all_results[4][grad_type] = [other_prob_means, other_prob_stds]
-        all_results[5][grad_type] = [other_max_score_means, other_max_score_stds]
-        all_results[6][grad_type] = [other_max_prob_means, other_max_prob_stds]
-
-    # plot for all gradient methods stds and means for all k% values
-    file_name = ARGS.dataset + "_" + model_name + "_" + salient_type + "_" + ARGS.replacement + str(ARGS.n_images)
-    save_experiment_file = result_path + file_name
-    # plot score differences, prob differences and kl divergence
-    #plot_all_grads(all_results[0], filename=save_experiment_file + "scores")
-    #plot_all_grads(all_results[1], filename=save_experiment_file + "probs")
-    #plot_all_grads(all_results[2], filename=save_experiment_file + "kl", div=True)
-    #plot_all_grads(all_results[3], filename=save_experiment_file + "topk_other_scores")
-    #plot_all_grads(all_results[4], filename=save_experiment_file + "topk_other_probs")
-    #plot_all_grads(all_results[5], filename=save_experiment_file + "max_other_scores")
-    #plot_all_grads(all_results[6], filename=save_experiment_file + "max_other_probs")
-
-    print("For K values: {}".format(ARGS.k))
-    print("############ Score absolute fractional differences ############")
-    print_dict(all_results[0])
-    print("############ Probs absolute fractional differences ############")
-    print_dict(all_results[1])
-    print("KL divergences per k")
-    print_dict(all_results[2])
-    print("############ Top: {} Other Score absolute fractional differences ############".format(ARGS.topk))
-    print_dict(all_results[3])
-    print("############ Top: {} Other Probs absolute fractional differences ############".format(ARGS.topk))
-    print_dict(all_results[4])
-    print("############ Max Other Score absolute fractional differences ############")
-    print_dict(all_results[5])
-    print("############ Max other Probs absolute fractional differences ############")
-    print_dict(all_results[6])
-
-    # save dictionary
-    save_obj(all_results, save_experiment_file)
-
-    # print_memory()
-
+# HELPER FUNCTIONS
 def print_dict(dictionary, div=False):
     for k, v in dictionary.items():
         print("Gradient method: {}".format(k))
@@ -268,6 +88,7 @@ def compute_difference_metrics(initial_output, final_output, tmp_results):
     return tmp_results
 
 def init_grad_and_model(grad_type, model_name, device):
+    model, grad = None, None
     if grad_type == 'gradcam':
         # Gradcam
         model, grad = initialize_grad_cam(model_name, device)
@@ -382,6 +203,8 @@ def plot_all_grads(results_dict, filename=None, div=False):
 
 def initialize_grad_cam(model_name, device, pretrained=True):
     model = models.__dict__[model_name](pretrained=pretrained)
+    # model = eval(model_name)(pretrained=True)
+
     model.to(device)
     model.eval()
 
@@ -389,7 +212,7 @@ def initialize_grad_cam(model_name, device, pretrained=True):
 
     return model, gcam
 
-def compute_saliency_per_grad(grad_type, grad, data):
+def compute_saliency_per_grad(grad_type, grad, data, target_layer):
     saliency = None
 
     # FULLGRAD
@@ -401,7 +224,7 @@ def compute_saliency_per_grad(grad_type, grad, data):
         probs, ids = grad.forward(data)
         # Grad-CAM
         grad.backward(ids=ids[:, [0]])
-        saliency = grad.generate(target_layer=ARGS.target_layer)
+        saliency = grad.generate(target_layer=target_layer)
 
     return saliency
 
@@ -444,39 +267,216 @@ def print_memory():
     print("{} GB".format(total / ((1024 ** 3) * 8)))
 
 
+def main():
+    device = ARGS.device
+
+    batch_size = ARGS.batch_size
+
+    if ARGS.most_salient == "True":
+        salient_type = "most"
+    else:
+        salient_type = "least"
+
+    # same transformations for each dataset
+    transform_standard = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                             std=[0.229, 0.224, 0.225]), ])
+
+    if ARGS.dataset == "cifar":
+        dataset = data_PATH + "/cifar/"
+        data = torchvision.datasets.CIFAR100(dataset, train=True, transform=transform_standard, target_transform=None,
+                                             download=True)
+        # Dataset loader for sample images
+        sample_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False)
+    elif ARGS.dataset == "mnist":
+        dataset = data_PATH + "/mnist/"
+        data = torchvision.datasets.MNIST(dataset, train=True, transform=transform_standard, target_transform=None,
+                                          download=True)
+        # Dataset loader for sample images
+        sample_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False)
+
+    elif ARGS.dataset == "imagenet":
+        dataset = data_PATH
+        sample_loader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(dataset, transform=transforms.Compose([
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                     std=[0.229, 0.224, 0.225])
+            ])),
+            batch_size=batch_size, shuffle=False)
+
+    model_name = ARGS.model + ARGS.model_type
+
+    save_path = PATH + 'results/' + ARGS.dataset
+
+    # initialize results dictionary: key: gradient method (random, fullgrad,...), values: [[mean, std],..] per k%
+    results_dict = {}
+    all_results = [{}, {}, {}, {}, {}, {}, {}]
+    total_features = 224 * 224
+
+    for grad_type in ARGS.grads:
+        model, grad = init_grad_and_model(grad_type, model_name, device)
+
+        grad_counter = 0
+        score_means, score_stds, prob_means, prob_stds, kl_div_means, kl_div_stds = [], [], [], [], [], []
+        other_score_means, other_score_stds, other_prob_means, other_prob_stds = [], [], [], []
+        other_max_score_means, other_max_score_stds, other_max_prob_means, other_max_prob_stds  = [], [], [], []
+
+        print("grad_type:{}".format(grad_type))
+
+        for i in ARGS.k:
+
+            # print("grad:{}".format(grad))
+            grad_counter +=1
+            k_most_salient = int(i * total_features)
+            # print("k_most_salient:{}".format(k_most_salient))
+            counter = 0
+            tmp_results = [[], [], [], [], [], [], []] # score diffs, prob diffs, kl divs, score other diffs, prob other diffs, max other diffs
+
+            for batch_idx, (data, target) in enumerate(sample_loader):
+                counter += 1
+                # console testing
+                # data, _ = next(iter(sample_loader))
+                # for debugging purposes
+                if counter % 100 == 0:
+                    print("{} image batches processed".format(counter))
+                if counter == ARGS.n_images:
+                    break
+
+                data = data.to(device).requires_grad_()
+
+                # Run Input through network (two different networks if gradcam or fullgrad)
+                with torch.no_grad():
+                    initial_output = model.forward(data)
+                    initial_out = initial_output.to(torch.device("cpu"))
+
+                    # compute saliency maps for grad methods not random
+                if grad_type != "random":
+
+                    # print("data size:{}".format(data.size()))
+                    cam = compute_saliency_per_grad(grad_type, grad, data, target_layer="features")
+
+                    if ARGS.save_grad is True and grad_counter == 1 and counter <= ARGS.n_save:
+                        save_saliency_map_batch(cam, data, result_path, grad_type, salient_type, counter)
+
+                    new_data = remove_salient_pixels(data, cam, num_pixels=k_most_salient, most_salient=ARGS.most_salient,
+                                                 replacement=ARGS.replacement)
+                    new_data.to("cpu")
+                    # output after pixel perturbation
+                    with torch.no_grad():
+                        final_output = model.forward(new_data)
+                        final_out = final_output.to("cpu")
+
+                    tmp_results = compute_difference_metrics(initial_out, final_out, tmp_results)
+
+                # change pixels based on random removal
+                elif grad_type == "random":
+                    # run n_random_runs for random pixel removal
+                    sample_seeds = np.random.randint(0, 10000, ARGS.n_random_runs)
+                    for seed in sample_seeds:
+                        tmp_data = remove_random_salient_pixels(data, seed, k_percentage=i, replacement=ARGS.replacement)
+
+                        with torch.no_grad():
+                            final_output = model.forward(tmp_data)
+                            final_out = final_output.to("cpu")
+
+                        tmp_results = compute_difference_metrics(initial_out, final_out, tmp_results)
+
+                # print("counter:{}".format(counter))
+            # print(torch.cuda.memory_summary(device=None, abbreviated=False))
+            # print(torch.cuda.memory_allocated(device=None))
+            #print("Absolute fractional output changes: ", tmp_results[0])
+            #print("Absolute fractional prob changes: ", tmp_results[1])
+            #print("Absolute fractional other topk output changes: ", tmp_results[3])
+            #print("Absolute fractional other topk prob changes: ", tmp_results[4])
+            #print("Absolute fractional max other output changes: ", tmp_results[5])
+            #print("Absolute fractional max other probchanges: ", tmp_results[6])
+
+            # print("Actual values: ",  initial_class_probability, final_class_probability)
+            # save mean and std of
+            append_mean_std(tmp_results[0], score_means, score_stds)
+            append_mean_std(tmp_results[1], prob_means, prob_stds)
+            append_mean_std(tmp_results[2], kl_div_means, kl_div_stds)
+            append_mean_std(tmp_results[3], other_score_means, other_score_stds)
+            append_mean_std(tmp_results[4], other_prob_means, other_prob_stds)
+            append_mean_std(tmp_results[5], other_max_score_means, other_max_score_stds)
+            append_mean_std(tmp_results[6], other_max_prob_means, other_max_prob_stds)
+
+        all_results[0][grad_type] = [score_means, score_stds]
+        all_results[1][grad_type] = [prob_means, prob_stds]
+        all_results[2][grad_type] = [kl_div_means, kl_div_stds]
+        all_results[3][grad_type] = [other_score_means, other_score_stds]
+        all_results[4][grad_type] = [other_prob_means, other_prob_stds]
+        all_results[5][grad_type] = [other_max_score_means, other_max_score_stds]
+        all_results[6][grad_type] = [other_max_prob_means, other_max_prob_stds]
+
+    # plot for all gradient methods stds and means for all k% values
+    file_name = ARGS.dataset + "_" + model_name + "_" + salient_type + "_" + ARGS.replacement + str(ARGS.n_images) + "_" + "k_addition"
+    save_experiment_file = result_path + file_name
+    # plot score differences, prob differences and kl divergence
+    #plot_all_grads(all_results[0], filename=save_experiment_file + "scores")
+    #plot_all_grads(all_results[1], filename=save_experiment_file + "probs")
+    #plot_all_grads(all_results[2], filename=save_experiment_file + "kl", div=True)
+    #plot_all_grads(all_results[3], filename=save_experiment_file + "topk_other_scores")
+    #plot_all_grads(all_results[4], filename=save_experiment_file + "topk_other_probs")
+    #plot_all_grads(all_results[5], filename=save_experiment_file + "max_other_scores")
+    #plot_all_grads(all_results[6], filename=save_experiment_file + "max_other_probs")
+
+    print("For K values: {}".format(ARGS.k))
+    print("############ Score absolute fractional differences ############")
+    print_dict(all_results[0])
+    print("############ Probs absolute fractional differences ############")
+    print_dict(all_results[1])
+    print("KL divergences per k")
+    print_dict(all_results[2])
+    print("############ Top: {} Other Score absolute fractional differences ############".format(ARGS.topk))
+    print_dict(all_results[3])
+    print("############ Top: {} Other Probs absolute fractional differences ############".format(ARGS.topk))
+    print_dict(all_results[4])
+    print("############ Max Other Score absolute fractional differences ############")
+    print_dict(all_results[5])
+    print("############ Max other Probs absolute fractional differences ############")
+    print_dict(all_results[6])
+
+    # save dictionary
+    save_obj(all_results, save_experiment_file)
+
+    # print_memory()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument('--batch_size', default=1, type=int,
+                        help='Number of images passed through at once')
+    parser.add_argument('--dataset', default="imagenet", type=str,
+                        help='which dataset')
+    parser.add_argument('--device', default="cuda:0", type=str,
+                        help='cpu or gpu')
+    parser.add_argument('--grads', default=["gradcam"], type=str, nargs='+',
+                        help='which grad methods to be applied')
     parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
                         help='Percentage of k% most salient pixels')
     parser.add_argument('--most_salient', default="True", type=str,
                         help='most salient = True or False depending on retrain or pixel perturbation')
-    parser.add_argument('--model', default="resnet", type=str,
+    parser.add_argument('--model', default="vgg", type=str,
                         help='which model to use')
-    parser.add_argument('--model_type', default="18", type=str,
+    parser.add_argument('--model_type', default="16_bn", type=str,
                         help='which model type: resnet_18, ...')
-    parser.add_argument('--dataset', default="imagenet", type=str,
-                        help='which dataset')
-    parser.add_argument('--grads', default=["fullgrad"], type=str, nargs='+',
-                        help='which grad methods to be applied')
-    parser.add_argument('--device', default="cuda:0", type=str,
-                        help='cpu or gpu')
-    parser.add_argument('--target_layer', default="layer4", type=str,
-                        help='Which layer to be visualized in GRADCAM')
+    parser.add_argument('--n_images', default=50, type=int,
+                        help='Test for n_images images ')
     parser.add_argument('--n_random_runs', default=5, type=int,
                         help='Number of runs for random pixels to be removed to decrease std of random run')
+    parser.add_argument('--n_save', default=50, type=int,
+                        help='Save saliency maps for first n_save images')
+    parser.add_argument('--target_layer', default="features", type=str,
+                        help='Which layer to be visualized in GRADCAM')
     parser.add_argument('--replacement', default="black", type=str,
                         help='black = 1.0 or mean = [0.485, 0.456, 0.406]')
     parser.add_argument('--save_grad', default=False, type=bool,
                         help='saliency map to be saved?')
-    parser.add_argument('--n_images', default=50, type=int,
-                        help='Test for n_images images ')
-    parser.add_argument('--n_save', default=50, type=int,
-                        help='Save saliency maps for first n_save images')
-    parser.add_argument('--batch_size', default=1, type=int,
-                        help='Number of images passed through at once')
     parser.add_argument('--topk', default=100, type=int,
                         help='Number of other classes considered for metric of other class changes')
     ARGS = parser.parse_args()
     main()
-
-# TODO 5) add inputgrad

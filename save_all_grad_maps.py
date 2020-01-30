@@ -1,8 +1,3 @@
-#
-# Copyright (c) 2019 Idiap Research Institute, http://www.idiap.ch/
-# Written by Suraj Srinivas <suraj.srinivas@idiap.ch>
-#
-
 """ Compute saliency maps of images from dataset folder
     and dump them in a results folder """
 
