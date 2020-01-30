@@ -1,9 +1,1 @@
-/var/spool/slurm-llnl/slurmd/job4421482/slurm_script: line 21: cd: FACT: No such file or directory
-Files already downloaded and verified
-Files already downloaded and verified
-0.009899999999999961
-Completeness test passed for FullGrad.
-
-real	20m34.021s
-user	31m33.812s
-sys	19m37.132s
+/var/spool/slurm-llnl/slurmd/job4424658/slurm_script: line 21: cd: FACT: No such file or directory

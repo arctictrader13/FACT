@@ -263,7 +263,7 @@ if __name__ == "__main__":
                         help='Maximum number of epochs')
     parser.add_argument('--initial_learning_rate', default=0.001, type=float,
                         help='Initial learning rate')
-    parser.add_argument('--lr_decresing_step', default=1, type=int,
+    parser.add_argument('--lr_decresing_step', default=10, type=int,
                         help='Number of training steps between decreasing the learning rate')
     parser.add_argument('--lr_gamma', default=0.1, type=float,
                         help='mltiplier for changing the lr')
