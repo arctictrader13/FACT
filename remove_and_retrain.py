@@ -39,6 +39,7 @@ def train(data_loader, model, k_most_salient=0, saliency_path="", \
     for epoch in range(ARGS.epochs):
         accuracy = 0.0
         for step, (batch_inputs, batch_targets) in enumerate(data_loader):
+            num_batches += 1
             batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
                                           batch_targets.to(ARGS.device)
             if k_most_salient != 0:
@@ -57,9 +58,9 @@ def train(data_loader, model, k_most_salient=0, saliency_path="", \
             loss.backward()
             optimizer.step()
 
-            if step % ARGS.print_step == 0:
+            if step % ARGS.print_step == 0 and step != 0:
                 losses += [loss]
-                loss_steps += [num_batches + step]
+                loss_steps += [num_batches]
                 accuracy = float(accuracy) / float(ARGS.batch_size * ARGS.print_step)
 
                 if (len(losses) > 2 and abs(losses[-1] - losses[-2]) < 0.0001):
@@ -72,7 +73,6 @@ def train(data_loader, model, k_most_salient=0, saliency_path="", \
                 accuracy = 0.0
 
             if ARGS.max_train_steps == step:
-                num_batches += step
                 break
         
         scheduler.step()
@@ -111,6 +111,7 @@ def test(data_loader, model, max_steps, k_most_salient=0, saliency_path=""):
         num_batches += 1
         if ARGS.max_train_steps == step:
             break
+    print(accuracy)
     return float(accuracy) / float(num_batches * ARGS.batch_size)
 
 
@@ -219,7 +220,6 @@ def compute_modified_datasets(train_set_loader, test_set_loader):
                 torch.save(modified_dataset, os.path.join(dataset_path, dataset))
 
 
-
 def main():
     # same transformations for each dataset
     transform_standard = transforms.Compose([
@@ -261,7 +261,7 @@ if __name__ == "__main__":
                         help='Maximum number of training steps')
     parser.add_argument('--epochs', default=100, type=int,
                         help='Maximum number of epochs')
-    parser.add_argument('--initial_learning_rate', default=0.0005, type=float,
+    parser.add_argument('--initial_learning_rate', default=0.001, type=float,
                         help='Initial learning rate')
     parser.add_argument('--lr_decresing_step', default=1, type=int,
                         help='Number of training steps between decreasing the learning rate')
