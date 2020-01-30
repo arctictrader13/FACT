@@ -5,6 +5,7 @@ import os
 # Import saliency methods and models
 from saliency.fullgrad import FullGrad
 from saliency.simple_fullgrad import SimpleFullGrad
+from saliency.inputgradient import Inputgrad
 from models.vgg import *
 from models.resnet import *
 from misc_functions import *
