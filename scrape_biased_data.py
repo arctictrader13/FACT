@@ -17,9 +17,7 @@ def create_label_names(dir_name, path, label):
 
     for name in filenames:
         rename(name, re.sub('.jpg', "", name) + "_" + label + ".jpg")
-
     os.chdir(path)
-
 
 def change_names(filenames):
     counter = 0
