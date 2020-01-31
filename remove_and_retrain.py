@@ -32,7 +32,7 @@ def train(model, data_loader=None, data_path="", plot_name=""):
     scheduler = lr_scheduler.StepLR(optimizer, step_size=ARGS.lr_decresing_step, gamma=ARGS.lr_gamma)
     model.train()
 
-    if data_path == "":
+    if data_loader != None:
         data_iterator = iter(data_loader)
     
     losses = []
@@ -93,24 +93,35 @@ def train(model, data_loader=None, data_path="", plot_name=""):
     plt.savefig(os.path.join("results", "remove_and_retrain", plot_name))
 
 
-def test(data_path, model, max_steps, k_most_salient=0, saliency_path=""):
+def test(model, data_loader=None, data_path=""):
     model.eval()
     accuracies = []
     step = 0
-    print(ARGS.max_train_steps)
+
+    if data_loader != None:
+        data_iterator = iter(data_loader)
+
     while step != ARGS.max_train_steps:
-        if not os.path.exists(os.path.join(data_path, "batch_input" + str(step))):
-            break
-        batch_inputs = torch.load(os.path.join(data_path, "batch_input" + str(step))).to(ARGS.device)
-        batch_targets = torch.load(os.path.join(data_path, "batch_target" + str(step))).to(ARGS.device)
-             
+        if data_path != "":
+            if not os.path.exists(os.path.join(data_path, "batch_input" + str(step))):
+                break
+            batch_inputs = torch.load(os.path.join(data_path, "batch_input" + str(step))).to(ARGS.device)
+            batch_targets = torch.load(os.path.join(data_path, "batch_target" + str(step))).to(ARGS.device)
+        else:
+            try:
+                batch_inputs, batch_targets = next(data_iterator)
+                batch_inputs = batch_inputs.to(ARGS.device)
+                batch_targets = batch_targets.to(ARGS.device)
+            except StopIteration:
+                break
+
         batch_inputs.requires_grad = False
         
         output = model.forward(batch_inputs)
         accuracies += [float(sum(batch_targets == torch.argmax(output, 1))) / ARGS.batch_size]
         step += 1
     accuracies = torch.tensor(accuracies)
-    return accuracies.mean(), accuracies.std()
+    return float(accuracies.mean()), float(accuracies.std())
 
 
 def init_model():
@@ -156,17 +167,13 @@ def remove_and_retrain():
            
             model = init_model()
             train(model, data_path=os.path.join(data_path, "train"), plot_name=method_name + "_" + str(k) + ".jpeg")
-            accuracy_mean, accuracy_std = test(os.path.join(data_path, "test"), model, \
-                            ARGS.max_train_steps)
-            accuracies_mean[method_idx][ k_idx] = float(accuracy_mean)
-            accuracies_std[method_idx][k_idx] = float(accuracy_std)
-
+            accuracies_mean[method_idx][k_idx], accuracies_std[method_idx][k_idx] = test(model, data_path=os.path.join(data_path, "test"))
+            
         plt.figure(0)
         print(len([k * 100 for k in ARGS.k]), len(list(accuracies_mean[method_idx])), len(list(accuracies_std[method_idx])))
         print([k * 100 for k in ARGS.k])
         print(accuracies_mean[method_idx])
         print(accuracies_std[method_idx])
-        #plt.plot([k * 100 for k in ARGS.k], accuracies_mean[method_idx], label=method_name, color=colors[method_name])
         plt.errorbar([k * 100 for k in ARGS.k], accuracies_mean[method_idx], accuracies_std[method_idx], label=method_name, color=colors[method_name])
 
     plt.figure(0)
@@ -227,11 +234,10 @@ def main():
     if ARGS.phase == "train_initial_model":
         initial_model = init_model()
         train(initial_model, data_loader=train_set_loader, plot_name="initial_model.jpeg")
-        initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
-        print(initial_accuracy)
+        initial_accuracy_mean, initial_accuracy_std = test(initial_model, data_loader=test_set_loader)
+        print(initial_accuracy_mean, initial_accuracy_std)
         torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
     elif ARGS.phase == "create_modified_datasets":
-        print(ARGS.batch_size)
         compute_modified_datasets(train_set_loader, test_set_loader)
     elif ARGS.phase == "train_on_modified_datasets":
         remove_and_retrain()
