@@ -91,6 +91,16 @@ def compute_and_store_saliency_maps(sample_loader, model, device, max_batch_num,
         if batch_idx == max_batch_num:
             break
 
+def transform():
+    # Transform images to correct dimensions
+    transform_standard = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                             std=[0.229, 0.224, 0.225]), ])
+
+    return transform_standard
+
 
 def remove_salient_pixels(image_batch, saliency_maps, most_salient, num_pixels=100, replacement="black"):
     # Check that the data and the saliency map have the same batch size and the
