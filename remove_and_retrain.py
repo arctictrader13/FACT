@@ -26,8 +26,8 @@ torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
 
-def train(data_loader, model, k_most_salient=0, saliency_path="", \
-        saliency_method_name=""):
+def train(data_path, model, k_most_salient=0, saliency_path="", \
+        saliency_method_name="", plot_name=""):
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.classifier.parameters(), lr=ARGS.initial_learning_rate, momentum=0.9)
     scheduler = lr_scheduler.StepLR(optimizer, step_size=ARGS.lr_decresing_step, gamma=ARGS.lr_gamma)
@@ -38,10 +38,14 @@ def train(data_loader, model, k_most_salient=0, saliency_path="", \
     num_batches = 0.0
     for epoch in range(ARGS.epochs):
         accuracy = 0.0
-        for step, (batch_inputs, batch_targets) in enumerate(data_loader):
+        step = 0
+        while step != ARGS.max_train_steps:
+            if not os.path.exists(os.path.join(data_path, "batch_input" + str(step))):
+                break
+            batch_inputs = torch.load(os.path.join(data_path, "batch_input" + str(step))).to(ARGS.device)
+            batch_targets = torch.load(os.path.join(data_path, "batch_target" + str(step))).to(ARGS.device)
             num_batches += 1
-            batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
-                                          batch_targets.to(ARGS.device)
+            
             if k_most_salient != 0:
                 saliency_map = torch.load(os.path.join(saliency_path, \
                         "saliency_map_" + str(step)))
@@ -68,12 +72,10 @@ def train(data_loader, model, k_most_salient=0, saliency_path="", \
                 print("[{}] Train Step {:04d}/{:04d}, Batch Size = {}, "
                       "Accuracy = {:.2f}, Train Loss = {:.3f}".format(
                         datetime.now().strftime("%Y-%m-%d %H:%M"), step,
-                        len(data_loader.dataset), ARGS.batch_size, accuracy, loss
+                        0, ARGS.batch_size, accuracy, loss
                 ))
                 accuracy = 0.0
-
-            if ARGS.max_train_steps == step:
-                break
+            step += 1
         
         scheduler.step()
 
@@ -83,36 +85,31 @@ def train(data_loader, model, k_most_salient=0, saliency_path="", \
     plt.plot(loss_steps, losses)
     plt.ylabel('Loss')
     plt.xlabel('Batches')
-    if k_most_salient != 0:
-        figname = saliency_method_name + "_" + str(k_most_salient) + ".jpeg"
-    else:
-        figname = "initial_model.jpeg"
-    plt.savefig(os.path.join("results", "remove_and_retrain", figname))
+    #if k_most_salient != 0:
+    #    figname = saliency_method_name + "_" + str(k_most_salient) + ".jpeg"
+    #else:
+    #    figname = "initial_model.jpeg"
+    plt.savefig(os.path.join("results", "remove_and_retrain", plot_name))
 
 
-def test(data_loader, model, max_steps, k_most_salient=0, saliency_path=""):
+def test(data_path, model, max_steps, k_most_salient=0, saliency_path=""):
     model.eval()
-    accuracy = 0.0
-    num_batches = 0
-    for step, (batch_inputs, batch_targets) in enumerate(data_loader):
-        batch_inputs, batch_targets = batch_inputs.to(ARGS.device), \
-                                      batch_targets.to(ARGS.device)
-        if k_most_salient != 0: 
-            saliency_map = torch.load(os.path.join(saliency_path, \
-                    "saliency_map_" + str(step)))
-            data = remove_salient_pixels(batch_inputs, saliency_map, \
-                    num_pixels=k_most_salient, most_salient=ARGS.most_salient)
-        else:
-            data = batch_inputs
+    accuracies = []
+    step = 0
+    print(ARGS.max_train_steps)
+    while step != ARGS.max_train_steps:
+        if not os.path.exists(os.path.join(data_path, "batch_input" + str(step))):
+            break
+        batch_inputs = torch.load(os.path.join(data_path, "batch_input" + str(step))).to(ARGS.device)
+        batch_targets = torch.load(os.path.join(data_path, "batch_target" + str(step))).to(ARGS.device)
+             
         batch_inputs.requires_grad = False
         
         output = model.forward(batch_inputs)
-        accuracy += sum(batch_targets == torch.argmax(output, 1))
-        num_batches += 1
-        if ARGS.max_train_steps == step:
-            break
-    print(accuracy)
-    return float(accuracy) / float(num_batches * ARGS.batch_size)
+        accuracies += [float(sum(batch_targets == torch.argmax(output, 1))) / ARGS.batch_size]
+        step += 1
+    accuracies = torch.tensor(accuracies)
+    return accuracies.mean(), accuracies.std()
 
 
 def init_model():
@@ -137,42 +134,40 @@ def get_saliency_methods(grad_names, initial_model):
         elif grad_name == "inputgrad":
             saliency_methods += [(Inputgrad(initial_model), "InputGrad")]
         elif grad_name == "random":
-            saliency_methods += [(None, "RandomGrad")]
+            saliency_methods += [(None, "Random")]
     return saliency_methods
 
 
-def remove_and_retrain(train_set_loader, test_set_loader):
-    initial_model = init_model()
-    train(train_set_loader, initial_model)
-    initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
-    
+def remove_and_retrain():
+    initial_model = torch.load(os.path.join("models", "trained_vgg11_cifar10")) 
     saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
-
+    
+    colors = {"FullGrad": "#0074d9", "gradcam": "#111111", "Random": "#f012be", "InputGrad": "#01ff70"}
     total_features = ARGS.img_size * ARGS.img_size
-    accuracies = torch.zeros((len(saliency_methods), len(ARGS.k)))
+    accuracies_mean = [[0.0 for _ in range(len(ARGS.k))] for _ in range(len(saliency_methods))]
+    accuracies_std = [[0.0 for _ in range(len(ARGS.k))] for _ in range(len(saliency_methods))]
     for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
-        train_saliency_path = os.path.join(data_PATH, "saliency_maps", method_name + "_vgg11", "train")
-        compute_and_store_saliency_maps(train_set_loader, initial_model, \
-            ARGS.device, ARGS.max_train_steps, saliency_method, train_saliency_path)
-
-        test_saliency_path = os.path.join(data_PATH, "saliency_maps", method_name + "_vgg11", "test")
-        compute_and_store_saliency_maps(test_set_loader, initial_model, \
-            ARGS.device, ARGS.max_train_steps, saliency_method, test_saliency_path)
-
+        modified_data_path = os.path.join(data_PATH, "modified_cifar_10", method_name)
+        
         for k_idx, k in enumerate(ARGS.k):
             print("Run saliency method: ", method_name)
-
+            data_path = os.path.join(modified_data_path, str(int(k * total_features)) )
+           
             model = init_model()
-            train(train_set_loader, k_most_salient=int(k * total_features), \
-                  saliency_path=train_saliency_path, \
-                  saliency_method_name=method_name)
-            accuracy = test(test_set_loader, model, \
-                            ARGS.max_train_steps, \
-                            k_most_salient=int(k * total_features), \
-                            saliency_path=test_saliency_path)
-            accuracies[method_idx, k_idx] = accuracy
+            train(os.path.join(data_path, "train"), model, plot_name=method_name + "_" + str(k) + ".jpeg")
+            accuracy_mean, accuracy_std = test(os.path.join(data_path, "test"), model, \
+                            ARGS.max_train_steps)
+            accuracies_mean[method_idx][ k_idx] = float(accuracy_mean)
+            accuracies_std[method_idx][k_idx] = float(accuracy_std)
+
         plt.figure(0)
-        plt.plot([k * 100 for k in ARGS.k], list(accuracies[method_idx]), label=method_name + str(k))
+        print(len([k * 100 for k in ARGS.k]), len(list(accuracies_mean[method_idx])), len(list(accuracies_std[method_idx])))
+        print([k * 100 for k in ARGS.k])
+        print(accuracies_mean[method_idx])
+        print(accuracies_std[method_idx])
+        #plt.plot([k * 100 for k in ARGS.k], accuracies_mean[method_idx], label=method_name, color=colors[method_name])
+        plt.errorbar([k * 100 for k in ARGS.k], accuracies_mean[method_idx], accuracies_std[method_idx], label=method_name, color=colors[method_name])
+
     plt.figure(0)
     plt.ylabel('Accuracy')
     plt.xlabel('k %')
@@ -181,15 +176,7 @@ def remove_and_retrain(train_set_loader, test_set_loader):
 
 
 def compute_modified_datasets(train_set_loader, test_set_loader):
-    '''
-    initial_model = init_model()
-    train(train_set_loader, initial_model)
-    initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
-    print(initial_accuracy)
-    torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
-    '''
     initial_model = torch.load(os.path.join("models", "trained_vgg11_cifar10")) 
-
     saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
 
     total_features = ARGS.img_size * ARGS.img_size
@@ -205,22 +192,21 @@ def compute_modified_datasets(train_set_loader, test_set_loader):
                 num_pixels = int(k * total_features)
 
                 dataset_path = os.path.join(data_PATH, "modified_cifar_10", method_name, str(num_pixels))
-                create_folder(dataset_path)
+                create_folder(os.path.join(dataset_path, dataset))
 
                 for step, (batch_inputs, batch_targets) in enumerate(dataloader):
-                    if method_name == "RandomGrad":
+                    if method_name == "Random":
                         data = remove_random_salient_pixels(batch_inputs, 42, k, im_size=32)
                     else:
                         saliency_map = torch.load(os.path.join(saliency_path, \
                             "saliency_map_" + str(step)))
                         data = remove_salient_pixels(batch_inputs, saliency_map, \
                             num_pixels=num_pixels, most_salient=ARGS.most_salient)
-                    batches += [data]
+                    torch.save(data, os.path.join(dataset_path, dataset, "batch_input" + str(step)))
+                    torch.save(batch_targets, os.path.join(dataset_path, dataset, "batch_target" + str(step)))
+
                     if step == ARGS.max_train_steps:
                         break
-
-                modified_dataset = torch.utils.data.ConcatDataset(batches)
-                torch.save(modified_dataset, os.path.join(dataset_path, dataset))
 
 def main():
     # same transformations for each dataset
@@ -236,14 +222,23 @@ def main():
         target_transform=None, download=True)
     train_set_loader = torch.utils.data.DataLoader(train_set, batch_size=ARGS.batch_size, shuffle=False)
     test_set_loader = torch.utils.data.DataLoader(test_set, batch_size=ARGS.batch_size, shuffle=False)
-
-    #remove_and_retrain(train_set_loader, test_set_loader)
-    compute_modified_datasets(train_set_loader, test_set_loader)
+    
+    if ARGS.phase == "train_initial_model":
+        initial_model = init_model()
+        train(train_set_loader, initial_model)
+        initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
+        print(initial_accuracy)
+        torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
+    elif ARGS.phase == "create_modified_datasets":
+        print(ARGS.batch_size)
+        compute_modified_datasets(train_set_loader, test_set_loader)
+    elif ARGS.phase == "train_on_modified_datasets":
+        remove_and_retrain()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
+    parser.add_argument('--k', default=[0.1, 0.25, 0.5, 0.75, 0.9], type=float,nargs="+",
                         help='Percentage of k% most salient pixels')
     parser.add_argument('--most_salient', default="True", type=str,
                         help='most salient = True or False depending on retrain or pixel perturbation')
@@ -273,7 +268,9 @@ if __name__ == "__main__":
                         help='Row and Column size of the image')
     parser.add_argument('--print_step', default=500, type=int,
                         help='Number of batches after which we print')
-
+    parser.add_argument('--phase', default="train_initial_model", type=str,
+                        help='Slect phase of the experiment. Options: train_initial_model, \
+                                create_modified_datasets, train_on_modified_datasets')
 
     ARGS = parser.parse_args()
     main()
