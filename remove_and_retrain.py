@@ -26,13 +26,15 @@ torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
 
-def train(data_path, model, k_most_salient=0, saliency_path="", \
-        saliency_method_name="", plot_name=""):
+def train(model, data_loader=None, data_path="", plot_name=""):
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.classifier.parameters(), lr=ARGS.initial_learning_rate, momentum=0.9)
     scheduler = lr_scheduler.StepLR(optimizer, step_size=ARGS.lr_decresing_step, gamma=ARGS.lr_gamma)
     model.train()
 
+    if data_path == "":
+        data_iterator = iter(data_loader)
+    
     losses = []
     loss_steps = []
     num_batches = 0.0
@@ -40,21 +42,24 @@ def train(data_path, model, k_most_salient=0, saliency_path="", \
         accuracy = 0.0
         step = 0
         while step != ARGS.max_train_steps:
-            if not os.path.exists(os.path.join(data_path, "batch_input" + str(step))):
-                break
-            batch_inputs = torch.load(os.path.join(data_path, "batch_input" + str(step))).to(ARGS.device)
-            batch_targets = torch.load(os.path.join(data_path, "batch_target" + str(step))).to(ARGS.device)
+            if data_path != "":
+                if not os.path.exists(os.path.join(data_path, "batch_input" + str(step))):
+                    break
+                batch_inputs = torch.load(os.path.join(data_path, "batch_input" + str(step))).to(ARGS.device)
+                batch_targets = torch.load(os.path.join(data_path, "batch_target" + str(step))).to(ARGS.device)
+            else:
+                try:
+                    batch_inputs, batch_targets = next(data_iterator)
+                    batch_inputs = batch_inputs.to(ARGS.device)
+                    batch_targets = batch_targets.to(ARGS.device)
+                except StopIteration:
+                    data_iterator = iter(data_loader)
+                    break
+
             num_batches += 1
             
-            if k_most_salient != 0:
-                saliency_map = torch.load(os.path.join(saliency_path, \
-                        "saliency_map_" + str(step)))
-                data = remove_salient_pixels(batch_inputs, saliency_map, \
-                        num_pixels=k_most_salient, most_salient=ARGS.most_salient)
-            else:
-                data = batch_inputs
             optimizer.zero_grad()
-            output = model.forward(data)
+            output = model.forward(batch_inputs)
             
             loss = criterion(output, batch_targets)
             accuracy += sum(batch_targets == torch.argmax(output, 1))
@@ -85,10 +90,6 @@ def train(data_path, model, k_most_salient=0, saliency_path="", \
     plt.plot(loss_steps, losses)
     plt.ylabel('Loss')
     plt.xlabel('Batches')
-    #if k_most_salient != 0:
-    #    figname = saliency_method_name + "_" + str(k_most_salient) + ".jpeg"
-    #else:
-    #    figname = "initial_model.jpeg"
     plt.savefig(os.path.join("results", "remove_and_retrain", plot_name))
 
 
@@ -154,7 +155,7 @@ def remove_and_retrain():
             data_path = os.path.join(modified_data_path, str(int(k * total_features)) )
            
             model = init_model()
-            train(os.path.join(data_path, "train"), model, plot_name=method_name + "_" + str(k) + ".jpeg")
+            train(model, data_path=os.path.join(data_path, "train"), plot_name=method_name + "_" + str(k) + ".jpeg")
             accuracy_mean, accuracy_std = test(os.path.join(data_path, "test"), model, \
                             ARGS.max_train_steps)
             accuracies_mean[method_idx][ k_idx] = float(accuracy_mean)
@@ -225,7 +226,7 @@ def main():
     
     if ARGS.phase == "train_initial_model":
         initial_model = init_model()
-        train(train_set_loader, initial_model)
+        train(initial_model, data_loader=train_set_loader, plot_name="initial_model.jpeg")
         initial_accuracy = test(test_set_loader, initial_model, ARGS.max_train_steps)
         print(initial_accuracy)
         torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
@@ -252,7 +253,7 @@ if __name__ == "__main__":
                         help='Number of runs for random pixels to be removed to decrease std of random run')
     parser.add_argument('--replacement', default="black", type=str,
                         help='black = 1.0 or mean = [0.485, 0.456, 0.406]')
-    parser.add_argument('--batch_size', default=1, type=int,
+    parser.add_argument('--batch_size', default=10, type=int,
                         help='Number of images passed through at once')
     parser.add_argument('--max_train_steps', default=-1, type=int,
                         help='Maximum number of training steps')
