@@ -155,7 +155,7 @@ def get_saliency_methods(grad_names, initial_model):
         elif grad_name == "simplegrad":
             saliency_methods += [(SimpleFullGrad(initial_model), "SimpleFullGrad")]
         elif grad_name == "inputgrad":
-            saliency_methods += [(Inputgrad(initial_model), "InputGrad")]
+            saliency_methods += [(Inputgrad(initial_model), "Input-Gradient")]
         elif grad_name == "random":
             saliency_methods += [(None, "Random")]
     return saliency_methods
@@ -166,7 +166,7 @@ def remove_and_retrain(data_path):
     saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
 
     colors = {"FullGrad": "#0074d9", "gradcam": "#111111",
-              "Random": "#f012be", "InputGrad": "#01ff70"}
+              "Random": "#f012be", "Input-Gradient": "#01ff70"}
     total_features = ARGS.img_size * ARGS.img_size
     accuracies_mean = [[0.0 for _ in range(len(ARGS.k))] for _ in range(len(saliency_methods))]
     accuracies_std = [[0.0 for _ in range(len(ARGS.k))] for _ in range(len(saliency_methods))]
