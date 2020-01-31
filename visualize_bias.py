@@ -36,12 +36,6 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 data_stats = [dataset_sizes, class_names]
 
-# DATASET Description
-# 136 female doctors
-# 199 male doctors
-# 258 female nurses
-# 57 male nurses
-# TODO get from actual folder the distribution
 
 def fill_config_dict():
     config_dict = {}

@@ -101,6 +101,11 @@ def transform():
 
     return transform_standard
 
+def unnormalize():
+    unnormalize = NormalizeInverse(mean=[0.485, 0.456, 0.406],
+                                   std=[0.229, 0.224, 0.225])
+
+    return unnormalize
 
 def remove_salient_pixels(image_batch, saliency_maps, most_salient, num_pixels=100, replacement="black"):
     # Check that the data and the saliency map have the same batch size and the

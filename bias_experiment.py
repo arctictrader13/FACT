@@ -1,3 +1,11 @@
+"""
+ADAPTED FROM
+Transfer Learning for Computer Vision Tutorial
+==============================================
+**Author**: `Sasank Chilamkurthy <https://chsasank.github.io>`_
+https://github.com/pytorch/tutorials/blob/master/beginner_source/transfer_learning_tutorial.py
+"""
+
 import torch.optim as optim
 from torch.optim import lr_scheduler
 import numpy as np
@@ -8,40 +16,27 @@ import time
 import os
 import copy
 import argparse
+from misc_functions import transform
 from models.resnet import *
 from models.vgg import *
 from os import listdir
 from PIL import Image
 
+PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
+
 ## console testing
 # PATH = os.path.abspath(os.getcwd()) + "/"
 
-# DATASET Description
-# 136 female doctors
-# 199 male doctors
-# 258 female nurses
-# 57 male nurses
+# get transformator
+transform_standard = transform()
 
-# Data augmentation and normalization for training
-# Just normalization for validation
-transform_standard = transforms.Compose([
-    transforms.Resize((224, 224)),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                         std=[0.229, 0.224, 0.225]), ])
-
-data_dir = 'more_biased_dataset/'
+# set PATH variables
+data_dir = 'biased_dataset/'
 model_dir = 'results/bias_experiment/model'
 dataset = PATH + data_dir
 model_path = PATH + "/" + model_dir
 
-# TODO female and male doctors
-# TODO male correct female misclassified
-
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-device = "cpu"
 
 def imshow(inp, file_name, title=None):
     """Imshow for Tensor."""
@@ -54,16 +49,6 @@ def imshow(inp, file_name, title=None):
     plt.imshow(inp)
     plt.savefig(file_name)
     plt.pause(0.001)  # pause a bit so that plots are updated
-
-def show_ex_images(dataloaders, data_stats):
-    dataset_sizes, class_names = data_stats
-
-    # Get a batch of training data
-    inputs, classes = next(iter(dataloaders['val']))
-
-    # Make a grid from batch
-    out = torchvision.utils.make_grid(inputs)
-    imshow(out, title=[class_names[x] for x in classes])
 
 def train_model(model, dataloaders,  criterion, optimizer, scheduler, data_stats, num_epochs=25):
     dataset_sizes, class_names = data_stats
@@ -136,38 +121,12 @@ def train_model(model, dataloaders,  criterion, optimizer, scheduler, data_stats
     model.load_state_dict(best_model_wts)
     return model
 
-
-def visualize_model(model, dataloaders, data_stats, num_images=6):
-    dataset_sizes, class_names = data_stats
-
-    was_training = model.training
-    model.eval()
-    images_so_far = 0
-
-    with torch.no_grad():
-        for i, (inputs, labels) in enumerate(dataloaders['val']):
-            inputs = inputs.to(device)
-            labels = labels.to(device)
-
-            outputs = model(inputs)
-            _, preds = torch.max(outputs, 1)
-
-            for j in range(inputs.size()[0]):
-                images_so_far += 1
-                ax = plt.subplot(num_images // 2, 2, images_so_far)
-                ax.axis('off')
-                ax.set_title('predicted: {}'.format(class_names[preds[j]]))
-                imshow(inputs.cpu().data[j])
-
-                if images_so_far == num_images:
-                    model.train(mode=was_training)
-                    return
-        model.train(mode=was_training)
-
-# show_ex_images(dataloaders)
-#show_ex_images(dataloaders, data_stats)
-
 def test_bad_files():
+    """
+    Apparently scraping yielded corrputed files that were causing issues on GPU of cluster. Therefore, detect corrupted
+    images and remove them.
+    :return:
+    """
     for filename in listdir('./'):
         if filename.endswith('.jpg'):
             try:
@@ -177,6 +136,75 @@ def test_bad_files():
                 os.remove("./" + filename)
                 print('Bad file:', filename)
 
+def detect_and_remove_corrupt_ims():
+    """
+    For all datasplits detects and removes corrupt images.
+    :return:
+    """
+    os.chdir(PATH + "biased_dataset/train/doctor")
+    print("Train Doctors:")
+    test_bad_files()
+    os.chdir(PATH + "biased_dataset/train/nurse")
+    print("Train Nurse:")
+    test_bad_files()
+    os.chdir(PATH + "biased_dataset/val/doctor")
+    print("Val Doctors:")
+    test_bad_files()
+    os.chdir(PATH + "biased_dataset/val/nurse")
+    print("Val Nurse:")
+    test_bad_files()
+
+def initialize_model(model_type, frozen_bool="False"):
+    """
+    Initializes pretrained model. Frozen conv layers or full finetuning.
+    :param model_type:
+    :param frozen_bool:
+    :return:
+    """
+
+    if model_type== "vgg":
+        model = vgg16_bn(pretrained=True)
+
+        if frozen_bool == "True":
+            frozen = "frozen"
+            for param in model.parameters():
+                param.requires_grad = False
+        else:
+            frozen = "unfrozen"
+        model.classifier = nn.Sequential(
+            nn.Linear(25088, 4096, bias=True),
+            nn.ReLU(True),
+            nn.Dropout(p=0.5, inplace=False),
+            nn.Linear(4096, 512),
+            nn.ReLU(True),
+            nn.Dropout(p=0.5, inplace=False),
+            nn.Linear(512, 2))
+
+    else:
+        model = resnet18(pretrained=True)
+        num_ftrs = model.fc.in_features
+
+        if frozen_bool == "True":
+            # frozen names the obtained model depending on whether conv layers were frozen or not
+            frozen = "frozen"
+            for param in model.parameters():
+                param.requires_grad = False
+        else:
+            frozen = "unfrozen"
+
+        # Here the size of each output sample is set to 2.
+        model.fc = nn.Linear(num_ftrs, 2)
+
+    return model, frozen
+
+def initialize_optimizer(model_type, model, lr):
+    # Observe that all parameters are being optimized
+    if model_type == "resnet":
+        optimizer = optim.SGD(model.fc.parameters(), lr=lr, momentum=0.9)
+    elif model_type == "vgg":
+        optimizer = optim.SGD(model.classifier.parameters(), lr=lr, momentum=0.9)
+
+    return optimizer
 
 def main():
 
@@ -190,62 +218,25 @@ def main():
 
     dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
     class_names = image_datasets['train'].classes
-
     data_stats = [dataset_sizes, class_names]
 
-    if ARGS.model == "vgg":
-        model_ft = vgg16_bn(pretrained=True)
+    model, frozen = initialize_model(ARGS.model, frozen_bool=ARGS.frozen)
 
-        if ARGS.frozen == "True":
-            frozen = "frozen"
-            for param in model_ft.parameters():
-                param.requires_grad = False
-        else:
-            frozen = "unfrozen"
-        model_ft.classifier = nn.Sequential(
-            nn.Linear(25088, 4096, bias=True),
-            nn.ReLU(True),
-            nn.Dropout(p=0.5, inplace=False),
-            nn.Linear(4096, 512),
-            nn.ReLU(True),
-            nn.Dropout(p=0.5, inplace=False),
-            nn.Linear(512, 2))
-
-    else:
-        model_ft = resnet18(pretrained=True)
-
-        num_ftrs = model_ft.fc.in_features
-
-        if ARGS.frozen == "True":
-            frozen = "frozen"
-
-            for param in model_ft.parameters():
-                param.requires_grad = False
-        else:
-            frozen = "unfrozen"
-
-        # Here the size of each output sample is set to 2.
-        # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
-        model_ft.fc = nn.Linear(num_ftrs, 2)
-
-    model_ft = model_ft.to(device)
+    model = model.to(device)
 
     criterion = nn.CrossEntropyLoss()
 
-    # Observe that all parameters are being optimized
-    if ARGS.model == "resnet":
-        optimizer_ft = optim.SGD(model_ft.fc.parameters(), lr=ARGS.lr, momentum=0.9)
-    else:
-        optimizer_ft = optim.SGD(model_ft.classifier.parameters(), lr=ARGS.lr, momentum=0.9)
+    optimizer = initialize_optimizer(ARGS.model, model, ARGS.lr)
 
     # Decay LR by a factor of 0.1 every 7 epochs
-    exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
+    exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
 
-    model_ft = train_model(model_ft, dataloaders,  criterion, optimizer_ft, exp_lr_scheduler,
+    model = train_model(model, dataloaders,  criterion, optimizer, exp_lr_scheduler,
                            data_stats, num_epochs=ARGS.n_epochs)
 
     # visualize_model(model_ft)
-    torch.save(model_ft.state_dict(), model_path + "/model_" + ARGS.model + "more_bias" +".pt")
+    torch.save(model.state_dict(), model_path + "/model_" + ARGS.name + "_" + ARGS.model + "bias_" + frozen + ".pt")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -257,23 +248,10 @@ if __name__ == "__main__":
                         help='Learning Rate')
     parser.add_argument('--model', default="resnet", type=str,
                         help='vgg or resnet')
-    parser.add_argument('--frozen', default="True", type=str,
-                        help='Freeze conv layers')
-    parser.add_argument('--grads', default=["fullgrad"], type=str, nargs='+',
-                        help='which grad methods to be applied')
+    parser.add_argument('--frozen', default="False", type=str,
+                        help='Freeze conv layers?')
+    parser.add_argument('--name', default="", type=str,
+                        help='Extra to name of model?')
     ARGS = parser.parse_args()
-
-    os.chdir(PATH + "more_biased_dataset/train/doctor")
-    print("Train Doctors:")
-    test_bad_files()
-    os.chdir(PATH + "more_biased_dataset/train/nurse")
-    print("Train Nurse:")
-    test_bad_files()
-    os.chdir(PATH + "more_biased_dataset/val/doctor")
-    print("Val Doctors:")
-    test_bad_files()
-    os.chdir(PATH + "more_biased_dataset/val/nurse")
-    print("Val Nurse:")
-    test_bad_files()
 
     main()

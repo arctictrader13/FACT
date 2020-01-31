@@ -48,7 +48,7 @@ class Inputgrad():
         input = input / (input.max())
         return input
 
-    def saliency(self, image):
+    def saliency(self, image, target_class=None):
 
         # Inputgrad  saliency
         self.model.eval()
