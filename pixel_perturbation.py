@@ -1,28 +1,19 @@
 from torchvision import datasets, transforms, utils, models
-
-# Import saliency methods and models
-from saliency.fullgrad import FullGrad
-from saliency.simple_fullgrad import SimpleFullGrad
-from models.vgg import *
-from models.resnet import *
 from misc_functions import *
 from gradcam import grad_cam
 from functools import reduce
 from saliency.inputgradient import Inputgrad
 import gc
 import argparse
-import torchvision
-# import matplotlib as mpl
-# mpl.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import torch.nn.functional as F
+from models.resnet import *
+from models.vgg import *
 
 # PATH variables
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 
-# console testing
-# PATH = os.path.abspath(os.getcwd()) + "/"
 
 data_PATH = PATH + 'dataset/'
 result_path = PATH + 'results/'
@@ -35,7 +26,6 @@ transform_standard = transform()
 # prevents F.interpolate from random behaviour which caused Cuda memory errors
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
-
 
 # HELPER FUNCTIONS
 def print_dict(dictionary, div=False):

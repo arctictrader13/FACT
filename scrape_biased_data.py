@@ -4,7 +4,6 @@ path = os.getcwd()
 from os.path import isfile, join
 import re
 
-
 def change_names_dir(dir_name, path):
     os.chdir(dir_name)
     filenames = [f for f in listdir(dir_name) if isfile(join(dir_name, f))]
@@ -40,5 +39,3 @@ create_label_names(doctors, path, "doctor_male")
 nurses = path + "/biased_data/nurses/nurse_male"
 change_names_dir(nurses, path)
 create_label_names(nurses, path, "nurse_male")
-
-
