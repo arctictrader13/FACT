@@ -28,6 +28,7 @@ def train(model, data_loader=None, data_path="", plot_name=""):
                                     step_size=ARGS.lr_decresing_step,
                                     gamma=ARGS.lr_gamma)
     model.train()
+    print(data_path)
 
     if data_loader != None:
         data_iterator = iter(data_loader)
@@ -175,13 +176,13 @@ def remove_and_retrain(data_path):
 
         for k_idx, k in enumerate(ARGS.k):
             print("Run saliency method: ", method_name)
-            data_path = os.path.join(modified_data_path, str(int(k * total_features)))
+            train_data_path = os.path.join(modified_data_path, str(int(k * total_features)))
 
             model = init_model()
-            train(model, data_path=os.path.join(data_path, "train"),
+            train(model, data_path=os.path.join(train_data_path, "train"),
                   plot_name=method_name + "_" + str(k))
             accuracies_mean[method_idx][k_idx], accuracies_std[method_idx][k_idx] \
-             = test(model, data_path=os.path.join(data_path, "test"))
+             = test(model, data_path=os.path.join(train_data_path, "test"))
 
         plt.figure(0)
         print([k * 100 for k in ARGS.k])

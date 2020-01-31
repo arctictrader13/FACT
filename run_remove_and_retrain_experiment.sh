@@ -20,8 +20,9 @@ source activate dl
 cp -r $HOME/git_repo/FACT/ $TMPDIR
 cd FACT 
 
-#time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=5 --print_step=1000 --grads fullgrad inputgrad random --phase=create_modified_datasets
-time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=5 --print_step=500 --grads fullgrad inputgrad random --phase=train_on_modified_datasets
+#time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=5 --print_step=500 --phase=train_initial_model
+#time python3 remove_and_retrain.py --device=cuda --batch_size=10 --grads fullgrad inputgrad random --phase=create_modified_datasets
+time python3 remove_and_retrain.py --device=cuda --batch_size=10 --epochs=5 --print_step=500 --grads fullgrad inputgrad random  --phase=train_on_modified_datasets
 
 
 source deactivate dl
