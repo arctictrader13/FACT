@@ -17,4 +17,3 @@ results/imagenet
 biased_data/
 results_bias/
 results/bias_experiment/model/model_vgg.pt
-results/remove_and_retrain/models/*
