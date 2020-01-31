@@ -2,8 +2,11 @@
 
 ##### Authors
 P. Chandrikasingh - 11059842 - puja.chandrikasingh@student.uva.nl
+
 R. Leushuis - 10988270 - radmir.leushuis@student.uva.nl
+
 P. Lintl - 12152498 - philipp.lintl@student.uva.nl
+
 A. Vicol - 12408913 - anca.vicol@student.uva.nl
 
 Teacher Assistant: Leon Lang
