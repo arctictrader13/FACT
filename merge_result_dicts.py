@@ -1,6 +1,5 @@
 from misc_functions import *
 from matplotlib import pyplot as plt
-
 import re
 
 # console testing
@@ -54,9 +53,6 @@ for i in steps:
 
     save_obj(full, experiment_pickles[i] + "_full")
 
-
-
-
 # console testing
 PATH = os.path.abspath(os.getcwd()) + "/"
 
@@ -95,6 +91,3 @@ def plot_all_grads(results_dict, filename=None, div=False):
     #plt.savefig(filename + ".png")
     plt.show()
 
-plot_all_grads(a[0], None)
-len(a)
-a[0].items()

@@ -1,78 +1,42 @@
 """ Compute saliency maps of images from dataset folder
     and dump them in a results folder """
 
-import torch
-from torchvision import datasets, transforms, utils
-import os
-
-# Import saliency methods and models
-from saliency.inputgradient import Inputgrad
 from pixel_perturbation import *
-from models.vgg import *
-from models.resnet import *
-from gradcam import grad_cam
 from misc_functions import *
-
-batch_size = 10
-salient_type = "most"
-grad_type = "inputgrad"
+from saliency import fullgrad
+from models.resnet import *
+from models.vgg import *
+import argparse
 
 # PATH variables
 # PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 PATH = os.path.abspath(os.getcwd()) + "/"
 dataset = PATH + 'dataset/'
 result_path = PATH + 'results/imagenet/'
-
-# cuda = torch.cuda.is_available()
-# device = torch.device("cuda" if cuda else "cpu")
-device = "cpu"
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 data_PATH = PATH + 'dataset/'
 dataset = data_PATH
-
-sample_loader = torch.utils.data.DataLoader(
-    datasets.ImageFolder(dataset, transform=transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                             std=[0.229, 0.224, 0.225])
-    ])),
-    batch_size=batch_size, shuffle=False)
-
-unnormalize = NormalizeInverse(mean=[0.485, 0.456, 0.406],
-                               std=[0.229, 0.224, 0.225])
-
-# uncomment to use VGG
-model_name = "resnet18" # or "vgg16_bn
-target_layer = "layer4" # for vgg: features
-grads = ["inputgrad", "fullgrad", "gradcam"]
-n_images_save = 50
-
+unnormalize = unnormalize()
 save_path = PATH + 'results/'
 
-
-def get_filename(result_path, grad_type, index):
-    filename = result_path + "/" + grad_type + "_" + model_name + "_" + str(index) + ".png"
+def get_filename(result_path, grad_type, index, name_addition=None):
+    filename = result_path + "/" + grad_type + "_" + ARGS.model_name + "_" + str(index) + name_addition + ".png"
     return filename
 
-
-def compute_saliency_and_save():
-    inputgrad_bool = False
-    for grad_type in grads:
-        model, grad = init_grad_and_model(grad_type, model_name, device)
-
+def compute_saliency_and_save(sample_loader):
+    for grad_type in ARGS.grads:
+        inputgrad_bool = False
+        model, grad = initialize_grad_and_model(grad_type, ARGS.model_name, device)
         if grad_type == "inputgrad":
             inputgrad_bool = True
 
         grad_counter = 0
         print("grad_type:{}".format(grad_type))
-
-        # print("grad:{}".format(grad))
         grad_counter += 1
         counter = 1
 
         for batch_idx, (data, target) in enumerate(sample_loader):
-            if counter >= n_images_save:
+            if counter >= ARGS.n_images_save:
                 break
             data, target = data.to(device).requires_grad_(), target.to(device)
             # data, _ = next(iter(sample_loader))
@@ -82,7 +46,7 @@ def compute_saliency_and_save():
                 probs, ids = grad.forward(data)
                 # Grad-CAM
                 grad.backward(ids=ids[:, [0]])
-                saliency = grad.generate(target_layer=target_layer)
+                saliency = grad.generate(target_layer=ARGS.target_layer)
 
             else:
                 saliency = grad.saliency(data)
@@ -91,15 +55,14 @@ def compute_saliency_and_save():
                 im = unnormalize(data[i, :, :, :].cpu())
                 im = im.view(1, 3, 224, 224)[-1, :, :, :]
                 reg = saliency[i, :, :, :]
-                filename = get_filename(result_path, grad_type, counter)
+                filename = get_filename(result_path, grad_type, counter, name_addition=ARGS.name_addition)
                 counter += 1
                 print(filename)
 
                 # print("filename:{}".format(filename))
                 save_saliency_map_inputgrad(im, reg, filename, inputgrad=inputgrad_bool)
 
-
-def save_saliency_map_inputgrad(image, saliency_map, filename, inputgrad=False):
+def save_saliency_map_inputgrad(image, saliency_map, filename, inputgrad=False, save_image=False):
     """
     Save saliency map on image.
 
@@ -135,7 +98,33 @@ def save_saliency_map_inputgrad(image, saliency_map, filename, inputgrad=False):
 
     cv2.imwrite(filename, np.uint8(255 * img_with_heatmap))
 
+def get_sample_loader():
+    dataset = data_PATH
+    sample_loader = torch.utils.data.DataLoader(
+        datasets.ImageFolder(dataset, transform=transform_standard),
+        batch_size=ARGS.batch_size, shuffle=False)
+
+    return sample_loader
+
+def main():
+    sample_loader = get_sample_loader()
+    compute_saliency_and_save(sample_loader)
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--batch_size', default=10, type=int,
+                        help='How large are processed image batches')
+    parser.add_argument('--grads', default=["inputgrad", "fullgrad", "gradcam"], type=str,nargs='+',
+                        help='fullgrad, gradcam, inputgrad')
+    parser.add_argument('--model_name', default="resnet18", type=str,
+                        help='resnet18 or vgg16_bn')
+    parser.add_argument('--target_layer', default="layer4", type=str,
+                        help='resnet18: layer4 or vgg16_bn:features')
+    parser.add_argument('--n_images_save', default=10, type=int,
+                        help='How many images to compute saliency maps from')
+    parser.add_argument('--name_addition', default="test", type=str,
+                        help='Additional string for filename')
+    ARGS = parser.parse_args()
     # Create folder to saliency maps
-    compute_saliency_and_save()
+    main()
     print('Saliency maps saved.')
