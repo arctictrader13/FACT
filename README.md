@@ -1,20 +1,17 @@
 # Visualizing Neural Network responses
 
 ##### Authors
-
-| Name                          | UvA-ID     | Email                         |
-|-------------------------------|:----------:|:----------:|:-----------------------------:|
-| Philipp Lintl                 |12152498|l.t.ebner@student.vu.nl        |
-| Anca Diana Vicol              ||12484024    |frederic@chamot.nl             |
-| Radmir Leishuis               ||12362743   | |j.j.lopezgonzalez@student.vu.nl|
-| Puja SSSS                     | |            |12261653    |max.knaller@student.uva.nl     |
+P. Chandrikasingh - 11059842 - puja.chandrikasingh@student.uva.nl
+R. Leushuis - 10988270 - radmir.leushuis@student.uva.nl
+P. Lintl - 12152498 - philipp.lintl@student.uva.nl
+A. Vicol - 12408913 - anca.vicol@student.uva.nl
 
 Teacher Assistant: Leon Lang
 
 ## Summary
 
 In this Repo we aim to reproduce an extend the ideas presented in the paper
-[Uncovering and Mitigating Algorithmic Bias through Learned Latent Structure](https://lmrt.mit.edu/sites/default/files/AIES-19_paper_220.pdf).
+[Full-Gradient Representation for Neural Network Visualization](https://arxiv.org/abs/1905.00780).
 
 For reproduction we will mainly follow an implementation that was provided in an
 [course](https://github.com/aamini/introtodeeplearning) that seems to be closely affiliated with the authors,
