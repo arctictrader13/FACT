@@ -1,5 +1,3 @@
-import torch
-import torch.nn as nn
 import torch.optim as optim
 from torch.optim import lr_scheduler
 import numpy as np
@@ -15,11 +13,8 @@ from models.vgg import *
 from os import listdir
 from PIL import Image
 
-# PATH variables
-# PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
-
-# console testing
-PATH = os.path.abspath(os.getcwd()) + "/"
+## console testing
+# PATH = os.path.abspath(os.getcwd()) + "/"
 
 # DATASET Description
 # 136 female doctors
