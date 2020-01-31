@@ -47,14 +47,14 @@ image_datasets = {x: datasets.ImageFolder(os.path.join(dataset, x),
                   for x in ['train', 'val']}
 
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=4,
-                                              shuffle=False)
+                                              shuffle=True)
                for x in ['train', 'val']}
 
 dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
+#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = "cpu"
 
 def imshow(inp, title=None):
     """Imshow for Tensor."""
@@ -110,10 +110,12 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
                 with torch.set_grad_enabled(phase == 'train'):
                     outputs = model(inputs)
                     _, preds = torch.max(outputs, 1)
+                    
                     loss = criterion(outputs, labels)
 
                     # backward + optimize only if in training phase
                     if phase == 'train':
+                        #print(labels)
                         loss.backward()
                         optimizer.step()
 
@@ -215,7 +217,7 @@ def main():
     if ARGS.model == "resnet":
         optimizer_ft = optim.SGD(model_ft.fc.parameters(), lr=0.0001, momentum=0.9)
     else:
-        optimizer_ft = optim.SGD(model_ft.classifier.parameters(), lr=0.0001, momentum=0.9)
+        optimizer_ft = optim.SGD(model_ft.classifier.parameters(), lr=0.001, momentum=0.9)
 
     # Decay LR by a factor of 0.1 every 7 epochs
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
