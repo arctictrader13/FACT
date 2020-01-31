@@ -38,12 +38,15 @@ transform_standard = transforms.Compose([
 data_dir = 'more_biased_dataset/'
 model_dir = 'results/bias_experiment/model'
 dataset = PATH + data_dir
-model_path = PATH + model_dir
+model_path = PATH + "/" + model_dir
 
 # TODO female and male doctors
 # TODO male correct female misclassified
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = "cpu"
 
 def imshow(inp, file_name, title=None):
     """Imshow for Tensor."""
@@ -101,10 +104,12 @@ def train_model(model, dataloaders,  criterion, optimizer, scheduler, data_stats
                 with torch.set_grad_enabled(phase == 'train'):
                     outputs = model(inputs)
                     _, preds = torch.max(outputs, 1)
+                    
                     loss = criterion(outputs, labels)
 
                     # backward + optimize only if in training phase
                     if phase == 'train':
+                        #print(labels)
                         loss.backward()
                         optimizer.step()
 
