@@ -16,19 +16,6 @@ Teacher Assistant: Leon Lang
 In this Repo we aim to reproduce an extend the ideas presented in the paper
 [Full-Gradient Representation for Neural Network Visualization](https://arxiv.org/abs/1905.00780).
 
-For reproduction we will mainly follow an implementation that was provided in an
-[course](https://github.com/aamini/introtodeeplearning) that seems to be closely affiliated with the authors,
-as both are published from MIT (Massachusetts Institute of Technology). However, the code was removed from their
-Github on 25.01.2020, so we can't link to the source anymore.  Extensions focus mainly on the reevaluation of the
-findings based on a bigger and especially for the topic of bias in face detection created dataset
-called [FairFace](https://github.com/joojs/fairface).
-
-All details, experiments, results and discussions can be found in the notebook `Bias_in_face_detection.ipynb`, that
-follows this order. We will start by looking at the data used in the project. Then evaluate if there is bias in
-classic face detection systems. Lastly, we will look into the proposed mehtod for reducing this probable bias.
-
-Please make sure to check out the Requirements section before starting.
-
 # Full-Gradient Saliency Maps 
 
 This code is the reference implementation of the methods described 
