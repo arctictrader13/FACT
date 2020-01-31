@@ -3,6 +3,7 @@ import os
 
 import argparse
 from datetime import datetime
+import json
 import matplotlib.pyplot as plt
 import torch
 from torch.optim import lr_scheduler
@@ -67,7 +68,7 @@ def train(model, data_loader=None, data_path="", plot_name=""):
             optimizer.step()
 
             if step % ARGS.print_step == 0 and step != 0:
-                losses += [loss]
+                losses += [float(loss)]
                 loss_steps += [num_batches]
                 accuracy = float(accuracy) / float(ARGS.batch_size * ARGS.print_step)
 
@@ -89,7 +90,15 @@ def train(model, data_loader=None, data_path="", plot_name=""):
     plt.plot(loss_steps, losses)
     plt.ylabel('Loss')
     plt.xlabel('Batches')
-    plt.savefig(os.path.join("results", "remove_and_retrain", plot_name))
+    plt.savefig(os.path.join("results", "remove_and_retrain",
+                             "plots", plot_name + ".jpg"))
+
+    torch.save(model, os.path.join("results", "remove_and_retrain",
+                                   "models", plot_name))
+
+    with open(os.path.join("results", "remove_and_retrain",
+                           "training_output", plot_name + ".json"), 'w') as f:
+        json.dump({"steps": loss_steps, "loss": losses}, f)
 
 
 def test(model, data_loader=None, data_path=""):
@@ -153,7 +162,7 @@ def get_saliency_methods(grad_names, initial_model):
 
 
 def remove_and_retrain(data_path):
-    initial_model = torch.load(os.path.join("models", "trained_vgg11_cifar10"))
+    initial_model = torch.load(os.path.join("results", "remove_and_retrain", "models", "initial_model"))
     saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
 
     colors = {"FullGrad": "#0074d9", "gradcam": "#111111",
@@ -170,14 +179,11 @@ def remove_and_retrain(data_path):
 
             model = init_model()
             train(model, data_path=os.path.join(data_path, "train"),
-                  plot_name=method_name + "_" + str(k) + ".jpeg")
+                  plot_name=method_name + "_" + str(k))
             accuracies_mean[method_idx][k_idx], accuracies_std[method_idx][k_idx] \
              = test(model, data_path=os.path.join(data_path, "test"))
 
         plt.figure(0)
-        print(len([k * 100 for k in ARGS.k]),
-              len(list(accuracies_mean[method_idx])),
-              len(list(accuracies_std[method_idx])))
         print([k * 100 for k in ARGS.k])
         print(accuracies_mean[method_idx])
         print(accuracies_std[method_idx])
@@ -189,11 +195,16 @@ def remove_and_retrain(data_path):
     plt.ylabel('Accuracy')
     plt.xlabel('k %')
     plt.legend()
-    plt.savefig(os.path.join("results", "remove_and_retrain", "final_result.jpeg"))
+    plt.savefig(os.path.join("results", "remove_and_retrain", "final_plot.jpeg"))
+
+    with open(os.path.join("results", "remove_and_retrain",
+                           "final_output" + ".json"), 'w') as f:
+        json.dump({"mean": accuracies_mean, "std": accuracies_std}, f)
 
 
 def compute_modified_datasets(train_set_loader, test_set_loader, data_path):
-    initial_model = torch.load(os.path.join("models", "trained_vgg11_cifar10"))
+    initial_model = torch.load(os.path.join("results", "remove_and_retrain",
+                                            "models", "initial_model"))
     saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
 
     total_features = ARGS.img_size * ARGS.img_size
@@ -248,15 +259,15 @@ def main():
         train_set_loader, test_set_loader = load_cifar_dataset(data_path)
         initial_model = init_model()
 
-        train(initial_model, data_loader=train_set_loader, plot_name="initial_model.jpeg")
-        initial_accuracy_mean, initial_accuracy_std = test(initial_model, data_loader=test_set_loader)
+        train(initial_model, data_loader=train_set_loader, plot_name="initial_model")
 
+        initial_accuracy_mean, initial_accuracy_std = test(initial_model, data_loader=test_set_loader)
         print(initial_accuracy_mean, initial_accuracy_std)
-        torch.save(initial_model, os.path.join("models", "trained_vgg11_cifar10"))
 
     elif ARGS.phase == "create_modified_datasets":
         train_set_loader, test_set_loader = load_cifar_dataset(data_path)
         compute_modified_datasets(train_set_loader, test_set_loader, data_path)
+
     elif ARGS.phase == "train_on_modified_datasets":
         remove_and_retrain(data_path)
 
