@@ -14,7 +14,6 @@ from models.vgg import *
 # PATH variables
 PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 
-
 data_PATH = PATH + 'dataset/'
 result_path = PATH + 'results/'
 
@@ -510,7 +509,6 @@ def main():
     # save dictionary
     save_obj(all_results, save_experiment_file)
     # print_memory()
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

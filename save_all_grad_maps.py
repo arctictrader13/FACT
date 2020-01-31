@@ -12,21 +12,21 @@ import argparse
 # PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
 PATH = os.path.abspath(os.getcwd()) + "/"
 dataset = PATH + 'dataset/'
-result_path = PATH + 'results/imagenet/'
+result_path = PATH + 'results/imagenet'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 data_PATH = PATH + 'dataset/'
 dataset = data_PATH
 unnormalize = unnormalize()
 save_path = PATH + 'results/'
 
-def get_filename(result_path, grad_type, index, name_addition=None):
-    filename = result_path + "/" + grad_type + "_" + ARGS.model_name + "_" + str(index) + name_addition + ".png"
+def get_filename(result_path, grad_type, index, model_name, name_addition=None):
+    filename = result_path + "/" + grad_type + "_" + model_name + "_" + str(index) + name_addition + ".png"
     return filename
 
-def compute_saliency_and_save(sample_loader):
-    for grad_type in ARGS.grads:
+def compute_saliency_and_save(sample_loader, grads, n_images_save, target_layer, model_name, name_addition):
+    for grad_type in grads:
         inputgrad_bool = False
-        model, grad = initialize_grad_and_model(grad_type, ARGS.model_name, device)
+        model, grad = initialize_grad_and_model(grad_type, model_name, device)
         if grad_type == "inputgrad":
             inputgrad_bool = True
 
@@ -36,7 +36,7 @@ def compute_saliency_and_save(sample_loader):
         counter = 1
 
         for batch_idx, (data, target) in enumerate(sample_loader):
-            if counter >= ARGS.n_images_save:
+            if counter >= n_images_save:
                 break
             data, target = data.to(device).requires_grad_(), target.to(device)
             # data, _ = next(iter(sample_loader))
@@ -46,7 +46,7 @@ def compute_saliency_and_save(sample_loader):
                 probs, ids = grad.forward(data)
                 # Grad-CAM
                 grad.backward(ids=ids[:, [0]])
-                saliency = grad.generate(target_layer=ARGS.target_layer)
+                saliency = grad.generate(target_layer=target_layer)
 
             else:
                 saliency = grad.saliency(data)
@@ -55,7 +55,7 @@ def compute_saliency_and_save(sample_loader):
                 im = unnormalize(data[i, :, :, :].cpu())
                 im = im.view(1, 3, 224, 224)[-1, :, :, :]
                 reg = saliency[i, :, :, :]
-                filename = get_filename(result_path, grad_type, counter, name_addition=ARGS.name_addition)
+                filename = get_filename(result_path, grad_type, counter, model_name, name_addition=name_addition)
                 counter += 1
                 print(filename)
 
@@ -98,17 +98,19 @@ def save_saliency_map_inputgrad(image, saliency_map, filename, inputgrad=False, 
 
     cv2.imwrite(filename, np.uint8(255 * img_with_heatmap))
 
-def get_sample_loader():
+
+
+def get_sample_loader(batch_size):
     dataset = data_PATH
     sample_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(dataset, transform=transform_standard),
-        batch_size=ARGS.batch_size, shuffle=False)
+        batch_size=batch_size, shuffle=False)
 
     return sample_loader
 
 def main():
-    sample_loader = get_sample_loader()
-    compute_saliency_and_save(sample_loader)
+    sample_loader = get_sample_loader(ARGS.batch_size)
+    compute_saliency_and_save(sample_loader, ARGS.grads, ARGS.n_images_save, ARGS.target_layer, ARGS.model_name, ARGS.name_addition)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

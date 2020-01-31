@@ -1,3 +1,6 @@
+#### After scraping duplicates can appear, therefore this script detects and removes them so we dont have
+# duplicates in the dataset
+
 import hashlib
 from scipy.misc import imread, imresize, imshow
 import matplotlib.pyplot as plt

@@ -1,9 +1,0 @@
-Saves results
-
-Run1:
- - Training from scranch
- - cifar 10 - resized to 224x224
- - vgg11
- - batch_size=10, 3 epochs
- - Accuracy on test data = 0.009899999999999961
- - initial lr=0.001

@@ -37,13 +37,13 @@ class_names = image_datasets['train'].classes
 data_stats = [dataset_sizes, class_names]
 
 
-def fill_config_dict():
+def fill_config_dict(model_type, device, target_layer):
     config_dict = {}
-    config_dict["bias_result_images_path"] =  'results/bias_experiment/' + ARGS.model_type + "/" + 'images_pred/'
-    config_dict["model_file_name"] = "model_" + ARGS.model_type + ".pt"
-    config_dict["model_type"] = ARGS.model_type
-    config_dict["device"] = ARGS.device
-    config_dict["target_layer"] =  ARGS.target_layer
+    config_dict["bias_result_images_path"] =  'results/bias_experiment/' + model_type + "/" + 'images_pred/'
+    config_dict["model_file_name"] = "model_" + model_type + ".pt"
+    config_dict["model_type"] = model_type
+    config_dict["device"] = device
+    config_dict["target_layer"] =  target_layer
     config_dict["model_path"] = PATH + 'results/bias_experiment/model'
 
     return config_dict
@@ -238,7 +238,7 @@ def saliency_map_from_pretrained_model(dataloaders, config_dict, n_val=None, n_c
 
 def main():
 
-    config_dict = fill_config_dict()
+    config_dict = fill_config_dict(ARGS.model_type, ARGS.device, ARGS.target_layer)
     # save all validation images with targets, predictions and corresponding saliency map
     saliency_map_from_pretrained_model(dataloaders, config_dict, n_val=ARGS.n_val, data_type="val")
     # save all misclassifications on the train set and n_correct correctly classified images
