@@ -6,7 +6,7 @@
 |-------------------------------|:----------:|:----------:|:-----------------------------:|
 | Philipp Lintl                 |12152498|l.t.ebner@student.vu.nl        |
 | Anca Diana Vicol              ||12484024    |frederic@chamot.nl             |
-| Radmir Leishuis  ||12362743   | |j.j.lopezgonzalez@student.vu.nl|
+| Radmir Leishuis               ||12362743   | |j.j.lopezgonzalez@student.vu.nl|
 | Puja SSSS                     | |            |12261653    |max.knaller@student.uva.nl     |
 
 Teacher Assistant: Leon Lang
