@@ -1,25 +1,21 @@
-import torch
 from torchvision import datasets, transforms, utils, models
-import os
 
 # Import saliency methods and models
 from saliency.fullgrad import FullGrad
 from saliency.simple_fullgrad import SimpleFullGrad
-from saliency.inputgradient import Inputgrad
 from models.vgg import *
 from models.resnet import *
 from misc_functions import *
 from gradcam import grad_cam
 from gradcam import main
 from functools import reduce
-from saliency.inputgradient import *
 
 import gc
 
 import argparse
 import torchvision
-import matplotlib as mpl
-mpl.use('Agg')
+#import matplotlib as mpl
+#mpl.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import random
@@ -200,7 +196,6 @@ def plot_all_grads(results_dict, filename=None, div=False):
     #plt.savefig(filename + ".png")
     plt.show()
 
-
 def initialize_grad_cam(model_name, device, pretrained=True):
     model = models.__dict__[model_name](pretrained=pretrained)
     # model = eval(model_name)(pretrained=True)
@@ -212,13 +207,13 @@ def initialize_grad_cam(model_name, device, pretrained=True):
 
     return model, gcam
 
-def compute_saliency_per_grad(grad_type, grad, data, target_layer):
+def compute_saliency_per_grad(grad_type, grad, data, target_layer, target_class = None):
     saliency = None
 
     # FULLGRAD
     if grad_type == "fullgrad" or grad_type == "inputgrad"  :
         # print("calculating saliency")
-        saliency = grad.saliency(data)
+        saliency = grad.saliency(data, target_class=target_class)
 
     elif grad_type == "gradcam":
         probs, ids = grad.forward(data)
@@ -228,10 +223,6 @@ def compute_saliency_per_grad(grad_type, grad, data, target_layer):
 
     return saliency
 
-#def get_filename(result_path, salient_type, grad_type, index):
-#    filename = result_path + ARGS.dataset + "/" + grad_type + "_" + ARGS.model + ARGS.model_type + \
-#               "_" + salient_type + "_" + str(index) + ".png"
-#    return filename
 
 def get_filename(result_path, grad_type, index):
     filename = result_path + "/" + grad_type + "_" + "vgg_16bn" + "_" + str(index) + ".png"
@@ -283,6 +274,8 @@ def main():
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406],
                              std=[0.229, 0.224, 0.225]), ])
+
+    # TODO helper function
 
     if ARGS.dataset == "cifar":
         dataset = data_PATH + "/cifar/"

@@ -12,3 +12,6 @@ models/old_models/trained_vgg11_cifar10
 pp_experiments_
 pp_experiments_most
 results/imagenet
+biased_data/
+results_bias/
+results/bias_experiment/model/model_vgg.pt

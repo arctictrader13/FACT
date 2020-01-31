@@ -22,7 +22,7 @@ class FullGrad():
         self.model.eval()
         self.device = next(model.parameters()).device
         self.blockwise_biases = self.model.getBiases()
-        self.checkCompleteness()
+        # self.checkCompleteness()
 
     def _getimplicitBiases(self, image, target_class):
         # TODO: Compute implicit biases that arise due to non-ReLU non-linearities
