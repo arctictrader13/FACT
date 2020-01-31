@@ -16,7 +16,7 @@ import torch
 import torch.nn as nn
 import torch.utils.model_zoo as model_zoo
 
-cfg = { 
+cfg = {
     'A': [64, 'M', 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
     'B': [64, 64, 'M', 128, 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
     'D': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512, 'M'],
@@ -36,11 +36,12 @@ model_urls = {
 
 class VGG(nn.Module):
 
-    def __init__(self, vgg_name, batch_norm=False, num_classes=1000, init_weights=True):
+    def __init__(self, vgg_name, batch_norm=False, num_classes=1000, init_weights=True, in_size=224):
         super(VGG, self).__init__()
         self.features = self.make_layers(cfg[vgg_name], batch_norm=batch_norm)
         self.name = vgg_name
         self.bn = batch_norm
+        self.in_size = in_size
         self.classifier = nn.Sequential(
             nn.Linear(512 * 7 * 7, 4096),
             nn.ReLU(False),
@@ -71,7 +72,7 @@ class VGG(nn.Module):
         self.get_biases = True
         self.biases = [0]
 
-        x = torch.zeros(1,3,224,224).to(device) #put in GPU
+        x = torch.zeros(1,3,self.in_size, self.in_size).to(device)
         _ = self.forward(x)
         self.get_biases = False
         return self.biases
@@ -168,7 +169,6 @@ class VGG(nn.Module):
                     layers += [conv2d, nn.ReLU(inplace=False)]
                 in_channels = v
         return nn.ModuleList(layers)
-
 
 
 def vgg11(pretrained=False, **kwargs):

@@ -1,167 +1,317 @@
 
 import os
 
-import torch
-from torchvision import datasets, transforms
+import argparse
 from datetime import datetime
+import json
+import matplotlib.pyplot as plt
+import torch
+from torch.optim import lr_scheduler
+from torchvision import datasets, transforms
 
 # Import saliency methods and models
-import argparse
 from saliency.fullgrad import FullGrad
 from saliency.simple_fullgrad import SimpleFullGrad
-from models.vgg import vgg16_bn
-from models.resnet import resnet18
-from misc_functions import create_folder, compute_and_store_saliency_maps, remove_salient_pixels
-import copy
-import matplotlib.pyplot as plt
-
-# PATH variables
-PATH = os.path.dirname(os.path.abspath(__file__)) + '/'
-data_PATH= PATH + 'dataset/'
+from saliency.inputgradient import Inputgrad
+from models.vgg import vgg11
+import misc_functions
 
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
-def train(data_loader, model, use_saliency=False, \
-          k_most_salient=0, saliency_method=None, saliency_method_name=None):
-    learning_rate = ARGS.initial_learning_rate
-    criterion = torch.nn.CrossEntropyLoss() 
-    optimizer = torch.optim.RMSprop(model.parameters(), lr=learning_rate)
-    accuracies = []
+
+def train(model, data_loader=None, data_path="", plot_name=""):
+    criterion = torch.nn.CrossEntropyLoss()
+    optimizer = torch.optim.SGD(model.classifier.parameters(),
+                                lr=ARGS.initial_learning_rate, momentum=0.9)
+    scheduler = lr_scheduler.StepLR(optimizer,
+                                    step_size=ARGS.lr_decresing_step,
+                                    gamma=ARGS.lr_gamma)
+    model.train()
+
+    if data_loader != None:
+        data_iterator = iter(data_loader)
+
     losses = []
-    for step, (batch_inputs, batch_targets) in enumerate(data_loader):
-        batch_inputs, batch_targets = batch_inputs.to(ARGS.device), batch_targets.to(ARGS.device)
-        if use_saliency:
-            batch_inputs = batch_inputs.detach()
-            saliency_map = saliency_method.saliency(batch_inputs)
-            data = remove_salient_pixels(batch_inputs, saliency_map, num_pixels=k_most_salient, most_salient=ARGS.most_salient)
-        else:
-            data = batch_inputs
-        
-        data.requires_grad = True
-        data = data.to(ARGS.device)
-        batch_targets = batch_targets.to(ARGS.device)
-        
-        output = model.forward(data)
-        loss = criterion(output, batch_targets)
-        accuracy = float(sum(batch_targets == torch.argmax(output, 1))) / float(ARGS.batch_size)
+    loss_steps = []
+    num_batches = 0.0
+    for _ in range(ARGS.epochs):
+        accuracy = 0.0
+        step = 0
+        while step != ARGS.max_train_steps:
+            if data_path != "":
+                if not os.path.exists(os.path.join(data_path,
+                                                   "batch_input" + str(step))):
+                    break
+                batch_inputs = torch.load(
+                    os.path.join(data_path, "batch_input" + str(step)))
+                batch_targets = torch.load(
+                    os.path.join(data_path, "batch_target" + str(step)))
+            else:
+                try:
+                    batch_inputs, batch_targets = next(data_iterator)
+                except StopIteration:
+                    data_iterator = iter(data_loader)
+                    break
+            batch_inputs = batch_inputs.to(ARGS.device)
+            batch_targets = batch_targets.to(ARGS.device)
 
-        # conpute gradients
-        loss.backward()
+            num_batches += 1
 
-        # update weights
-        optimizer.step()
+            optimizer.zero_grad()
+            output = model.forward(batch_inputs)
 
-        if step % ARGS.lr_decresing_step == 0:
-            learning_rate /= ARGS.lr_divisor
-            accuracies += [accuracy]
-            losses += [loss]
-            if (len(losses) > 2 and abs(losses[-1] - losses[-2]) < 0.0001):
-                break
-            print("[{}] Train Step {:04d}/{:04d}, Batch Size = {}, "
-                  "Accuracy = {:.2f}, Loss = {:.3f}".format(
-                    datetime.now().strftime("%Y-%m-%d %H:%M"), step,
-                    ARGS.max_train_steps, ARGS.batch_size, accuracy, loss
-            ))
+            loss = criterion(output, batch_targets)
+            accuracy += sum(batch_targets == torch.argmax(output, 1))
 
-        if step == ARGS.max_train_steps:
-            break
+            loss.backward()
+            optimizer.step()
+
+            if step % ARGS.print_step == 0 and step != 0:
+                losses += [float(loss)]
+                loss_steps += [num_batches]
+                accuracy = float(accuracy) / float(ARGS.batch_size * ARGS.print_step)
+
+                if (len(losses) > 2 and abs(losses[-1] - losses[-2]) < 0.0001):
+                    break
+                print("[{}] Train Step {:04d}/{:04d}, Batch Size = {}, "
+                      "Accuracy = {:.2f}, Train Loss = {:.3f}".format(
+                          datetime.now().strftime("%Y-%m-%d %H:%M"), step,
+                          0, ARGS.batch_size, accuracy, loss
+                          ))
+                accuracy = 0.0
+            step += 1
+
+        scheduler.step()
+
     # plot
     plt.figure(1)
     plt.clf()
-    plt.plot(range(0, ARGS.batch_size * len(losses), ARGS.batch_size), losses)
+    plt.plot(loss_steps, losses)
     plt.ylabel('Loss')
     plt.xlabel('Batches')
-    if use_saliency:
-        figname = saliency_method_name + "_" + str(k_most_salient) + ".jpeg"
-    else:
-        figname = "initial_model.jpeg"
-    plt.savefig(os.path.join("results", "remove_and_retrain", figname))
-    return accuracies[-1]
+    plt.savefig(os.path.join("results", "remove_and_retrain",
+                             "plots", plot_name + ".jpg"))
+
+    torch.save(model, os.path.join("results", "remove_and_retrain",
+                                   "models", plot_name))
+
+    with open(os.path.join("results", "remove_and_retrain",
+                           "training_output", plot_name + ".json"), 'w') as f:
+        json.dump({"steps": loss_steps, "loss": losses}, f)
 
 
-def get_cifar_ready_resnet():
-    model = resnet18(pretrained=True)
-    model.fc = torch.nn.Linear(512, 100)
-    model = model.to(ARGS.device)
+def test(model, data_loader=None, data_path=""):
+    model.eval()
+    accuracies = []
+    step = 0
+
+    if data_loader != None:
+        data_iterator = iter(data_loader)
+
+    while step != ARGS.max_train_steps:
+        if data_path != "":
+            if not os.path.exists(os.path.join(data_path,
+                                               "batch_input" + str(step))):
+                break
+            batch_inputs = torch.load(
+                os.path.join(data_path, "batch_input" + str(step)))
+            batch_targets = torch.load(
+                os.path.join(data_path, "batch_target" + str(step)))
+        else:
+            try:
+                batch_inputs, batch_targets = next(data_iterator)
+            except StopIteration:
+                break
+        batch_inputs = batch_inputs.to(ARGS.device)
+        batch_targets = batch_targets.to(ARGS.device)
+        batch_inputs.requires_grad = False
+
+        output = model.forward(batch_inputs)
+        accuracies += [float(sum(batch_targets ==
+                                 torch.argmax(output, 1))) / ARGS.batch_size]
+        step += 1
+    accuracies = torch.tensor(accuracies)
+    return float(accuracies.mean()), float(accuracies.std())
+
+
+def init_model():
+    model = vgg11(pretrained=True, in_size=32).to(ARGS.device)
+    for param in  model.features:
+        param.requires_grad = False
+
+    model.classifier[0] = torch.nn.Linear(in_features=512, out_features=256, bias=True).to(ARGS.device)
+    model.classifier[3] = torch.nn.Linear(in_features=256, out_features=128, bias=True).to(ARGS.device)
+    model.classifier[6] = torch.nn.Linear(in_features=128, out_features=10, bias=True).to(ARGS.device)
+
     return model
 
 
-def remove_and_retrain(data_loader):
-    initial_model = get_cifar_ready_resnet()
-    initial_accuracy = train(data_loader, initial_model, use_saliency=False)
+def get_saliency_methods(grad_names, initial_model):
     saliency_methods = []
-    print(next(initial_model.parameters()).device)
-    for grad_name in ARGS.grads:
+    for grad_name in grad_names:
         if grad_name == "fullgrad":
-            saliency_methods += [(FullGrad(initial_model), "FullGrad")]
+            saliency_methods += [(FullGrad(initial_model, im_size=(3, 32, 32)), "FullGrad")]
         elif grad_name == "simplegrad":
             saliency_methods += [(SimpleFullGrad(initial_model), "SimpleFullGrad")]
-        # TODO add gradcam
-    total_features = 224 * 224
-    accuracies = torch.zeros((len(saliency_methods), len(ARGS.k)))
-    for method_idx, (saliency_method, method_name) in enumerate(saliency_methods):
+        elif grad_name == "inputgrad":
+            saliency_methods += [(Inputgrad(initial_model), "Input-Gradient")]
+        elif grad_name == "random":
+            saliency_methods += [(None, "Random")]
+    return saliency_methods
+
+
+def remove_and_retrain(data_path):
+    initial_model = torch.load(os.path.join("results", "remove_and_retrain", "models", "initial_model"))
+    saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
+
+    colors = {"FullGrad": "#0074d9", "gradcam": "#111111",
+              "Random": "#f012be", "Input-Gradient": "#01ff70"}
+    total_features = ARGS.img_size * ARGS.img_size
+    accuracies_mean = [[0.0 for _ in range(len(ARGS.k))] for _ in range(len(saliency_methods))]
+    accuracies_std = [[0.0 for _ in range(len(ARGS.k))] for _ in range(len(saliency_methods))]
+    for method_idx, (_, method_name) in enumerate(saliency_methods):
+        modified_data_path = os.path.join(data_path, "modified_cifar_10", method_name)
+
         for k_idx, k in enumerate(ARGS.k):
             print("Run saliency method: ", method_name)
+            data_path = os.path.join(modified_data_path, str(int(k * total_features)))
 
-            model = get_cifar_ready_resnet()
-            accuracy = train(data_loader, model, use_saliency=True, \
-                             k_most_salient=int(k * total_features), \
-                             saliency_method=saliency_method, \
-                             saliency_method_name=method_name)
-            accuracies[method_idx, k_idx] = accuracy
+            model = init_model()
+            train(model, data_path=os.path.join(data_path, "train"),
+                  plot_name=method_name + "_" + str(k))
+            accuracies_mean[method_idx][k_idx], accuracies_std[method_idx][k_idx] \
+             = test(model, data_path=os.path.join(data_path, "test"))
+
         plt.figure(0)
-        plt.plot([k * 100 for k in ARGS.k], list(accuracies[method_idx]), label=method_name + str(k))
+        print([k * 100 for k in ARGS.k])
+        print(accuracies_mean[method_idx])
+        print(accuracies_std[method_idx])
+        plt.errorbar([k * 100 for k in ARGS.k], accuracies_mean[method_idx],
+                     accuracies_std[method_idx], label=method_name,
+                     color=colors[method_name])
+
     plt.figure(0)
     plt.ylabel('Accuracy')
     plt.xlabel('k %')
     plt.legend()
-    plt.savefig(os.path.join("results", "remove_and_retrain", "final_result.jpeg"))
+    plt.savefig(os.path.join("results", "remove_and_retrain", "final_plot.jpeg"))
+
+    with open(os.path.join("results", "remove_and_retrain",
+                           "final_output" + ".json"), 'w') as f:
+        json.dump({"mean": accuracies_mean, "std": accuracies_std}, f)
 
 
-def main():
-    # same transformations for each dataset
+def compute_modified_datasets(train_set_loader, test_set_loader, data_path):
+    initial_model = torch.load(os.path.join("results", "remove_and_retrain",
+                                            "models", "initial_model"))
+    saliency_methods = get_saliency_methods(ARGS.grads, initial_model)
+
+    total_features = ARGS.img_size * ARGS.img_size
+    for _, (saliency_method, method_name) in enumerate(saliency_methods):
+        for dataset, dataloader in [("train", train_set_loader), ("test", test_set_loader)]:
+            saliency_path = os.path.join(data_path, "saliency_maps", method_name + "_vgg11", dataset)
+            if saliency_method != None:
+                misc_functions.compute_and_store_saliency_maps(dataloader, initial_model, \
+                    ARGS.device, ARGS.max_train_steps, saliency_method, saliency_path)
+            for k in ARGS.k:
+                num_pixels = int(k * total_features)
+
+                dataset_path = os.path.join(data_path, "modified_cifar_10", method_name, str(num_pixels))
+                misc_functions.create_folder(os.path.join(dataset_path, dataset))
+
+                for step, (batch_inputs, batch_targets) in enumerate(dataloader):
+                    if method_name == "Random":
+                        data = misc_functions.remove_random_salient_pixels(batch_inputs, 42, k, im_size=32)
+                    else:
+                        saliency_map = torch.load(os.path.join(saliency_path, \
+                            "saliency_map_" + str(step)))
+                        data = misc_functions.remove_salient_pixels(batch_inputs, saliency_map, \
+                            num_pixels=num_pixels, most_salient=ARGS.most_salient)
+                    torch.save(data, os.path.join(dataset_path, dataset, "batch_input" + str(step)))
+                    torch.save(batch_targets, os.path.join(dataset_path, dataset, "batch_target" + str(step)))
+
+                    if step == ARGS.max_train_steps:
+                        break
+
+
+def load_cifar_dataset(data_path):
     transform_standard = transforms.Compose([
-        transforms.Resize((224, 224)),
+        transforms.Resize((ARGS.img_size, ARGS.img_size)),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406],
                              std=[0.229, 0.224, 0.225]), ])
-    dataset = data_PATH + "/cifar/"
-    data = datasets.CIFAR100(dataset, train=True, transform=transform_standard, \
+    cifar_path = os.path.join(data_path, "cifar")
+    train_set = datasets.CIFAR10(cifar_path, train=True, transform=transform_standard, \
         target_transform=None, download=True)
-    data_loader = torch.utils.data.DataLoader(data, batch_size=ARGS.batch_size, shuffle=False)
+    test_set = datasets.CIFAR10(cifar_path, train=False, transform=transform_standard, \
+        target_transform=None, download=True)
+    train_set_loader = torch.utils.data.DataLoader(train_set, batch_size=ARGS.batch_size, shuffle=False)
+    test_set_loader = torch.utils.data.DataLoader(test_set, batch_size=ARGS.batch_size, shuffle=False)
 
-    remove_and_retrain(data_loader)
+    return train_set_loader, test_set_loader
+
+
+def main():
+    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ARGS.data_directory)
+
+    if ARGS.phase == "train_initial_model":
+        train_set_loader, test_set_loader = load_cifar_dataset(data_path)
+        initial_model = init_model()
+
+        train(initial_model, data_loader=train_set_loader, plot_name="initial_model")
+
+        initial_accuracy_mean, initial_accuracy_std = test(initial_model, data_loader=test_set_loader)
+        print(initial_accuracy_mean, initial_accuracy_std)
+
+    elif ARGS.phase == "create_modified_datasets":
+        train_set_loader, test_set_loader = load_cifar_dataset(data_path)
+        compute_modified_datasets(train_set_loader, test_set_loader, data_path)
+
+    elif ARGS.phase == "train_on_modified_datasets":
+        remove_and_retrain(data_path)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--k', default=[0.001, 0.005, 0.01, 0.05, 0.1], type=float,nargs="+",
-                        help='Percentage of k% most salient pixels')
-    parser.add_argument('--most_salient', default=True, type=bool,
-                        help='most salient = True or False depending on retrain or pixel perturbation')
-    parser.add_argument('--grads', default=["fullgrad"], type=str, nargs='+',
-                        help='which grad methods to be applied')
+    parser.add_argument('--batch_size', default=10, type=int,
+                        help='Number of images passed through at once')
+    parser.add_argument('--data_directory', default="dataset", type=str,
+                        help='Name of the directory containing the datasets')
     parser.add_argument('--device', default="cuda:0", type=str,
                         help='cpu or gpu')
-    parser.add_argument('--target_layer', default="layer4", type=str,
-                        help='Which layer to be visualized in GRADCAM')
+    parser.add_argument('--epochs', default=100, type=int,
+                        help='Maximum number of epochs')
+    parser.add_argument('--grads', default=["fullgrad"], type=str, nargs='+',
+                        help='which grad methods to be applied')
+    parser.add_argument('--img_size', default=32, type=int,
+                        help='Row and Column size of the image')
+    parser.add_argument('--initial_learning_rate', default=0.001, type=float,
+                        help='Initial learning rate')
+    parser.add_argument('--k', default=[0.1, 0.25, 0.5, 0.75, 0.9],
+                        type=float,nargs="+",
+                        help='Percentage of k% most salient pixels')
+    parser.add_argument('--lr_decresing_step', default=1, type=int,
+                        help='Number of training steps between decreasing the \
+                        learning rate')
+    parser.add_argument('--lr_gamma', default=0.1, type=float,
+                        help='mltiplier for changing the lr')
+    parser.add_argument('--max_train_steps', default=-1, type=int,
+                        help='Maximum number of training steps')
+    parser.add_argument('--most_salient', default="True", type=str,
+                        help='most salient = True or False depending on retrain or pixel perturbation')
     parser.add_argument('--n_random_runs', default=5, type=int,
                         help='Number of runs for random pixels to be removed to decrease std of random run')
+    parser.add_argument('--phase', default="train_initial_model", type=str,
+                        help='Slect phase of the experiment. Options: train_initial_model, \
+                                create_modified_datasets, train_on_modified_datasets')
+    parser.add_argument('--print_step', default=500, type=int,
+                        help='Number of batches after which we print')
     parser.add_argument('--replacement', default="black", type=str,
                         help='black = 1.0 or mean = [0.485, 0.456, 0.406]')
-    parser.add_argument('--batch_size', default=1, type=int,
-                        help='Number of images passed through at once')
-    parser.add_argument('--max_train_steps', default=100, type=int,
-                        help='Maximum number of training steps')
-    parser.add_argument('--initial_learning_rate', default=0.01, type=float,
-                        help='Initial learning rate')
-    parser.add_argument('--lr_decresing_step', default=10, type=int,
-                        help='Number of training steps between decreasing the learning rate')
-    parser.add_argument('--lr_divisor', default=10, type=float,
-                        help='Divisor used to decrease the leaarning rate')
+    parser.add_argument('--target_layer', default="layer4", type=str,
+                        help='Which layer to be visualized in GRADCAM')
+
 
     ARGS = parser.parse_args()
     main()
-
-

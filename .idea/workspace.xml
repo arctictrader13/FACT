@@ -2,17 +2,131 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c3a6114-30d4-4667-be04-609c10d6daa3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/saliency/inputgradient.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FACT.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/misc_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/misc_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/100_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/103_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/108_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/109_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/111_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/112_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/113_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/115_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/117_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/118_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/120_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/121_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/125_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/130_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/133_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/136_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/13_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/15_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/19_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/20_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/21_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/23_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/29_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/2_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/34_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/37_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/38_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/3_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/40_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/41_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/42_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/43_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/44_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/45_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/47_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/49_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/50_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/51_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/52_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/53_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/54_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/55_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/56_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/57_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/58_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/59_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/5_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/60_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/61_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/62_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/63_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/64_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/65_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/66_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/67_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/68_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/69_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/70_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/71_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/72_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/73_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/74_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/75_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/76_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/77_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/78_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/79_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/80_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/82_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/83_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/84_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/85_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/86_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/87_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/88_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/89_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/91_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/92_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/93_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/94_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/95_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/96_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/97_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biased_data/doctors/doctor_female/98_doctor_female.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dump_images.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/merge_result_dicts.py" beforeDir="false" afterPath="$PROJECT_DIR$/merge_result_dicts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pixel_perturbation.py" beforeDir="false" afterPath="$PROJECT_DIR$/pixel_perturbation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black1000_kl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black1000_probs.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black1000_scores.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black5000_kl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black5000_probs.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/imagenet_vgg16_bn_most_black5000_scores.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/saliency/inputgrad.py" beforeDir="false" afterPath="$PROJECT_DIR$/saliency/inputgrad.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/imagenet_resnet18_most_black5.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/all_final_dicts/imagenet_resnet18_least_black500_full.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/all_final_dicts/imagenet_resnet18_least_mean500_full.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/all_final_dicts/imagenet_resnet18_most_black500_full.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/all_final_dicts/imagenet_resnet18_most_mean500_full.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/all_final_dicts/imagenet_vgg16_bn_least_black500_full.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/all_final_dicts/imagenet_vgg16_bn_least_mean500_full.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/all_final_dicts/imagenet_vgg16_bn_most_black500_full.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/all_final_dicts/imagenet_vgg16_bn_most_mean500_full.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_least_black500.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_least_black500_inputgrad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_least_black750_k_addition.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_least_mean500.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_least_mean500_inputgrad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_least_mean750_k_addition.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_most_black500.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_most_black500_inputgrad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_most_black750_k_addition.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_most_mean500.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_most_mean500_inputgrad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_resnet18_most_mean750_k_addition.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_least_black500.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_least_black500_inputgrad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_least_black750_k_addition.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_least_mean500.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_least_mean500_inputgrad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_least_mean750_k_addition.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_most_black500.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_most_black500_inputgrad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_most_black750_k_addition.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_most_mean500.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_most_mean500_inputgrad.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/pp_experiments/imagenet_vgg16_bn_most_mean750_k_addition.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/save_all_grad_maps.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_all_grad_maps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scrape_biased_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/scrape_biased_data.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,104 +139,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dump_images.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/saliency/inputgrad.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="48" column="19" selection-start-line="48" selection-end-line="49" />
-              <folding>
-                <element signature="e#91#103#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/saliency/simple_fullgrad.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="54" column="22" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/find_and_remove_duplicates.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-799">
-              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-              <folding>
-                <element signature="e#174#186#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/vgg.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1258">
-              <caret line="87" selection-start-line="87" selection-end-line="87" />
-              <folding>
-                <element signature="e#441#453#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/saliency/inputgradient.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="28" column="19" selection-start-line="28" selection-end-line="29" />
-              <folding>
-                <element signature="e#174#186#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2825">
-              <caret line="264" column="53" selection-start-line="264" selection-start-column="53" selection-end-line="264" selection-end-column="53" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/models/resnet.py">
+        <entry file="file://$PROJECT_DIR$/save_all_grad_maps.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2635">
-              <caret line="170" column="29" selection-start-line="170" selection-start-column="29" selection-end-line="170" selection-end-column="29" />
-              <caret line="169" selection-start-line="169" selection-end-line="169" />
+            <state relative-caret-position="79">
+              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
               <folding>
-                <element signature="e#536#548#0" expanded="true" />
+                <element signature="e#99#131#0" expanded="true" />
+                <element signature="e#1524#1631#0" />
+                <element signature="e#2452#3563#0" />
+                <element signature="e#3459#3673#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="289">
+                <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/visualize_bias.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="247" selection-start-line="247" selection-end-line="262" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -131,10 +181,63 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/misc_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
+            <state relative-caret-position="17">
+              <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
               <folding>
                 <element signature="e#158#167#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bias_experiment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="131">
+              <caret line="212" column="48" selection-start-line="212" selection-start-column="48" selection-end-line="212" selection-end-column="48" />
+              <folding>
+                <element signature="e#275#302#0" expanded="true" />
+                <element signature="e#1390#1715#0" />
+                <element signature="e#2131#4483#0" />
+                <element signature="e#4420#4782#0" />
+                <element signature="e#4999#5387#0" />
+                <element signature="e#5017#6198#0" />
+                <element signature="e#6316#6589#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+                <element signature="e#817#1131#0" />
+                <element signature="e#1155#1387#0" />
+                <element signature="e#1468#3207#0" />
+                <element signature="e#3275#3985#0" />
+                <element signature="e#4036#4571#0" />
+                <element signature="e#4635#5265#0" />
+                <element signature="e#5325#6221#0" />
+                <element signature="e#6284#6974#0" />
+                <element signature="e#7042#7594#0" />
+                <element signature="e#7647#7921#0" />
+                <element signature="e#7976#8815#0" />
+                <element signature="e#8883#9247#0" />
+                <element signature="e#9298#9534#0" />
+                <element signature="e#9627#10316#0" />
+                <element signature="e#10371#10525#0" />
+                <element signature="e#10607#11104#0" />
+                <element signature="e#11130#12067#0" />
+                <element signature="e#12342#12469#0" />
+                <element signature="e#12507#13344#0" />
+                <element signature="e#13383#14027#0" />
+                <element signature="e#14089#14850#0" />
+                <element signature="e#14925#15638#0" />
+                <element signature="e#15696#15896#0" />
               </folding>
             </state>
           </provider>
@@ -146,41 +249,42 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>classta</find>
-      <find>target_layer</find>
-      <find>model</find>
-      <find>save_gradcam</find>
-      <find>output_dir</find>
-      <find>save_saliency_map</find>
-      <find>ARGS.most</find>
-      <find>number_batches</find>
-      <find>index</find>
-      <find>save_gradc</find>
-      <find>calcul</find>
-      <find>batch</find>
-      <find>counter</find>
-      <find>click</find>
-      <find>getBiase</find>
-      <find>dev</find>
-      <find>check</find>
-      <find>device</find>
-      <find>model_urls</find>
-      <find>model_zoo</find>
-      <find>softma</find>
-      <find>seed</find>
-      <find>get_re</find>
-      <find>init_grad</find>
-      <find>get_filen</find>
-      <find>kl_div</find>
-      <find>TODO</find>
       <find>inter</find>
-      <find>topk</find>
+      <find>self.im</find>
       <find>index_sele</find>
+      <find>targer</find>
+      <find>class_names</find>
+      <find>batch</find>
+      <find>misc</find>
+      <find>save</find>
+      <find>frozen</find>
+      <find>unnorm</find>
+      <find>predictions</find>
+      <find>batch_s</find>
+      <find>TODO</find>
+      <find>ta</find>
+      <find>device</find>
+      <find>transforms</find>
+      <find>data_stats</find>
+      <find>model_path</find>
+      <find>imshow</find>
+      <find>transform</find>
+      <find>unnormalize</find>
+      <find>target_class</find>
+      <find>resnet</find>
+      <find>salient_type</find>
+      <find>dataloader</find>
+      <find>model_name</find>
+      <find>target_layer</find>
+      <find>filename</find>
+      <find>batch_size</find>
+      <find>sample_loader</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,39 +299,45 @@
         <option value="$PROJECT_DIR$/models/resnet.py" />
         <option value="$PROJECT_DIR$/models/vgg.py" />
         <option value="$PROJECT_DIR$/duplicate-images-master/duplicate_finder.py" />
-        <option value="$PROJECT_DIR$/scrape_biased_data.py" />
         <option value="$PROJECT_DIR$/duplicate-images-master/find_remove_duplicates.py" />
-        <option value="$PROJECT_DIR$/find_and_remove_duplicates.py" />
-        <option value="$PROJECT_DIR$/saliency/fullgrad.py" />
-        <option value="$PROJECT_DIR$/saliency/inputgradient.py" />
+        <option value="$PROJECT_DIR$/models/plot_pp_experiments.py" />
         <option value="$PROJECT_DIR$/saliency/inputgrad.py" />
+        <option value="$PROJECT_DIR$/test_inputgrad.py" />
+        <option value="$PROJECT_DIR$/find_and_remove_duplicates.py" />
+        <option value="$PROJECT_DIR$/change_im_names.py" />
+        <option value="$PROJECT_DIR$/gradcam/grad_cam.py" />
+        <option value="$PROJECT_DIR$/saliency/fullgrad.py" />
+        <option value="$PROJECT_DIR$/visualize_bias.py" />
+        <option value="$PROJECT_DIR$/bias_experiment.py" />
         <option value="$PROJECT_DIR$/misc_functions.py" />
+        <option value="$PROJECT_DIR$/saliency/inputgradient.py" />
+        <option value="$PROJECT_DIR$/scrape_biased_data.py" />
+        <option value="$PROJECT_DIR$/merge_result_dicts.py" />
         <option value="$PROJECT_DIR$/pixel_perturbation.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/FACT.ipynb" />
+        <option value="$PROJECT_DIR$/save_all_grad_maps.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="940" />
-    <option name="height" value="1094" />
+    <option name="x" value="-16" />
+    <option name="y" value="-16" />
+    <option name="width" value="2896" />
+    <option name="height" value="2012" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="FACT" type="b2602c69:ProjectViewProjectNode" />
               <item name="FACT" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FACT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FACT" type="462c0819:PsiDirectoryNode" />
-              <item name="dataset" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FACT" type="b2602c69:ProjectViewProjectNode" />
@@ -248,7 +358,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -330,18 +439,28 @@
       <workItem from="1579771721338" duration="23989000" />
       <workItem from="1579861029623" duration="13864000" />
       <workItem from="1579878146967" duration="245000" />
-      <workItem from="1579948243827" duration="62946000" />
+      <workItem from="1579948243827" duration="69904000" />
+      <workItem from="1580216212153" duration="919000" />
+      <workItem from="1580218222597" duration="11123000" />
+      <workItem from="1580250485313" duration="10705000" />
+      <workItem from="1580304614600" duration="27900000" />
+      <workItem from="1580380888348" duration="1003000" />
+      <workItem from="1580396637052" duration="4438000" />
+      <workItem from="1580405664423" duration="8330000" />
+      <workItem from="1580420086152" duration="7114000" />
+      <workItem from="1580429733309" duration="9732000" />
+      <workItem from="1580441163799" duration="26210000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205401000" />
+    <option name="totallyTimeSpent" value="319833000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1864" height="1096" extended-state="6" />
+    <frame x="-6" y="-6" width="1441" height="1013" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17572062" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23571946" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -355,37 +474,14 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4989339" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.2238806" side_tool="true" weight="0.3575298" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.84115136" visible="true" weight="0.23260644" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.7761194" weight="0.5160955" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.84115136" visible="true" weight="0.29331824" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.7761194" weight="0.34881088" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.050997782" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.03470716" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10554371" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.34019503" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32827735" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -394,14 +490,6 @@
     <entry file="file://$PROJECT_DIR$/cifar_pixel_pert.py" />
     <entry file="file://$PROJECT_DIR$/grad-cam-pytorch-master/grad_cam.py" />
     <entry file="file://$PROJECT_DIR$/grad-cam-pytorch-master/main.py" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lmdb_import.py" />
     <entry file="file://$USER_HOME$/Anaconda3/envs/Lib/site-packages/torch/nn/functional.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -418,47 +506,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/duplicate-images-master/find_remove_duplicates.py" />
-    <entry file="file://$PROJECT_DIR$/gradcam/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradcam/grad_cam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="104" column="53" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scrape_biased_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="22" selection-start-line="22" selection-end-line="23" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/find_and_remove_duplicates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/saliency/simple_fullgrad.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="54" column="22" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/pkgs/pytorch-1.2.0-py3.7_cuda100_cudnn7_1/Lib/site-packages/torch/nn/modules/module.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-204">
@@ -466,80 +513,210 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
+    <entry file="file://$PROJECT_DIR$/saliency/inputgrad.py" />
+    <entry file="file://$PROJECT_DIR$/dump_images.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-799">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        <state relative-caret-position="102">
+          <caret line="6" column="41" lean-forward="true" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/remove_and_retrain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="17" column="16" selection-end-line="205" />
           <folding>
-            <element signature="e#174#186#0" expanded="true" />
+            <element signature="e#1#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/plot_pp_experiments.py" />
+    <entry file="file://$PROJECT_DIR$/find_and_remove_duplicates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/change_im_names.py" />
+    <entry file="file://$PROJECT_DIR$/models/resnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2856">
+          <caret line="170" column="29" selection-start-line="170" selection-start-column="29" selection-end-line="170" selection-end-column="29" />
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+          <folding>
+            <element signature="e#536#548#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/vgg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="2907">
+          <caret line="173" column="13" selection-start-line="173" selection-start-column="10" selection-end-line="173" selection-end-column="13" />
           <folding>
             <element signature="e#441#453#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gradcam/grad_cam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2397">
+          <caret line="147" column="39" selection-start-line="147" selection-start-column="39" selection-end-line="147" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saliency/simple_fullgrad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="72" column="8" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradcam/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/saliency/inputgradient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="28" column="19" selection-start-line="28" selection-end-line="29" />
+        <state relative-caret-position="323">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scrape_biased_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/merge_result_dicts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/saliency/fullgrad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1229">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
           <folding>
             <element signature="e#174#186#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/saliency/inputgrad.py">
+    <entry file="file://$PROJECT_DIR$/visualize_bias.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="48" column="19" selection-start-line="48" selection-end-line="49" />
+        <state relative-caret-position="244">
+          <caret line="247" selection-start-line="247" selection-end-line="262" />
           <folding>
-            <element signature="e#91#103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dump_images.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2825">
-          <caret line="264" column="53" selection-start-line="264" selection-start-column="53" selection-end-line="264" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/misc_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="111" column="10" selection-start-line="111" selection-start-column="10" selection-end-line="111" selection-end-column="10" />
+        <state relative-caret-position="17">
+          <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
           <folding>
             <element signature="e#158#167#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/resnet.py">
+    <entry file="file://$PROJECT_DIR$/bias_experiment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2635">
-          <caret line="170" column="29" selection-start-line="170" selection-start-column="29" selection-end-line="170" selection-end-column="29" />
-          <caret line="169" selection-start-line="169" selection-end-line="169" />
+        <state relative-caret-position="131">
+          <caret line="212" column="48" selection-start-line="212" selection-start-column="48" selection-end-line="212" selection-end-column="48" />
           <folding>
-            <element signature="e#536#548#0" expanded="true" />
+            <element signature="e#275#302#0" expanded="true" />
+            <element signature="e#1390#1715#0" />
+            <element signature="e#2131#4483#0" />
+            <element signature="e#4420#4782#0" />
+            <element signature="e#4999#5387#0" />
+            <element signature="e#5017#6198#0" />
+            <element signature="e#6316#6589#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pixel_perturbation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+            <element signature="e#817#1131#0" />
+            <element signature="e#1155#1387#0" />
+            <element signature="e#1468#3207#0" />
+            <element signature="e#3275#3985#0" />
+            <element signature="e#4036#4571#0" />
+            <element signature="e#4635#5265#0" />
+            <element signature="e#5325#6221#0" />
+            <element signature="e#6284#6974#0" />
+            <element signature="e#7042#7594#0" />
+            <element signature="e#7647#7921#0" />
+            <element signature="e#7976#8815#0" />
+            <element signature="e#8883#9247#0" />
+            <element signature="e#9298#9534#0" />
+            <element signature="e#9627#10316#0" />
+            <element signature="e#10371#10525#0" />
+            <element signature="e#10607#11104#0" />
+            <element signature="e#11130#12067#0" />
+            <element signature="e#12342#12469#0" />
+            <element signature="e#12507#13344#0" />
+            <element signature="e#13383#14027#0" />
+            <element signature="e#14089#14850#0" />
+            <element signature="e#14925#15638#0" />
+            <element signature="e#15696#15896#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FACT.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="289">
+            <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/save_all_grad_maps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+          <folding>
+            <element signature="e#99#131#0" expanded="true" />
+            <element signature="e#1524#1631#0" />
+            <element signature="e#2452#3563#0" />
+            <element signature="e#3459#3673#0" />
           </folding>
         </state>
       </provider>

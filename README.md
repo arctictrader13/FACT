@@ -1,5 +1,33 @@
-# FACT 
+# Visualizing Neural Network responses
 
+##### Authors
+
+| Name                          | UvA-ID     | Email                         |
+|-------------------------------|:----------:|:----------:|:-----------------------------:|
+| Philipp Lintl                 |12152498|l.t.ebner@student.vu.nl        |
+| Anca Diana Vicol              ||12484024    |frederic@chamot.nl             |
+| Radmir Leishuis  ||12362743   | |j.j.lopezgonzalez@student.vu.nl|
+| Puja SSSS                     | |            |12261653    |max.knaller@student.uva.nl     |
+
+Teacher Assistant: Leon Lang
+
+## Summary
+
+In this Repo we aim to reproduce an extend the ideas presented in the paper
+[Uncovering and Mitigating Algorithmic Bias through Learned Latent Structure](https://lmrt.mit.edu/sites/default/files/AIES-19_paper_220.pdf).
+
+For reproduction we will mainly follow an implementation that was provided in an
+[course](https://github.com/aamini/introtodeeplearning) that seems to be closely affiliated with the authors,
+as both are published from MIT (Massachusetts Institute of Technology). However, the code was removed from their
+Github on 25.01.2020, so we can't link to the source anymore.  Extensions focus mainly on the reevaluation of the
+findings based on a bigger and especially for the topic of bias in face detection created dataset
+called [FairFace](https://github.com/joojs/fairface).
+
+All details, experiments, results and discussions can be found in the notebook `Bias_in_face_detection.ipynb`, that
+follows this order. We will start by looking at the data used in the project. Then evaluate if there is bias in
+classic face detection systems. Lastly, we will look into the proposed mehtod for reducing this probable bias.
+
+Please make sure to check out the Requirements section before starting.
 
 # Full-Gradient Saliency Maps 
 
@@ -8,7 +36,7 @@ in our NeurIPS 2019 publication ["Full-Gradient Representation for Neural Networ
 
 This repository implements two methods: the reference `FullGrad` algorithm, and a variant called `Simple FullGrad`, which omits computation of bias parameters for bias-gradients. The related `full-gradient decomposition` is implemented within `FullGrad`. Note that while `full-gradient decomposition` applies to any ReLU neural network, `FullGrad` saliency is <b>specific to CNNs</b>.
 
-The codebase currently supports VGG, ResNet and ResNeXt architectures. Extending support for any other architecture of choice should be straightforward, and contributions are welcome! Among non-linearities, only ReLU-like functions are supported. For more information, please read the description of "implicit  biases" in the paper on how to include support for non-ReLU functions.
+The codebase currently supports VGG, ResNet. Extending support for any other architecture of choice should be straightforward, and contributions are welcome! Among non-linearities, only ReLU-like functions are supported. For more information, please read the description of "implicit  biases" in the paper on how to include support for non-ReLU functions.
 
 ## Usage
 Simply run  `python dump_images.py`, the saliency maps should be saved consequently in a results folder.

@@ -1,75 +1,725 @@
-/var/spool/slurm-llnl/slurmd/job4410414/slurm_script: line 21: cd: FACT: No such file or directory
+/var/spool/slurm-llnl/slurmd/job4429558/slurm_script: line 21: cd: FACT: No such file or directory
 Files already downloaded and verified
-[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.572
-[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 94.963
-[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 75.797
-[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 41.501
-[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 46.993
-[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 22.219
-[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 10.143
-[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3.862
-[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.662
-[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.50, Loss = 3.687
-[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.136
-cuda:0
+Files already downloaded and verified
 Completeness test passed for FullGrad.
 Run saliency method:  FullGrad
-[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.553
-[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 91.539
-[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 83.270
-[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 46.944
-[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 24.115
-[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.291
-[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 15.634
-[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 9.280
-[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.982
-[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.032
-[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.653
+[2020-01-31 11:18] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.925
+[2020-01-31 11:18] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.593
+[2020-01-31 11:18] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.076
+[2020-01-31 11:18] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 2.267
+[2020-01-31 11:18] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.776
+[2020-01-31 11:18] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.564
+[2020-01-31 11:18] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.000
+[2020-01-31 11:18] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.50, Train Loss = 1.355
+[2020-01-31 11:18] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 0.750
+[2020-01-31 11:18] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.51, Train Loss = 1.513
+[2020-01-31 11:19] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.51, Train Loss = 1.217
+[2020-01-31 11:19] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.52, Train Loss = 0.919
+[2020-01-31 11:19] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.51, Train Loss = 1.777
+[2020-01-31 11:19] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.53, Train Loss = 1.462
+[2020-01-31 11:19] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.52, Train Loss = 1.486
+[2020-01-31 11:19] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.53, Train Loss = 0.669
+[2020-01-31 11:19] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.54, Train Loss = 0.955
+[2020-01-31 11:19] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.54, Train Loss = 0.547
+[2020-01-31 11:19] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.54, Train Loss = 1.459
+[2020-01-31 11:20] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.55, Train Loss = 1.446
+[2020-01-31 11:20] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.55, Train Loss = 0.723
+[2020-01-31 11:20] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.54, Train Loss = 1.983
+[2020-01-31 11:20] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.56, Train Loss = 1.469
+[2020-01-31 11:20] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.55, Train Loss = 1.406
+[2020-01-31 11:20] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.55, Train Loss = 0.649
+[2020-01-31 11:20] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.56, Train Loss = 0.732
+[2020-01-31 11:20] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.55, Train Loss = 0.421
+[2020-01-31 11:20] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.57, Train Loss = 1.228
+[2020-01-31 11:20] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.56, Train Loss = 1.223
+[2020-01-31 11:21] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.56, Train Loss = 0.666
+[2020-01-31 11:21] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.55, Train Loss = 1.481
+[2020-01-31 11:21] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.56, Train Loss = 1.499
+[2020-01-31 11:21] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.57, Train Loss = 1.495
+[2020-01-31 11:21] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.57, Train Loss = 0.564
+[2020-01-31 11:21] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.57, Train Loss = 0.923
+[2020-01-31 11:21] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.56, Train Loss = 0.701
+[2020-01-31 11:21] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.58, Train Loss = 1.309
+[2020-01-31 11:21] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.57, Train Loss = 1.446
+[2020-01-31 11:21] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.58, Train Loss = 0.686
+[2020-01-31 11:22] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.57, Train Loss = 1.634
+[2020-01-31 11:22] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.57, Train Loss = 1.031
+[2020-01-31 11:22] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.57, Train Loss = 1.721
+[2020-01-31 11:22] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.58, Train Loss = 0.567
+[2020-01-31 11:22] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.58, Train Loss = 0.849
+[2020-01-31 11:22] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.56, Train Loss = 0.660
+-1
 Run saliency method:  FullGrad
-[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.302
-[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 90.086
-[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 80.838
-[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 49.260
-[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 28.966
-[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 12.346
-[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.046
-[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.405
-[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.308
-[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.489
-[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.436
+[2020-01-31 11:22] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 1.990
+[2020-01-31 11:22] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 2.039
+[2020-01-31 11:23] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.311
+[2020-01-31 11:23] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.935
+[2020-01-31 11:23] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 2.548
+[2020-01-31 11:23] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.361
+[2020-01-31 11:23] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.011
+[2020-01-31 11:23] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.710
+[2020-01-31 11:23] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.023
+[2020-01-31 11:23] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.44, Train Loss = 1.889
+[2020-01-31 11:23] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.867
+[2020-01-31 11:23] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.323
+[2020-01-31 11:24] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.931
+[2020-01-31 11:24] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 2.304
+[2020-01-31 11:24] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.527
+[2020-01-31 11:24] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.44, Train Loss = 0.714
+[2020-01-31 11:24] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.391
+[2020-01-31 11:24] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 0.859
+[2020-01-31 11:24] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.552
+[2020-01-31 11:24] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.922
+[2020-01-31 11:24] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.261
+[2020-01-31 11:24] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.715
+[2020-01-31 11:25] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 2.161
+[2020-01-31 11:25] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.519
+[2020-01-31 11:25] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 0.656
+[2020-01-31 11:25] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.572
+[2020-01-31 11:25] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 0.680
+[2020-01-31 11:25] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.790
+[2020-01-31 11:25] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.632
+[2020-01-31 11:25] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.539
+[2020-01-31 11:25] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.849
+[2020-01-31 11:26] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.557
+[2020-01-31 11:26] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.537
+[2020-01-31 11:26] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 0.767
+[2020-01-31 11:26] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.765
+[2020-01-31 11:26] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 0.853
+[2020-01-31 11:26] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.953
+[2020-01-31 11:26] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.486
+[2020-01-31 11:26] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.195
+[2020-01-31 11:26] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.696
+[2020-01-31 11:26] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.908
+[2020-01-31 11:27] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.172
+[2020-01-31 11:27] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 0.854
+[2020-01-31 11:27] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.388
+[2020-01-31 11:27] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 0.697
+-1
 Run saliency method:  FullGrad
-[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.482
-[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 107.627
-[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 85.705
-[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 81.458
-[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 42.436
-[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 7.221
-[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 11.384
-[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.113
-[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.877
-[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.723
-[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.943
+[2020-01-31 11:27] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.16, Train Loss = 2.169
+[2020-01-31 11:27] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.850
+[2020-01-31 11:27] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.662
+[2020-01-31 11:27] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 2.037
+[2020-01-31 11:28] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 2.015
+[2020-01-31 11:28] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.924
+[2020-01-31 11:28] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.447
+[2020-01-31 11:28] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.618
+[2020-01-31 11:28] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.576
+[2020-01-31 11:28] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 2.483
+[2020-01-31 11:28] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.696
+[2020-01-31 11:28] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.438
+[2020-01-31 11:28] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 2.514
+[2020-01-31 11:28] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.993
+[2020-01-31 11:28] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.938
+[2020-01-31 11:29] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.637
+[2020-01-31 11:29] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.364
+[2020-01-31 11:29] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.237
+[2020-01-31 11:29] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 2.214
+[2020-01-31 11:29] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.621
+[2020-01-31 11:29] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.395
+[2020-01-31 11:29] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 2.054
+[2020-01-31 11:29] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.674
+[2020-01-31 11:29] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 2.080
+[2020-01-31 11:30] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.359
+[2020-01-31 11:30] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.488
+[2020-01-31 11:30] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.279
+[2020-01-31 11:30] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.986
+[2020-01-31 11:30] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.610
+[2020-01-31 11:30] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.375
+[2020-01-31 11:30] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 2.148
+[2020-01-31 11:30] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.639
+[2020-01-31 11:30] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.666
+[2020-01-31 11:30] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.432
+[2020-01-31 11:31] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.330
+[2020-01-31 11:31] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.111
+[2020-01-31 11:31] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 2.132
+[2020-01-31 11:31] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.411
+[2020-01-31 11:31] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.399
+[2020-01-31 11:31] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.847
+[2020-01-31 11:31] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.437
+[2020-01-31 11:31] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.747
+[2020-01-31 11:31] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.283
+[2020-01-31 11:31] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.689
+[2020-01-31 11:32] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.112
+-1
 Run saliency method:  FullGrad
-[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.872
-[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 90.212
-[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 75.698
-[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 70.783
-[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 21.652
-[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3.413
-[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.579
-[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.871
-[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.256
-[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3.971
-[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 6.217
+[2020-01-31 11:32] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.15, Train Loss = 2.385
+[2020-01-31 11:32] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 1.833
+[2020-01-31 11:32] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.906
+[2020-01-31 11:32] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.243
+[2020-01-31 11:32] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.893
+[2020-01-31 11:32] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.744
+[2020-01-31 11:32] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.963
+[2020-01-31 11:33] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.005
+[2020-01-31 11:33] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.730
+[2020-01-31 11:33] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.967
+[2020-01-31 11:33] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.527
+[2020-01-31 11:33] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.658
+[2020-01-31 11:33] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 2.327
+[2020-01-31 11:33] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.890
+[2020-01-31 11:33] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.666
+[2020-01-31 11:33] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.696
+[2020-01-31 11:33] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 2.100
+[2020-01-31 11:34] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.723
+[2020-01-31 11:34] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.991
+[2020-01-31 11:34] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.644
+[2020-01-31 11:34] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.613
+[2020-01-31 11:34] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 2.212
+[2020-01-31 11:34] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.633
+[2020-01-31 11:34] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.702
+[2020-01-31 11:34] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.749
+[2020-01-31 11:34] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.954
+[2020-01-31 11:34] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.701
+[2020-01-31 11:35] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 2.110
+[2020-01-31 11:35] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.317
+[2020-01-31 11:35] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.472
+[2020-01-31 11:35] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 2.039
+[2020-01-31 11:35] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.847
+[2020-01-31 11:35] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.596
+[2020-01-31 11:35] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.700
+[2020-01-31 11:35] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.941
+[2020-01-31 11:35] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.620
+[2020-01-31 11:36] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.928
+[2020-01-31 11:36] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.493
+[2020-01-31 11:36] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.496
+[2020-01-31 11:36] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 2.040
+[2020-01-31 11:36] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.709
+[2020-01-31 11:36] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.555
+[2020-01-31 11:36] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.766
+[2020-01-31 11:36] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.974
+[2020-01-31 11:36] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.794
+-1
 Run saliency method:  FullGrad
-[2020-01-27 14:37] Train Step 0000/0030, Batch Size = 2, Accuracy = 0.50, Loss = 4.475
-[2020-01-27 14:37] Train Step 0003/0030, Batch Size = 2, Accuracy = 0.00, Loss = 100.001
-[2020-01-27 14:37] Train Step 0006/0030, Batch Size = 2, Accuracy = 0.00, Loss = 78.169
-[2020-01-27 14:37] Train Step 0009/0030, Batch Size = 2, Accuracy = 0.00, Loss = 54.928
-[2020-01-27 14:37] Train Step 0012/0030, Batch Size = 2, Accuracy = 0.00, Loss = 35.834
-[2020-01-27 14:37] Train Step 0015/0030, Batch Size = 2, Accuracy = 0.00, Loss = 3.307
-[2020-01-27 14:37] Train Step 0018/0030, Batch Size = 2, Accuracy = 0.00, Loss = 8.961
-[2020-01-27 14:37] Train Step 0021/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.905
-[2020-01-27 14:37] Train Step 0024/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.660
-[2020-01-27 14:37] Train Step 0027/0030, Batch Size = 2, Accuracy = 0.00, Loss = 4.790
-[2020-01-27 14:37] Train Step 0030/0030, Batch Size = 2, Accuracy = 0.00, Loss = 5.548
+[2020-01-31 11:37] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.13, Train Loss = 2.243
+[2020-01-31 11:37] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.18, Train Loss = 1.962
+[2020-01-31 11:37] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 2.121
+[2020-01-31 11:37] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.19, Train Loss = 2.289
+[2020-01-31 11:37] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 1.882
+[2020-01-31 11:37] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.002
+[2020-01-31 11:37] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 1.889
+[2020-01-31 11:37] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.091
+[2020-01-31 11:37] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 1.857
+[2020-01-31 11:38] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.780
+[2020-01-31 11:38] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.798
+[2020-01-31 11:38] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.960
+[2020-01-31 11:38] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.305
+[2020-01-31 11:38] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.043
+[2020-01-31 11:38] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.795
+[2020-01-31 11:38] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.821
+[2020-01-31 11:38] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.152
+[2020-01-31 11:38] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.811
+[2020-01-31 11:39] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.781
+[2020-01-31 11:39] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.888
+[2020-01-31 11:39] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.191
+[2020-01-31 11:39] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.290
+[2020-01-31 11:39] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.932
+[2020-01-31 11:39] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.785
+[2020-01-31 11:39] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.957
+[2020-01-31 11:39] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.150
+[2020-01-31 11:39] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.890
+[2020-01-31 11:39] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.752
+[2020-01-31 11:40] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.568
+[2020-01-31 11:40] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.963
+[2020-01-31 11:40] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.222
+[2020-01-31 11:40] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.995
+[2020-01-31 11:40] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.831
+[2020-01-31 11:40] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.924
+[2020-01-31 11:40] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.047
+[2020-01-31 11:40] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.880
+[2020-01-31 11:40] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.732
+[2020-01-31 11:41] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.863
+[2020-01-31 11:41] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.992
+[2020-01-31 11:41] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.272
+[2020-01-31 11:41] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.044
+[2020-01-31 11:41] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.666
+[2020-01-31 11:41] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.804
+[2020-01-31 11:41] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.964
+[2020-01-31 11:41] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.800
+-1
+5 5 5
+[10.0, 25.0, 50.0, 75.0, 90.0]
+[0.585099995136261, 0.5141000747680664, 0.41350001096725464, 0.3333999812602997, 0.27920001745224]
+[0.15694783627986908, 0.1530837118625641, 0.16190727055072784, 0.15351875126361847, 0.14264538884162903]
+Run saliency method:  InputGrad
+[2020-01-31 11:42] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.068
+[2020-01-31 11:42] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.616
+[2020-01-31 11:42] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.352
+[2020-01-31 11:42] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.735
+[2020-01-31 11:42] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.961
+[2020-01-31 11:42] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.444
+[2020-01-31 11:42] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.186
+[2020-01-31 11:42] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.494
+[2020-01-31 11:42] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 0.894
+[2020-01-31 11:42] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.589
+[2020-01-31 11:43] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.428
+[2020-01-31 11:43] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.022
+[2020-01-31 11:43] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.875
+[2020-01-31 11:43] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.774
+[2020-01-31 11:43] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.347
+[2020-01-31 11:43] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.088
+[2020-01-31 11:43] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.256
+[2020-01-31 11:43] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 0.727
+[2020-01-31 11:43] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.591
+[2020-01-31 11:44] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.265
+[2020-01-31 11:44] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 0.979
+[2020-01-31 11:44] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.827
+[2020-01-31 11:44] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.472
+[2020-01-31 11:44] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.455
+[2020-01-31 11:44] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.069
+[2020-01-31 11:44] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.283
+[2020-01-31 11:44] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 0.692
+[2020-01-31 11:44] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.529
+[2020-01-31 11:44] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.544
+[2020-01-31 11:45] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 0.981
+[2020-01-31 11:45] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.47, Train Loss = 1.586
+[2020-01-31 11:45] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.265
+[2020-01-31 11:45] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.50, Train Loss = 1.171
+[2020-01-31 11:45] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.50, Train Loss = 0.770
+[2020-01-31 11:45] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 1.399
+[2020-01-31 11:45] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.48, Train Loss = 0.677
+[2020-01-31 11:45] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.51, Train Loss = 1.301
+[2020-01-31 11:45] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.387
+[2020-01-31 11:45] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 0.800
+[2020-01-31 11:46] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.808
+[2020-01-31 11:46] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.49, Train Loss = 1.283
+[2020-01-31 11:46] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.51, Train Loss = 1.506
+[2020-01-31 11:46] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.50, Train Loss = 1.067
+[2020-01-31 11:46] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.50, Train Loss = 1.009
+[2020-01-31 11:46] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.50, Train Loss = 0.719
+-1
+Run saliency method:  InputGrad
+[2020-01-31 11:46] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.18, Train Loss = 2.356
+[2020-01-31 11:46] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.078
+[2020-01-31 11:47] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.660
+[2020-01-31 11:47] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.955
+[2020-01-31 11:47] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 2.059
+[2020-01-31 11:47] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.633
+[2020-01-31 11:47] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.339
+[2020-01-31 11:47] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.553
+[2020-01-31 11:47] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.451
+[2020-01-31 11:47] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.669
+[2020-01-31 11:47] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.746
+[2020-01-31 11:47] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.640
+[2020-01-31 11:48] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.605
+[2020-01-31 11:48] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 2.138
+[2020-01-31 11:48] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.496
+[2020-01-31 11:48] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.124
+[2020-01-31 11:48] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 1.222
+[2020-01-31 11:48] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.208
+[2020-01-31 11:48] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.749
+[2020-01-31 11:48] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.732
+[2020-01-31 11:48] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.479
+[2020-01-31 11:48] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.853
+[2020-01-31 11:49] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 2.046
+[2020-01-31 11:49] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.584
+[2020-01-31 11:49] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.102
+[2020-01-31 11:49] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.282
+[2020-01-31 11:49] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.344
+[2020-01-31 11:49] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.945
+[2020-01-31 11:49] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.409
+[2020-01-31 11:49] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.309
+[2020-01-31 11:49] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.418
+[2020-01-31 11:49] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 2.046
+[2020-01-31 11:50] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.378
+[2020-01-31 11:50] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.110
+[2020-01-31 11:50] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.259
+[2020-01-31 11:50] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.066
+[2020-01-31 11:50] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.589
+[2020-01-31 11:50] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.433
+[2020-01-31 11:50] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.148
+[2020-01-31 11:50] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.400
+[2020-01-31 11:50] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.959
+[2020-01-31 11:50] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.607
+[2020-01-31 11:51] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.023
+[2020-01-31 11:51] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.402
+[2020-01-31 11:51] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.124
+-1
+Run saliency method:  InputGrad
+[2020-01-31 11:51] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.17, Train Loss = 2.065
+[2020-01-31 11:51] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.976
+[2020-01-31 11:51] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.654
+[2020-01-31 11:51] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.163
+[2020-01-31 11:51] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.816
+[2020-01-31 11:51] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.705
+[2020-01-31 11:52] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.607
+[2020-01-31 11:52] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.654
+[2020-01-31 11:52] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.752
+[2020-01-31 11:52] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.742
+[2020-01-31 11:52] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.511
+[2020-01-31 11:52] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.425
+[2020-01-31 11:52] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.941
+[2020-01-31 11:52] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.932
+[2020-01-31 11:52] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.635
+[2020-01-31 11:52] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.431
+[2020-01-31 11:53] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.539
+[2020-01-31 11:53] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.598
+[2020-01-31 11:53] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.728
+[2020-01-31 11:53] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.596
+[2020-01-31 11:53] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.325
+[2020-01-31 11:53] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.922
+[2020-01-31 11:53] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.817
+[2020-01-31 11:53] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.651
+[2020-01-31 11:53] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.263
+[2020-01-31 11:53] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.622
+[2020-01-31 11:54] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.683
+[2020-01-31 11:54] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 2.000
+[2020-01-31 11:54] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.637
+[2020-01-31 11:54] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.350
+[2020-01-31 11:54] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.753
+[2020-01-31 11:54] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.870
+[2020-01-31 11:54] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.948
+[2020-01-31 11:54] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.168
+[2020-01-31 11:54] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.592
+[2020-01-31 11:54] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.830
+[2020-01-31 11:55] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.614
+[2020-01-31 11:55] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.670
+[2020-01-31 11:55] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.225
+[2020-01-31 11:55] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.549
+[2020-01-31 11:55] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.718
+[2020-01-31 11:55] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.675
+[2020-01-31 11:55] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.080
+[2020-01-31 11:55] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.587
+[2020-01-31 11:55] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.461
+-1
+Run saliency method:  InputGrad
+[2020-01-31 11:56] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.14, Train Loss = 2.298
+[2020-01-31 11:56] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.19, Train Loss = 1.906
+[2020-01-31 11:56] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 1.933
+[2020-01-31 11:56] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 2.288
+[2020-01-31 11:56] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.153
+[2020-01-31 11:56] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.670
+[2020-01-31 11:56] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.885
+[2020-01-31 11:56] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.705
+[2020-01-31 11:56] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.789
+[2020-01-31 11:57] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.537
+[2020-01-31 11:57] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.635
+[2020-01-31 11:57] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.811
+[2020-01-31 11:57] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.358
+[2020-01-31 11:57] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.935
+[2020-01-31 11:57] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.628
+[2020-01-31 11:57] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.617
+[2020-01-31 11:57] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.619
+[2020-01-31 11:57] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.735
+[2020-01-31 11:58] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.168
+[2020-01-31 11:58] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.812
+[2020-01-31 11:58] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.499
+[2020-01-31 11:58] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.109
+[2020-01-31 11:58] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 2.162
+[2020-01-31 11:58] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.673
+[2020-01-31 11:58] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.901
+[2020-01-31 11:58] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.613
+[2020-01-31 11:58] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.856
+[2020-01-31 11:58] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.446
+[2020-01-31 11:59] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.780
+[2020-01-31 11:59] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.627
+[2020-01-31 11:59] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.244
+[2020-01-31 11:59] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.876
+[2020-01-31 11:59] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.002
+[2020-01-31 11:59] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.658
+[2020-01-31 11:59] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.548
+[2020-01-31 11:59] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.658
+[2020-01-31 11:59] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 2.616
+[2020-01-31 11:59] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.786
+[2020-01-31 12:00] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.683
+[2020-01-31 12:00] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 2.121
+[2020-01-31 12:00] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.935
+[2020-01-31 12:00] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.776
+[2020-01-31 12:00] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.824
+[2020-01-31 12:00] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.813
+[2020-01-31 12:00] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.671
+-1
+Run saliency method:  InputGrad
+[2020-01-31 12:00] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.12, Train Loss = 2.404
+[2020-01-31 12:01] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.15, Train Loss = 2.162
+[2020-01-31 12:01] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.16, Train Loss = 1.847
+[2020-01-31 12:01] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.17, Train Loss = 2.220
+[2020-01-31 12:01] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.18, Train Loss = 2.401
+[2020-01-31 12:01] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.18, Train Loss = 2.162
+[2020-01-31 12:01] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.18, Train Loss = 2.204
+[2020-01-31 12:01] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 1.909
+[2020-01-31 12:01] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.18, Train Loss = 1.866
+[2020-01-31 12:01] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 2.417
+[2020-01-31 12:01] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 1.691
+[2020-01-31 12:02] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 1.904
+[2020-01-31 12:02] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 2.180
+[2020-01-31 12:02] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 2.151
+[2020-01-31 12:02] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 1.933
+[2020-01-31 12:02] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 2.002
+[2020-01-31 12:02] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 2.074
+[2020-01-31 12:02] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 1.874
+[2020-01-31 12:02] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 2.336
+[2020-01-31 12:02] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 1.795
+[2020-01-31 12:02] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.895
+[2020-01-31 12:03] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 2.050
+[2020-01-31 12:03] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 1.978
+[2020-01-31 12:03] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 2.128
+[2020-01-31 12:03] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 2.062
+[2020-01-31 12:03] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.865
+[2020-01-31 12:03] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 1.859
+[2020-01-31 12:03] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 2.430
+[2020-01-31 12:03] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 1.788
+[2020-01-31 12:03] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.896
+[2020-01-31 12:03] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 2.088
+[2020-01-31 12:04] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.280
+[2020-01-31 12:04] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.131
+[2020-01-31 12:04] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.000
+[2020-01-31 12:04] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.938
+[2020-01-31 12:04] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.826
+[2020-01-31 12:04] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.479
+[2020-01-31 12:04] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.749
+[2020-01-31 12:04] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.830
+[2020-01-31 12:04] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.986
+[2020-01-31 12:04] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.094
+[2020-01-31 12:05] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.070
+[2020-01-31 12:05] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.959
+[2020-01-31 12:05] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.911
+[2020-01-31 12:05] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.732
+-1
+5 5 5
+[10.0, 25.0, 50.0, 75.0, 90.0]
+[0.5212999582290649, 0.4589000642299652, 0.3821999728679657, 0.3101000189781189, 0.25300005078315735]
+[0.15761075913906097, 0.1595814973115921, 0.1554584503173828, 0.1472741663455963, 0.1383117139339447]
+Run saliency method:  Random
+[2020-01-31 12:05] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.19, Train Loss = 2.394
+[2020-01-31 12:05] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 2.022
+[2020-01-31 12:05] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.554
+[2020-01-31 12:05] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 2.199
+[2020-01-31 12:06] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.727
+[2020-01-31 12:06] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.174
+[2020-01-31 12:06] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.302
+[2020-01-31 12:06] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.372
+[2020-01-31 12:06] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 0.940
+[2020-01-31 12:06] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.39, Train Loss = 2.046
+[2020-01-31 12:06] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.601
+[2020-01-31 12:06] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 1.144
+[2020-01-31 12:06] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.684
+[2020-01-31 12:06] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.758
+[2020-01-31 12:07] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.339
+[2020-01-31 12:07] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.104
+[2020-01-31 12:07] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 1.464
+[2020-01-31 12:07] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.40, Train Loss = 0.827
+[2020-01-31 12:07] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.735
+[2020-01-31 12:07] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.42, Train Loss = 2.113
+[2020-01-31 12:07] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.227
+[2020-01-31 12:07] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.41, Train Loss = 1.793
+[2020-01-31 12:07] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.44, Train Loss = 1.755
+[2020-01-31 12:07] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.288
+[2020-01-31 12:08] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.163
+[2020-01-31 12:08] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.318
+[2020-01-31 12:08] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 0.883
+[2020-01-31 12:08] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.44, Train Loss = 1.628
+[2020-01-31 12:08] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.44, Train Loss = 1.822
+[2020-01-31 12:08] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.44, Train Loss = 0.962
+[2020-01-31 12:08] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.696
+[2020-01-31 12:08] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.800
+[2020-01-31 12:08] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.276
+[2020-01-31 12:08] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.214
+[2020-01-31 12:09] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.43, Train Loss = 1.152
+[2020-01-31 12:09] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 0.850
+[2020-01-31 12:09] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.522
+[2020-01-31 12:09] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.627
+[2020-01-31 12:09] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 0.808
+[2020-01-31 12:09] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.44, Train Loss = 1.731
+[2020-01-31 12:09] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.628
+[2020-01-31 12:09] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.46, Train Loss = 1.191
+[2020-01-31 12:09] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.136
+[2020-01-31 12:10] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 1.077
+[2020-01-31 12:10] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.45, Train Loss = 0.799
+-1
+Run saliency method:  Random
+[2020-01-31 12:10] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.17, Train Loss = 2.481
+[2020-01-31 12:10] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.227
+[2020-01-31 12:10] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.699
+[2020-01-31 12:10] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 2.301
+[2020-01-31 12:10] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.906
+[2020-01-31 12:10] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.609
+[2020-01-31 12:10] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.626
+[2020-01-31 12:11] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.316
+[2020-01-31 12:11] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.350
+[2020-01-31 12:11] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.726
+[2020-01-31 12:11] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 2.309
+[2020-01-31 12:11] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.632
+[2020-01-31 12:11] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 2.027
+[2020-01-31 12:11] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.658
+[2020-01-31 12:11] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.428
+[2020-01-31 12:11] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.812
+[2020-01-31 12:11] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.33, Train Loss = 1.345
+[2020-01-31 12:12] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.299
+[2020-01-31 12:12] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.955
+[2020-01-31 12:12] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 2.063
+[2020-01-31 12:12] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.537
+[2020-01-31 12:12] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.926
+[2020-01-31 12:12] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.863
+[2020-01-31 12:12] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.679
+[2020-01-31 12:12] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.553
+[2020-01-31 12:12] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.562
+[2020-01-31 12:12] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.34, Train Loss = 1.335
+[2020-01-31 12:13] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.292
+[2020-01-31 12:13] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.767
+[2020-01-31 12:13] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.543
+[2020-01-31 12:13] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.35, Train Loss = 1.896
+[2020-01-31 12:13] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.738
+[2020-01-31 12:13] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.580
+[2020-01-31 12:13] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.743
+[2020-01-31 12:13] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.316
+[2020-01-31 12:13] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.133
+[2020-01-31 12:14] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.38, Train Loss = 1.849
+[2020-01-31 12:14] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.941
+[2020-01-31 12:14] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.535
+[2020-01-31 12:14] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.849
+[2020-01-31 12:14] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.504
+[2020-01-31 12:14] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.396
+[2020-01-31 12:14] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.455
+[2020-01-31 12:14] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.36, Train Loss = 1.592
+[2020-01-31 12:14] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.37, Train Loss = 1.143
+-1
+Run saliency method:  Random
+[2020-01-31 12:15] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.15, Train Loss = 2.212
+[2020-01-31 12:15] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 2.415
+[2020-01-31 12:15] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 1.733
+[2020-01-31 12:15] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.886
+[2020-01-31 12:15] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.842
+[2020-01-31 12:15] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.718
+[2020-01-31 12:15] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.936
+[2020-01-31 12:15] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.705
+[2020-01-31 12:15] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.803
+[2020-01-31 12:15] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.069
+[2020-01-31 12:16] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.914
+[2020-01-31 12:16] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.593
+[2020-01-31 12:16] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.168
+[2020-01-31 12:16] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.868
+[2020-01-31 12:16] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.682
+[2020-01-31 12:16] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.744
+[2020-01-31 12:16] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.515
+[2020-01-31 12:16] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.862
+[2020-01-31 12:16] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.852
+[2020-01-31 12:16] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 2.097
+[2020-01-31 12:17] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.739
+[2020-01-31 12:17] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 2.549
+[2020-01-31 12:17] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.844
+[2020-01-31 12:17] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.534
+[2020-01-31 12:17] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.829
+[2020-01-31 12:17] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.566
+[2020-01-31 12:17] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.804
+[2020-01-31 12:17] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.516
+[2020-01-31 12:17] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 2.273
+[2020-01-31 12:17] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.750
+[2020-01-31 12:18] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 2.201
+[2020-01-31 12:18] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.828
+[2020-01-31 12:18] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.775
+[2020-01-31 12:18] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.536
+[2020-01-31 12:18] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.650
+[2020-01-31 12:18] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.785
+[2020-01-31 12:18] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.518
+[2020-01-31 12:18] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 2.142
+[2020-01-31 12:18] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.686
+[2020-01-31 12:19] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 2.208
+[2020-01-31 12:19] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.991
+[2020-01-31 12:19] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.32, Train Loss = 1.601
+[2020-01-31 12:19] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.565
+[2020-01-31 12:19] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 1.489
+[2020-01-31 12:19] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.31, Train Loss = 1.820
+-1
+Run saliency method:  Random
+[2020-01-31 12:19] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.13, Train Loss = 2.273
+[2020-01-31 12:19] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.17, Train Loss = 2.440
+[2020-01-31 12:19] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 1.935
+[2020-01-31 12:20] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 2.479
+[2020-01-31 12:20] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.427
+[2020-01-31 12:20] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.864
+[2020-01-31 12:20] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.090
+[2020-01-31 12:20] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 1.807
+[2020-01-31 12:20] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.784
+[2020-01-31 12:20] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.922
+[2020-01-31 12:20] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.240
+[2020-01-31 12:20] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.873
+[2020-01-31 12:20] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.972
+[2020-01-31 12:21] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.426
+[2020-01-31 12:21] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.710
+[2020-01-31 12:21] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.831
+[2020-01-31 12:21] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.019
+[2020-01-31 12:21] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.829
+[2020-01-31 12:21] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.038
+[2020-01-31 12:21] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.591
+[2020-01-31 12:21] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.741
+[2020-01-31 12:21] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.496
+[2020-01-31 12:21] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 2.408
+[2020-01-31 12:22] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.637
+[2020-01-31 12:22] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.009
+[2020-01-31 12:22] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.804
+[2020-01-31 12:22] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.760
+[2020-01-31 12:22] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.736
+[2020-01-31 12:22] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.450
+[2020-01-31 12:22] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.648
+[2020-01-31 12:22] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.258
+[2020-01-31 12:22] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.149
+[2020-01-31 12:22] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.761
+[2020-01-31 12:23] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.729
+[2020-01-31 12:23] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.681
+[2020-01-31 12:23] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.687
+[2020-01-31 12:23] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.904
+[2020-01-31 12:23] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 2.174
+[2020-01-31 12:23] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.689
+[2020-01-31 12:23] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 2.324
+[2020-01-31 12:23] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.30, Train Loss = 2.603
+[2020-01-31 12:23] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.29, Train Loss = 1.716
+[2020-01-31 12:23] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.720
+[2020-01-31 12:24] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.782
+[2020-01-31 12:24] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.28, Train Loss = 1.592
+-1
+Run saliency method:  Random
+[2020-01-31 12:24] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.13, Train Loss = 2.203
+[2020-01-31 12:24] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.17, Train Loss = 2.154
+[2020-01-31 12:24] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.18, Train Loss = 1.738
+[2020-01-31 12:24] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.20, Train Loss = 2.379
+[2020-01-31 12:24] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 2.409
+[2020-01-31 12:24] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.200
+[2020-01-31 12:25] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.048
+[2020-01-31 12:25] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.21, Train Loss = 2.134
+[2020-01-31 12:25] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.22, Train Loss = 1.951
+[2020-01-31 12:25] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.233
+[2020-01-31 12:25] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.198
+[2020-01-31 12:25] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.979
+[2020-01-31 12:25] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.23, Train Loss = 2.397
+[2020-01-31 12:25] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.318
+[2020-01-31 12:25] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.110
+[2020-01-31 12:25] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 1.908
+[2020-01-31 12:26] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.047
+[2020-01-31 12:26] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.785
+[2020-01-31 12:26] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.978
+[2020-01-31 12:26] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.280
+[2020-01-31 12:26] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.728
+[2020-01-31 12:26] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.24, Train Loss = 2.145
+[2020-01-31 12:26] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.188
+[2020-01-31 12:26] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.215
+[2020-01-31 12:26] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.829
+[2020-01-31 12:26] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.761
+[2020-01-31 12:27] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.737
+[2020-01-31 12:27] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.738
+[2020-01-31 12:27] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.270
+[2020-01-31 12:27] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.093
+[2020-01-31 12:27] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.024
+[2020-01-31 12:27] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.931
+[2020-01-31 12:27] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.064
+[2020-01-31 12:27] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.016
+[2020-01-31 12:27] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.947
+[2020-01-31 12:27] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 1.751
+[2020-01-31 12:28] Train Step 0500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.682
+[2020-01-31 12:28] Train Step 1000/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.204
+[2020-01-31 12:28] Train Step 1500/0000, Batch Size = 10, Accuracy = 0.26, Train Loss = 2.073
+[2020-01-31 12:28] Train Step 2000/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 2.244
+[2020-01-31 12:28] Train Step 2500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 2.012
+[2020-01-31 12:28] Train Step 3000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.917
+[2020-01-31 12:28] Train Step 3500/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.769
+[2020-01-31 12:28] Train Step 4000/0000, Batch Size = 10, Accuracy = 0.27, Train Loss = 1.908
+[2020-01-31 12:28] Train Step 4500/0000, Batch Size = 10, Accuracy = 0.25, Train Loss = 1.653
+-1
+5 5 5
+[10.0, 25.0, 50.0, 75.0, 90.0]
+[0.4859999716281891, 0.40199995040893555, 0.3465999960899353, 0.32710000872612, 0.29680001735687256]
+[0.15883710980415344, 0.15537098050117493, 0.1558612585067749, 0.15446504950523376, 0.14550234377384186]
+
+real	71m22.034s
+user	64m11.020s
+sys	4m7.648s
