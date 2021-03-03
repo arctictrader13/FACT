@@ -16,7 +16,7 @@ Teacher Assistant: Leon Lang
 In this Repo we aim to reproduce an extend the ideas presented in the paper
 [Full-Gradient Representation for Neural Network Visualization](https://arxiv.org/abs/1905.00780).
 
-All details, experiments, results and discussions can be found in the notebooks `PP_bias.ipynb`, `remove_and_retrain.ipynb` the ['final report'](https://github.com/rmleushuis/FACT/blob/master/11059842_10988270_12152498_12408913-FACT-AI-report.pdf) and our ['presentation '] (https://github.com/rmleushuis/FACT/blob/master/presentation/Presentation-converted.pdf)
+All details, experiments, results and discussions can be found in the notebooks `PP_bias.ipynb`, `remove_and_retrain.ipynb` the ['final report'](https://github.com/rmleushuis/FACT/blob/master/11059842_10988270_12152498_12408913-FACT-AI-report.pdf) and our ['presentation'](https://github.com/rmleushuis/FACT/blob/master/presentation/Presentation-converted.pdf)
 
 
 # Full-Gradient Saliency Maps 
