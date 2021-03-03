@@ -16,7 +16,7 @@ Teacher Assistant: Leon Lang
 In this Repo we aim to reproduce an extend the ideas presented in the paper
 [Full-Gradient Representation for Neural Network Visualization](https://arxiv.org/abs/1905.00780).
 
-All details, experiments, results and discussions can be found in the notebooks `PP_bias.ipynb` and `remove_and_retrain.ipynb`.
+All details, experiments, results and discussions can be found in the notebooks `PP_bias.ipynb`, `remove_and_retrain.ipynb` the ['final report'](https://github.com/rmleushuis/FACT/blob/master/11059842_10988270_12152498_12408913-FACT-AI-report.pdf) and our ['presentation '] (https://github.com/rmleushuis/FACT/blob/master/presentation/Presentation-converted.pdf)
 
 
 # Full-Gradient Saliency Maps 
@@ -28,7 +28,9 @@ Their repository implements two methods: the reference `FullGrad` algorithm, and
 The codebase currently supports VGG, ResNet. Extending support for any other architecture of choice should be straightforward, and contributions are welcome! Among non-linearities, only ReLU-like functions are supported. For more information, please read the description of "implicit  biases" in the paper on how to include support for non-ReLU functions.
 
 ## Dependencies
-See also the envoirnment file.
+See also the environment file.
 ``` 
 torch torchvision cv2 numpy 
 ```
+
+
