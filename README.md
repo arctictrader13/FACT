@@ -30,13 +30,35 @@ The codebase currently supports VGG, ResNet. Extending support for any other arc
 # Bias Experiments 
 In order to demonstrate that Saliency Maps can help to identify biases within trained models, we scraped images of doctors and nurses and trained them disproportionally according to gender. Our hypothesis was that training a model on almost exclusively male doctors and female nurses would yield classification based on gender rather than characteristics such as a stethoscop. Saliency Maps based on the biased model revealed that in fact not neccessarily characteristics of the profession but the gender were crucial for classification. For doctors the presence of a tie turned out to be highly important. Some examples demonstrate the observations: 
 
-Background classification: ![Alt](/wp.png )
+Background classification:\
+![](/results/bias_experiment/resnet/images_pred/val_73_0_saliency_.jpg )
 
 Classification based on Tie:\
 ![](/results/bias_experiment/resnet/images_pred/val_97_0_saliency_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/val_96_0_saliency_.jpg "Title")
+
+However saliency maps also help qualitative assessment of the model. As for instance some classifications show that not only the tie but also other features seem to be important. Thus, the stethoscop in fact seems to be detected:
+
+For the nurses on the other hand mainly the color of their clothing, the presence of a clipboard and the clothing itself seems relevant as the entire region tends to be highly activated. 
+
+\
+![](/results/bias_experiment/resnet/images_pred/val_69_0_saliency_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/val_69_0_prediction_.jpg "Title")
+\
+![](/results/bias_experiment/resnet/images_pred/val_82_0_saliency_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/val_82_0_prediction_.jpg "Title")
 
 
-Complete results are found in [Folder](), []() and []()
+Misclassfications can also be explained: 
+![](/results/bias_experiment/resnet/images_pred/train_7_0_saliency_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/train_7_0_prediction_.jpg "Title")\
+
+![](/results/bias_experiment/resnet/images_pred/train_43_0_saliency_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/train_43_0_prediction_.jpg "Title")
+
+
+
+Complete results are found in [Folder](https://github.com/rmleushuis/FACT/tree/master/results/bias_experiment)
 
 ## Dependencies
 See also the environment file.
