@@ -41,20 +41,22 @@ However saliency maps also help qualitative assessment of the model. As for inst
 
 For the nurses on the other hand mainly the color of their clothing, the presence of a clipboard and the clothing itself seems relevant as the entire region tends to be highly activated. 
 
-\
 ![](/results/bias_experiment/resnet/images_pred/val_69_0_saliency_.jpg "Title")
-![](/results/bias_experiment/resnet/images_pred/val_69_0_prediction_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/val_69_0_prediction.jpg "Title")
 \
 ![](/results/bias_experiment/resnet/images_pred/val_82_0_saliency_.jpg "Title")
-![](/results/bias_experiment/resnet/images_pred/val_82_0_prediction_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/val_82_0_prediction.jpg "Title")
+\
+![](/results/bias_experiment/resnet/images_pred/val_70_0_saliency_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/val_70_0_prediction.jpg "Title")
 
 
 Misclassfications can also be explained: 
 ![](/results/bias_experiment/resnet/images_pred/train_7_0_saliency_.jpg "Title")
-![](/results/bias_experiment/resnet/images_pred/train_7_0_prediction_.jpg "Title")\
+![](/results/bias_experiment/resnet/images_pred/train_7_0_prediction.jpg "Title")\
 
 ![](/results/bias_experiment/resnet/images_pred/train_43_0_saliency_.jpg "Title")
-![](/results/bias_experiment/resnet/images_pred/train_43_0_prediction_.jpg "Title")
+![](/results/bias_experiment/resnet/images_pred/train_43_0_prediction.jpg "Title")
 
 
 
