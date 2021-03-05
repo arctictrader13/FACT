@@ -27,6 +27,15 @@ Their repository implements two methods: the reference `FullGrad` algorithm, and
 
 The codebase currently supports VGG, ResNet. Extending support for any other architecture of choice should be straightforward, and contributions are welcome! Among non-linearities, only ReLU-like functions are supported. For more information, please read the description of "implicit  biases" in the paper on how to include support for non-ReLU functions.
 
+# Bias Experiments 
+In order to demonstrate that Saliency Maps can help to identify biases within trained models, we scraped images of doctors and nurses and trained them disproportionally according to gender. Our hypothesis was that training a model on almost exclusively male doctors and female nurses would yield classification based on gender rather than characteristics such as a stethoscop. Saliency Maps based on the biased model revealed that in fact not neccessarily characteristics of the profession but the gender were crucial for classification. For doctors the presence of a tie turned out to be highly important. Some examples demonstrate the observations: 
+
+Background classification: ![Alt](/wp.png "Title")
+Classification based on Tie: ![Alt](/results/bias_experiment/resnet/images_pred/val_97_0_saliency_.jpg "Title")
+
+
+Complete results are found in [Folder](), []() and []()
+
 ## Dependencies
 See also the environment file.
 ``` 
