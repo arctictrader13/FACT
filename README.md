@@ -30,10 +30,10 @@ The codebase currently supports VGG, ResNet. Extending support for any other arc
 # Bias Experiments 
 In order to demonstrate that Saliency Maps can help to identify biases within trained models, we scraped images of doctors and nurses and trained them disproportionally according to gender. Our hypothesis was that training a model on almost exclusively male doctors and female nurses would yield classification based on gender rather than characteristics such as a stethoscop. Saliency Maps based on the biased model revealed that in fact not neccessarily characteristics of the profession but the gender were crucial for classification. For doctors the presence of a tie turned out to be highly important. Some examples demonstrate the observations: 
 
-Background classification: ![Alt](/wp.png "Title")
+Background classification: ![Alt](/wp.png )
 
-Classification based on Tie: 
-![alt text](/results/bias_experiment/resnet/images_pred/val_97_0_saliency_.jpg "Title")
+Classification based on Tie:\
+![](/results/bias_experiment/resnet/images_pred/val_97_0_saliency_.jpg "Title")
 
 
 Complete results are found in [Folder](), []() and []()
